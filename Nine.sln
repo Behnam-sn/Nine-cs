@@ -7,7 +7,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		.editorconfig = .editorconfig
+		.dockerignore = .dockerignore
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{DDF5E75B-12AB-488B-88D2-548D5C2A9612}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{594DB2C2-A5D1-4250-BC41-B302FB2643A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.WebApi", "Sources\Hosts\Nine.WebApi\Nine.WebApi.csproj", "{C2DEDA38-2CA0-4598-8CF7-6521FE159F39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,5 +23,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{594DB2C2-A5D1-4250-BC41-B302FB2643A0} = {DDF5E75B-12AB-488B-88D2-548D5C2A9612}
+		{C2DEDA38-2CA0-4598-8CF7-6521FE159F39} = {594DB2C2-A5D1-4250-BC41-B302FB2643A0}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2DEDA38-2CA0-4598-8CF7-6521FE159F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DEDA38-2CA0-4598-8CF7-6521FE159F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DEDA38-2CA0-4598-8CF7-6521FE159F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DEDA38-2CA0-4598-8CF7-6521FE159F39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
