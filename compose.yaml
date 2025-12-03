@@ -1,0 +1,7 @@
+﻿services:
+  nine.webapi:
+    image: nine.webapi
+    build:
+      context: .
+      dockerfile: Sources/Hosts/Nine.WebApi/Dockerfile
+
