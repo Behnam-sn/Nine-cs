@@ -1,4 +1,7 @@
-namespace Nine.Domain.Abstractions.Entities;
+using Nine.Domain.Abstractions.Entities;
+using Nine.Domain.Abstractions.Events;
+
+namespace Nine.Domain.Abstractions.AggregateRoots;
 
 public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
 {
