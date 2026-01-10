@@ -8,12 +8,13 @@ public readonly record struct DomainEventId
     {
         Value = value;
     }
+
     public override string ToString()
     {
         return Value.ToString();
     }
 
-    internal static DomainEventId CreateInstance()
+    internal static DomainEventId Create()
     {
         return new(Guid.NewGuid());
     }

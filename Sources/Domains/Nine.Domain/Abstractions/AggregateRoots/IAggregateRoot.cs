@@ -1,6 +1,6 @@
 using Nine.Domain.Abstractions.Events;
 
-namespace Nine.Domain.Abstractions.Entities;
+namespace Nine.Domain.Abstractions.AggregateRoots;
 
 public interface IAggregateRoot
 {
