@@ -1,5 +1,4 @@
 ﻿using Nine.Domain.Abstractions.AggregateRoots;
-using Nine.Domain.Abstractions.Events;
 using Nine.Domain.Abstractions.ValueObjects;
 using Nine.Domain.Users.Events;
 
@@ -15,10 +14,21 @@ public sealed class User : EventSourcedAggregateRoot
 
     public string LastName { get; private set; }
 
+    public void ChangeFirstName(string firstName)
+    {
+        var userFirstNameChangedDomainEvent = UserFirstNameChangedDomainEventV1.Create(firstName);
+        RaiseDomainEvent(userFirstNameChangedDomainEvent);
+    }
+
     private void Apply(UserCreatedDomainEventV1 domainEvent)
     {
         FirstName = domainEvent.FirstName;
         LastName = domainEvent.LastName;
+    }
+
+    private void Apply(UserFirstNameChangedDomainEventV1 domainEvent)
+    {
+        FirstName = domainEvent.FirstName;
     }
 
     public static User Create(string firstName, string lastName)
