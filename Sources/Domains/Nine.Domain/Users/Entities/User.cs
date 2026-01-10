@@ -1,14 +1,17 @@
 ﻿using Nine.Domain.Abstractions.AggregateRoots;
 using Nine.Domain.Abstractions.ValueObjects;
 using Nine.Domain.Users.Events;
+using Nine.Domain.Users.ValueObjects;
 
 namespace Nine.Domain.Users.Entities;
 
-public sealed class User : EventSourcedAggregateRoot
+public sealed class User : EventSourcedAggregateRoot<UserId>
 {
     public User()
     {
     }
+
+    public UserId UserId { get; private set; }
 
     public string FirstName { get; private set; }
 
@@ -16,12 +19,13 @@ public sealed class User : EventSourcedAggregateRoot
 
     public void ChangeFirstName(string firstName)
     {
-        var userFirstNameChangedDomainEvent = UserFirstNameChangedDomainEventV1.Create(firstName);
+        var userFirstNameChangedDomainEvent = UserFirstNameChangedDomainEventV1.Create(UserId.Value, firstName);
         RaiseDomainEvent(userFirstNameChangedDomainEvent);
     }
 
     private void Apply(UserCreatedDomainEventV1 domainEvent)
     {
+        UserId = UserId.Parse(domainEvent.UserId);
         FirstName = domainEvent.FirstName;
         LastName = domainEvent.LastName;
     }
@@ -35,7 +39,8 @@ public sealed class User : EventSourcedAggregateRoot
     {
         var user = new User();
         var userCreatedEvent = new UserCreatedDomainEventV1(
-            Id: DomainEventId.Create(),
+            Id: DomainEventId.Create().Value,
+            UserId: UserId.Create().Value,
             FirstName: firstName,
             LastName: lastName,
             OccurredAt: DateTime.UtcNow
