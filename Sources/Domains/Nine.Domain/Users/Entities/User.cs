@@ -28,6 +28,17 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         RaiseDomainEvent(userFirstNameChangedDomainEvent);
     }
 
+    public void ChangeLastName(LastName lastName)
+    {
+        var userLastNameChangedDomainEvent = new UserLastNameChangedDomainEventV1(
+            Id: DomainEventId.Create(),
+            UserId: UserId,
+            LastName: lastName,
+            OccurredAt: DateTime.UtcNow
+        );
+        RaiseDomainEvent(userLastNameChangedDomainEvent);
+    }
+
     private void Apply(UserCreatedDomainEventV1 domainEvent)
     {
         UserId = domainEvent.UserId;
@@ -38,6 +49,11 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     private void Apply(UserFirstNameChangedDomainEventV1 domainEvent)
     {
         FirstName = domainEvent.FirstName;
+    }
+
+    private void Apply(UserLastNameChangedDomainEventV1 domainEvent)
+    {
+        LastName = domainEvent.LastName;
     }
 
     public static User Create(FirstName firstName, LastName lastName)

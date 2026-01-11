@@ -2,8 +2,8 @@
 
 ## Todo
 
-- [ ] Add `ChangeLastName` method to `User`
 - [ ] Add `Email` to `User`
+- [ ] Rename `OccurredAt` to `CreatedAt` in `IDomainEvent`
 
 ## Doing
 
@@ -13,3 +13,4 @@
 - [x] Use value objects in events
 - [x] Use `FirstName` value object to `User`
 - [x] Use `LastName` value object to `User`
+- [x] Add `ChangeLastName` method to `User`
