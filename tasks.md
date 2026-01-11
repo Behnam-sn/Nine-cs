@@ -3,7 +3,13 @@
 ## Todo
 
 - [ ] Add `Email` to `User`
+- [ ] Add `Phonenumber` to `User`
+- [ ] Add `Username` to `User`
+- [ ] Add `Password` to `User`
+- [ ] Add `State` to `User`
 - [ ] Rename `OccurredAt` to `CreatedAt` in `IDomainEvent`
+- [ ] Restructure the project to vertical slices
+- [ ] Add `Nine.Content.Domain.Tests`
 
 ## Doing
 
