@@ -19,7 +19,12 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
 
     public void ChangeFirstName(string firstName)
     {
-        var userFirstNameChangedDomainEvent = UserFirstNameChangedDomainEventV1.Create(UserId.Value, firstName);
+        var userFirstNameChangedDomainEvent = new UserFirstNameChangedDomainEventV1(
+            Id: DomainEventId.Create().Value,
+            UserId: UserId.Value,
+            FirstName: firstName,
+            OccurredAt: DateTime.UtcNow
+        );
         RaiseDomainEvent(userFirstNameChangedDomainEvent);
     }
 
