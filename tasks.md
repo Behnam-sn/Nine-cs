@@ -14,3 +14,4 @@
 - [x] Use `FirstName` value object to `User`
 - [x] Use `LastName` value object to `User`
 - [x] Add `ChangeLastName` method to `User`
+- [x] Replace `Create` method with a constructor in `User`

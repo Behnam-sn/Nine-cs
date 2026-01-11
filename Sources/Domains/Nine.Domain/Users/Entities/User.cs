@@ -7,15 +7,25 @@ namespace Nine.Domain.Users.Entities;
 
 public sealed class User : EventSourcedAggregateRoot<UserId>
 {
-    public User()
+    public UserId UserId { get; private set; }
+    public FirstName FirstName { get; private set; }
+    public LastName LastName { get; private set; }
+
+    private User()
     {
     }
 
-    public UserId UserId { get; private set; }
-
-    public FirstName FirstName { get; private set; }
-
-    public LastName LastName { get; private set; }
+    public User(FirstName firstName, LastName lastName)
+    {
+        var userCreatedEvent = new UserCreatedDomainEventV1(
+            Id: DomainEventId.Create(),
+            UserId: UserId.Create(),
+            FirstName: firstName,
+            LastName: lastName,
+            OccurredAt: DateTime.UtcNow
+        );
+        RaiseDomainEvent(userCreatedEvent);
+    }
 
     public void ChangeFirstName(FirstName firstName)
     {
@@ -54,19 +64,5 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     private void Apply(UserLastNameChangedDomainEventV1 domainEvent)
     {
         LastName = domainEvent.LastName;
-    }
-
-    public static User Create(FirstName firstName, LastName lastName)
-    {
-        var user = new User();
-        var userCreatedEvent = new UserCreatedDomainEventV1(
-            Id: DomainEventId.Create(),
-            UserId: UserId.Create(),
-            FirstName: firstName,
-            LastName: lastName,
-            OccurredAt: DateTime.UtcNow
-        );
-        user.RaiseDomainEvent(userCreatedEvent);
-        return user;
     }
 }
