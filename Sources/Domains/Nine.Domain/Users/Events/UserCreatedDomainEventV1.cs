@@ -1,7 +1,8 @@
 ﻿using Nine.Domain.Abstractions.Events;
 using Nine.Domain.Abstractions.ValueObjects;
+using Nine.Domain.Users.ValueObjects;
 
 namespace Nine.Domain.Users.Events;
 
-public sealed record UserCreatedDomainEventV1(Guid Id, Guid UserId, string FirstName, string LastName, DateTime OccurredAt)
+public sealed record UserCreatedDomainEventV1(DomainEventId Id, UserId UserId, string FirstName, string LastName, DateTime OccurredAt)
     : IDomainEvent;

@@ -2,7 +2,6 @@
 
 ## Todo
 
-- [ ] Use value objects in events
 - [ ] Use `FirstName` value object to `User`
 - [ ] Use `LastName` value object to `User`
 - [ ] Add `ChangeLastName` method to `User`
@@ -13,4 +12,4 @@
 ## Done
 
 - [x] Convert `UserFirstNameChangedDomainEventV1` constructor to a primary constructor
-
+- [x] Use value objects in events
