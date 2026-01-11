@@ -13,11 +13,11 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
 
     public UserId UserId { get; private set; }
 
-    public string FirstName { get; private set; }
+    public FirstName FirstName { get; private set; }
 
     public string LastName { get; private set; }
 
-    public void ChangeFirstName(string firstName)
+    public void ChangeFirstName(FirstName firstName)
     {
         var userFirstNameChangedDomainEvent = new UserFirstNameChangedDomainEventV1(
             Id: DomainEventId.Create(),
@@ -40,7 +40,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         FirstName = domainEvent.FirstName;
     }
 
-    public static User Create(string firstName, string lastName)
+    public static User Create(FirstName firstName, string lastName)
     {
         var user = new User();
         var userCreatedEvent = new UserCreatedDomainEventV1(

@@ -4,5 +4,5 @@ using Nine.Domain.Users.ValueObjects;
 
 namespace Nine.Domain.Users.Events;
 
-public sealed record UserCreatedDomainEventV1(DomainEventId Id, UserId UserId, string FirstName, string LastName, DateTime OccurredAt)
+public sealed record UserCreatedDomainEventV1(DomainEventId Id, UserId UserId, FirstName FirstName, string LastName, DateTime OccurredAt)
     : IDomainEvent;
