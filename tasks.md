@@ -2,12 +2,12 @@
 
 ## Todo
 
-- [ ] Add `Email` to `User`
 - [ ] Add `Phonenumber` to `User`
 - [ ] Add `Username` to `User`
 - [ ] Add `Password` to `User`
 - [ ] Add `State` to `User`
-- [ ] Rename `OccurredAt` to `CreatedAt` in `IDomainEvent`
+- [ ] Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
+- [ ] Replace `FirstName` and `LastName` with `Name` in `User`
 - [ ] Restructure the project to vertical slices
 - [ ] Add `Nine.Content.Domain.Tests`
 
@@ -21,3 +21,4 @@
 - [x] Use `LastName` value object to `User`
 - [x] Add `ChangeLastName` method to `User`
 - [x] Replace `Create` method with a constructor in `User`
+- [x] Add `Email` to `User`
