@@ -22,3 +22,4 @@
 - [x] Add `ChangeLastName` method to `User`
 - [x] Replace `Create` method with a constructor in `User`
 - [x] Add `Email` to `User`
+- [x] Create `PhoneNumber` value object
