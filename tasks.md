@@ -2,17 +2,17 @@
 
 ## Backlog
 
+- Restructure the project to vertical slices
+- Add `Nine.Content.Domain.Tests`
 - Add `Password` to `User`
 - Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
 
 ## Todo
 
 - [ ] Add `State` to `User`
-- [ ] Replace `FirstName` and `LastName` with `Name` in `User`
 - [ ] Create `Name` value object
+- [ ] Replace `FirstName` and `LastName` with `Name` in `User`
 - [ ] Add `Create` method to `User`
-- [ ] Restructure the project to vertical slices
-- [ ] Add `Nine.Content.Domain.Tests`
 
 ## Doing
 

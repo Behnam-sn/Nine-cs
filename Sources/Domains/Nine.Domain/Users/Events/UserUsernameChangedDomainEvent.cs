@@ -2,7 +2,7 @@
 using Nine.Domain.Abstractions.ValueObjects;
 using Nine.Domain.Users.ValueObjects;
 
-namespace Nine.Domain.Users.Entities;
+namespace Nine.Domain.Users.Events;
 
 public record UserUsernameChangedDomainEvent(DomainEventId Id, UserId UserId, Username Username, DateTime OccurredAt)
     : IDomainEvent;
