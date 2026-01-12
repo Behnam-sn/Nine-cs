@@ -7,7 +7,6 @@
 
 ## Todo
 
-- [ ] Add `Username` to `User`
 - [ ] Add `State` to `User`
 - [ ] Replace `FirstName` and `LastName` with `Name` in `User`
 - [ ] Create `Name` value object
@@ -29,3 +28,4 @@
 - [x] Create `PhoneNumber` value object
 - [x] Add `PhoneNumber` to `User`
 - [x] Create `Username` value object
+- [x] Add `Username` to `User`

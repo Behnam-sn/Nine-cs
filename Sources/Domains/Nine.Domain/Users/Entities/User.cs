@@ -12,12 +12,13 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     public LastName LastName { get; private set; }
     public Email Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
+    public Username Username { get; private set; }
 
     private User()
     {
     }
 
-    public User(FirstName firstName, LastName lastName, Email email, PhoneNumber phoneNumber)
+    public User(FirstName firstName, LastName lastName, Email email, PhoneNumber phoneNumber, Username username)
     {
         var userCreatedEvent = new UserCreatedDomainEventV1(
             Id: DomainEventId.Create(),
@@ -26,6 +27,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             LastName: lastName,
             Email: email,
             PhoneNumber: phoneNumber,
+            Username: username,
             OccurredAt: DateTime.UtcNow
         );
         RaiseDomainEvent(userCreatedEvent);
@@ -75,6 +77,17 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         RaiseDomainEvent(userPhoneNumberChangedDomainEvent);
     }
 
+    public void SetUsername(Username username)
+    {
+        var userUsernameChangedDomainEvent = new UserUsernameChangedDomainEvent(
+            Id: DomainEventId.Create(),
+            UserId: UserId,
+            Username: username,
+            OccurredAt: DateTime.UtcNow
+        );
+        RaiseDomainEvent(userUsernameChangedDomainEvent);
+    }
+
     private void Apply(UserCreatedDomainEventV1 domainEvent)
     {
         UserId = domainEvent.UserId;
@@ -82,6 +95,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         LastName = domainEvent.LastName;
         Email = domainEvent.Email;
         PhoneNumber = domainEvent.PhoneNumber;
+        Username = domainEvent.Username;
     }
 
     private void Apply(UserFirstNameChangedDomainEventV1 domainEvent)
@@ -102,5 +116,10 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     private void Apply(UserPhoneNumberChangedDomainEvent domainEvent)
     {
         PhoneNumber = domainEvent.PhoneNumber;
+    }
+
+    private void Apply(UserUsernameChangedDomainEvent domainEvent)
+    {
+        Username = domainEvent.Username;
     }
 }

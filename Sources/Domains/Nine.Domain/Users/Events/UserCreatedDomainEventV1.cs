@@ -11,5 +11,6 @@ public sealed record UserCreatedDomainEventV1(
     LastName LastName,
     Email Email,
     PhoneNumber PhoneNumber,
+    Username Username,
     DateTime OccurredAt
 ) : IDomainEvent;
