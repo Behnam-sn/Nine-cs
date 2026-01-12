@@ -2,7 +2,6 @@
 
 ## Todo
 
-- [ ] Add `Phonenumber` to `User`
 - [ ] Add `Username` to `User`
 - [ ] Add `Password` to `User`
 - [ ] Add `State` to `User`
@@ -23,3 +22,4 @@
 - [x] Replace `Create` method with a constructor in `User`
 - [x] Add `Email` to `User`
 - [x] Create `PhoneNumber` value object
+- [x] Add `PhoneNumber` to `User`

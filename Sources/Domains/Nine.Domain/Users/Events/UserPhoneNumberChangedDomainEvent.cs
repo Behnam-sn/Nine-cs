@@ -4,12 +4,9 @@ using Nine.Domain.Users.ValueObjects;
 
 namespace Nine.Domain.Users.Events;
 
-public sealed record UserCreatedDomainEventV1(
+public sealed record UserPhoneNumberChangedDomainEvent(
     DomainEventId Id,
     UserId UserId,
-    FirstName FirstName,
-    LastName LastName,
-    Email Email,
     PhoneNumber PhoneNumber,
     DateTime OccurredAt
 ) : IDomainEvent;
