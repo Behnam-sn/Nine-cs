@@ -1,12 +1,17 @@
 # Tasks
 
+## Backlog
+
+- Add `Password` to `User`
+- Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
+
 ## Todo
 
 - [ ] Add `Username` to `User`
-- [ ] Add `Password` to `User`
 - [ ] Add `State` to `User`
-- [ ] Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
 - [ ] Replace `FirstName` and `LastName` with `Name` in `User`
+- [ ] Create `Name` value object
+- [ ] Add `Create` method to `User`
 - [ ] Restructure the project to vertical slices
 - [ ] Add `Nine.Content.Domain.Tests`
 
@@ -23,3 +28,4 @@
 - [x] Add `Email` to `User`
 - [x] Create `PhoneNumber` value object
 - [x] Add `PhoneNumber` to `User`
+- [x] Create `Username` value object
