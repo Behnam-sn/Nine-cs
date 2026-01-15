@@ -7,8 +7,7 @@ namespace Nine.Domain.Users.Events;
 public sealed record UserCreatedDomainEventV1(
     DomainEventId Id,
     UserId UserId,
-    FirstName FirstName,
-    LastName LastName,
+    Name Name,
     Email Email,
     PhoneNumber PhoneNumber,
     Username Username,

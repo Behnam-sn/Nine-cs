@@ -9,8 +9,7 @@ namespace Nine.Domain.Users.Entities;
 public sealed class User : EventSourcedAggregateRoot<UserId>
 {
     public UserId UserId { get; private set; }
-    public FirstName FirstName { get; private set; }
-    public LastName LastName { get; private set; }
+    public Name Name { get; set; }
     public Email Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
     public Username Username { get; private set; }
@@ -20,13 +19,12 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     {
     }
 
-    public User(FirstName firstName, LastName lastName, Email email, PhoneNumber phoneNumber, Username username)
+    public User(Name name, Email email, PhoneNumber phoneNumber, Username username)
     {
         var userCreatedEvent = new UserCreatedDomainEventV1(
             Id: DomainEventId.Create(),
             UserId: UserId.Create(),
-            FirstName: firstName,
-            LastName: lastName,
+            Name: name,
             Email: email,
             PhoneNumber: phoneNumber,
             Username: username,
@@ -35,26 +33,15 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         RaiseDomainEvent(userCreatedEvent);
     }
 
-    public void ChangeFirstName(FirstName firstName)
+    public void ChangeName(Name name)
     {
-        var userFirstNameChangedDomainEvent = new UserFirstNameChangedDomainEventV1(
+        var userFirstNameChangedDomainEvent = new UserNameChangedDomainEventV1(
             Id: DomainEventId.Create(),
             UserId: UserId,
-            FirstName: firstName,
+            Name: Name,
             OccurredAt: DateTime.UtcNow
         );
         RaiseDomainEvent(userFirstNameChangedDomainEvent);
-    }
-
-    public void ChangeLastName(LastName lastName)
-    {
-        var userLastNameChangedDomainEvent = new UserLastNameChangedDomainEventV1(
-            Id: DomainEventId.Create(),
-            UserId: UserId,
-            LastName: lastName,
-            OccurredAt: DateTime.UtcNow
-        );
-        RaiseDomainEvent(userLastNameChangedDomainEvent);
     }
 
     public void SetEmail(Email email)
@@ -113,22 +100,16 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     private void Apply(UserCreatedDomainEventV1 domainEvent)
     {
         UserId = domainEvent.UserId;
-        FirstName = domainEvent.FirstName;
-        LastName = domainEvent.LastName;
+        Name = domainEvent.Name;
         Email = domainEvent.Email;
         PhoneNumber = domainEvent.PhoneNumber;
         Username = domainEvent.Username;
-        State =  UserStates.Active;
+        State = UserStates.Active;
     }
 
-    private void Apply(UserFirstNameChangedDomainEventV1 domainEvent)
+    private void Apply(UserNameChangedDomainEventV1 domainEvent)
     {
-        FirstName = domainEvent.FirstName;
-    }
-
-    private void Apply(UserLastNameChangedDomainEventV1 domainEvent)
-    {
-        LastName = domainEvent.LastName;
+        Name = domainEvent.Name;
     }
 
     private void Apply(UserEmailChangedDomainEventV1 domainEvent)
