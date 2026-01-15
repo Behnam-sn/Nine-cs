@@ -9,7 +9,6 @@
 
 ## Todo
 
-- [ ] Create `Name` value object
 - [ ] Replace `FirstName` and `LastName` with `Name` in `User`
 - [ ] Add `Create` method to `User`
 - [ ] Create `Post` aggregate root
@@ -31,3 +30,4 @@
 - [x] Add `Username` to `User`
 - [x] Create `UserStates` enum
 - [x] Add `State` property to `User`
+- [x] Create `Name` value object in `Users`
