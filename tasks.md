@@ -9,7 +9,6 @@
 
 ## Todo
 
-- [ ] Add `Create` method to `User`
 - [ ] Create `Post` aggregate root
 
 ## Doing
@@ -31,3 +30,4 @@
 - [x] Add `State` property to `User`
 - [x] Create `Name` value object in `Users`
 - [x] Replace `FirstName` and `LastName` with `Name` in `User`
+- [x] Add `CreateInstance` method to `User`

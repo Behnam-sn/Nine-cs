@@ -15,24 +15,6 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     public Username Username { get; private set; }
     public UserStates State { get; private set; }
 
-    private User()
-    {
-    }
-
-    public User(Name name, Email email, PhoneNumber phoneNumber, Username username)
-    {
-        var userCreatedEvent = new UserCreatedDomainEventV1(
-            Id: DomainEventId.Create(),
-            UserId: UserId.Create(),
-            Name: name,
-            Email: email,
-            PhoneNumber: phoneNumber,
-            Username: username,
-            OccurredAt: DateTime.UtcNow
-        );
-        RaiseDomainEvent(userCreatedEvent);
-    }
-
     public void ChangeName(Name name)
     {
         var userFirstNameChangedDomainEvent = new UserNameChangedDomainEventV1(
@@ -125,5 +107,21 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     private void Apply(UserUsernameChangedDomainEvent domainEvent)
     {
         Username = domainEvent.Username;
+    }
+    
+    public static User CreateInstance(Name name, Email email, PhoneNumber phoneNumber, Username username)
+    {
+        var user = new User();
+        var userCreatedEvent = new UserCreatedDomainEventV1(
+            Id: DomainEventId.Create(),
+            UserId: UserId.Create(),
+            Name: name,
+            Email: email,
+            PhoneNumber: phoneNumber,
+            Username: username,
+            OccurredAt: DateTime.UtcNow
+        );
+        user.RaiseDomainEvent(userCreatedEvent);
+        return user;
     }
 }
