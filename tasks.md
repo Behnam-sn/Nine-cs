@@ -9,10 +9,11 @@
 
 ## Todo
 
-- [ ] Add `State` to `User`
+- [ ] Add `State` property to `User`
 - [ ] Create `Name` value object
 - [ ] Replace `FirstName` and `LastName` with `Name` in `User`
 - [ ] Add `Create` method to `User`
+- [ ] Create `Post` aggregate root
 
 ## Doing
 
@@ -29,3 +30,4 @@
 - [x] Add `PhoneNumber` to `User`
 - [x] Create `Username` value object
 - [x] Add `Username` to `User`
+- [x] Create `UserStates` enum
