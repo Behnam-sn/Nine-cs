@@ -9,13 +9,13 @@ namespace Nine.Domain.Users.Entities;
 public sealed class User : EventSourcedAggregateRoot<UserId>
 {
     public UserId UserId { get; private set; }
-    public Name Name { get; set; }
+    public Name Name { get; private set; }
     public Email Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
     public Username Username { get; private set; }
     public UserStates State { get; private set; }
 
-    public void ChangeName(Name name)
+    public void SetName(Name name)
     {
         var userFirstNameChangedDomainEvent = new UserNameChangedDomainEventV1(
             Id: DomainEventId.Create(),

@@ -31,3 +31,4 @@
 - [x] Create `Name` value object in `Users`
 - [x] Replace `FirstName` and `LastName` with `Name` in `User`
 - [x] Add `CreateInstance` method to `User`
+- [x] Rename `ChangeName` to `SetName` in `User`
