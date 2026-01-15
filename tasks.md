@@ -9,7 +9,6 @@
 
 ## Todo
 
-- [ ] Add `State` property to `User`
 - [ ] Create `Name` value object
 - [ ] Replace `FirstName` and `LastName` with `Name` in `User`
 - [ ] Add `Create` method to `User`
@@ -31,3 +30,4 @@
 - [x] Create `Username` value object
 - [x] Add `Username` to `User`
 - [x] Create `UserStates` enum
+- [x] Add `State` property to `User`

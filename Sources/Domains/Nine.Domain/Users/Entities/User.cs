@@ -1,5 +1,6 @@
 ﻿using Nine.Domain.Abstractions.AggregateRoots;
 using Nine.Domain.Abstractions.ValueObjects;
+using Nine.Domain.Users.Enums;
 using Nine.Domain.Users.Events;
 using Nine.Domain.Users.ValueObjects;
 
@@ -13,6 +14,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     public Email Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
     public Username Username { get; private set; }
+    public UserStates State { get; private set; }
 
     private User()
     {
@@ -88,6 +90,26 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         RaiseDomainEvent(userUsernameChangedDomainEvent);
     }
 
+    private void Activate()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Archive()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Suspend()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Delete()
+    {
+        throw new NotImplementedException();
+    }
+
     private void Apply(UserCreatedDomainEventV1 domainEvent)
     {
         UserId = domainEvent.UserId;
@@ -96,6 +118,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         Email = domainEvent.Email;
         PhoneNumber = domainEvent.PhoneNumber;
         Username = domainEvent.Username;
+        State =  UserStates.Active;
     }
 
     private void Apply(UserFirstNameChangedDomainEventV1 domainEvent)
