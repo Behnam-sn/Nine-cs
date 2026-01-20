@@ -9,6 +9,12 @@
 
 ## Todo
 
+- [ ] Create `Nine.SharedKernel` project
+- [ ] Move `Abstractions` from `Nine.Domain` to `Nine.SharedKernel`
+- [ ] Create `Nine.Identities.Domain` project
+- [ ] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`  
+- [ ] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`
+- [ ] Remove `Nine.Domain` project 
 - [ ] Create `Post` aggregate root
 
 ## Doing
