@@ -14,7 +14,7 @@ public readonly record struct DomainEventId
         return Value.ToString();
     }
 
-    internal static DomainEventId Create()
+    public static DomainEventId Create()
     {
         return new(Guid.NewGuid());
     }

@@ -38,3 +38,4 @@
 - [x] Create `Nine.Identities.Domain` project
 - [x] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`  
 - [x] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`
+- [x] Change `Create` method access level from `internal` to `public` in `DomainEventId` 
