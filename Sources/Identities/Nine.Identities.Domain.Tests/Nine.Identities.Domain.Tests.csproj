@@ -18,4 +18,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Nine.Identities.Domain\Nine.Identities.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

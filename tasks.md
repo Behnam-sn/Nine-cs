@@ -7,7 +7,6 @@
 
 ## Todo
 
-- [ ] Reference `Nine.Identities.Domain` to `Nine.Identities.Domain.Tests`
 - [ ] Add `UserTests` in `Nine.Identities.Domain.Tests`
 - [ ] Add `Nine.Contents.Domain` project in `Contents` folder
 - [ ] Reference `Nine.SharedKernel` to `Nine.Contents.Domain`
@@ -45,3 +44,4 @@
 - [x] Change `Create` method access level from `internal` to `public` in `DomainEventId`
 - [x] Remove `Nine.Domain` project 
 - [x] Add `Nine.Identities.Domain.Tests` project in `Identities` folder
+- [x] Reference `Nine.Identities.Domain` to `Nine.Identities.Domain.Tests`
