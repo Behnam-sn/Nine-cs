@@ -9,7 +9,6 @@
 
 ## Todo
 
-- [ ] Create `Nine.Identities.Domain` project
 - [ ] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`  
 - [ ] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`
 - [ ] Remove `Nine.Domain` project 
@@ -38,3 +37,4 @@
 - [x] Rename `ChangeName` to `SetName` in `User`
 - [x] Create `Nine.SharedKernel` project
 - [x] Move `Abstractions` from `Nine.Domain` to `Nine.SharedKernel`
+- [x] Create `Nine.Identities.Domain` project
