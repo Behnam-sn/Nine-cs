@@ -2,14 +2,19 @@
 
 ## Backlog
 
-- Restructure the project to vertical slices
-- Add `Nine.Content.Domain.Tests`
 - Add `Password` to `User`
 - Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
 
 ## Todo
 
-- [ ] Create `Post` aggregate root
+- [ ] Reference `Nine.Identities.Domain` to `Nine.Identities.Domain.Tests`
+- [ ] Add `UserTests` in `Nine.Identities.Domain.Tests`
+- [ ] Add `Nine.Contents.Domain` project in `Contents` folder
+- [ ] Reference `Nine.SharedKernel` to `Nine.Contents.Domain`
+- [ ] Add `Nine.Contents.Domain.Tests` project in `Contents` folder
+- [ ] Reference `Nine.Contents.Domain` to `Nine.Contents.Domain.Tests`
+- [ ] Add `Post` aggregate root in `Nine.Contents.Domain`
+- [ ] Add `PostTests` in `Nine.Contents.Domain.Tests`
 
 ## Doing
 
@@ -35,7 +40,8 @@
 - [x] Create `Nine.SharedKernel` project
 - [x] Move `Abstractions` from `Nine.Domain` to `Nine.SharedKernel`
 - [x] Create `Nine.Identities.Domain` project
-- [x] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`  
+- [x] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`
 - [x] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`
-- [x] Change `Create` method access level from `internal` to `public` in `DomainEventId` 
+- [x] Change `Create` method access level from `internal` to `public` in `DomainEventId`
 - [x] Remove `Nine.Domain` project 
+- [x] Add `Nine.Identities.Domain.Tests` project in `Identities` folder
