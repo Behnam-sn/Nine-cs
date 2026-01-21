@@ -1,4 +1,4 @@
-namespace Nine.Domain.Abstractions.ValueObjects;
+namespace Nine.SharedKernel.Abstractions.ValueObjects;
 
 public readonly record struct DomainEventId
 {

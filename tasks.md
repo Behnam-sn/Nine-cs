@@ -9,7 +9,6 @@
 
 ## Todo
 
-- [ ] Move `Abstractions` from `Nine.Domain` to `Nine.SharedKernel`
 - [ ] Create `Nine.Identities.Domain` project
 - [ ] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`  
 - [ ] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`
@@ -37,4 +36,5 @@
 - [x] Replace `FirstName` and `LastName` with `Name` in `User`
 - [x] Add `CreateInstance` method to `User`
 - [x] Rename `ChangeName` to `SetName` in `User`
-- [ ] Create `Nine.SharedKernel` project
+- [x] Create `Nine.SharedKernel` project
+- [x] Move `Abstractions` from `Nine.Domain` to `Nine.SharedKernel`

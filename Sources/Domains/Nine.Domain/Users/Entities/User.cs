@@ -1,8 +1,8 @@
-﻿using Nine.Domain.Abstractions.AggregateRoots;
-using Nine.Domain.Abstractions.ValueObjects;
-using Nine.Domain.Users.Enums;
+﻿using Nine.Domain.Users.Enums;
 using Nine.Domain.Users.Events;
 using Nine.Domain.Users.ValueObjects;
+using Nine.SharedKernel.Abstractions.AggregateRoots;
+using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Domain.Users.Entities;
 
@@ -108,7 +108,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     {
         Username = domainEvent.Username;
     }
-    
+
     public static User CreateInstance(Name name, Email email, PhoneNumber phoneNumber, Username username)
     {
         var user = new User();

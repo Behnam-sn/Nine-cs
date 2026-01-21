@@ -1,7 +1,7 @@
-﻿using Nine.Domain.Abstractions.Entities;
-using Nine.Domain.Abstractions.Events;
+﻿using Nine.SharedKernel.Abstractions.Entities;
+using Nine.SharedKernel.Abstractions.Events;
 
-namespace Nine.Domain.Abstractions.AggregateRoots;
+namespace Nine.SharedKernel.Abstractions.AggregateRoots;
 
 public abstract class EventSourcedAggregateRoot<TId> : EventSourcedEntity<TId>, IAggregateRoot
 {

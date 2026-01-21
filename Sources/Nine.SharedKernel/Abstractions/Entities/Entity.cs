@@ -1,4 +1,4 @@
-namespace Nine.Domain.Abstractions.Entities;
+namespace Nine.SharedKernel.Abstractions.Entities;
 
 public abstract class Entity<TId> : IEntity
 {

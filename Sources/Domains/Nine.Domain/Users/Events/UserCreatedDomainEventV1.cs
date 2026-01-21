@@ -1,6 +1,6 @@
-﻿using Nine.Domain.Abstractions.Events;
-using Nine.Domain.Abstractions.ValueObjects;
-using Nine.Domain.Users.ValueObjects;
+﻿using Nine.Domain.Users.ValueObjects;
+using Nine.SharedKernel.Abstractions.Events;
+using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Domain.Users.Events;
 
