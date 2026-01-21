@@ -9,7 +9,6 @@
 
 ## Todo
 
-- [ ] Remove `Nine.Domain` project 
 - [ ] Create `Post` aggregate root
 
 ## Doing
@@ -39,3 +38,4 @@
 - [x] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`  
 - [x] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`
 - [x] Change `Create` method access level from `internal` to `public` in `DomainEventId` 
+- [x] Remove `Nine.Domain` project 
