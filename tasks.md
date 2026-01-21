@@ -9,7 +9,6 @@
 
 ## Todo
 
-- [ ] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`
 - [ ] Remove `Nine.Domain` project 
 - [ ] Create `Post` aggregate root
 
@@ -38,3 +37,4 @@
 - [x] Move `Abstractions` from `Nine.Domain` to `Nine.SharedKernel`
 - [x] Create `Nine.Identities.Domain` project
 - [x] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`  
+- [x] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`

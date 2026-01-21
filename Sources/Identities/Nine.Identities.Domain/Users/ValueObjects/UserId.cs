@@ -1,4 +1,4 @@
-﻿namespace Nine.Domain.Users.ValueObjects;
+﻿namespace Nine.Identities.Domain.Users.ValueObjects;
 
 public readonly record struct UserId
 {

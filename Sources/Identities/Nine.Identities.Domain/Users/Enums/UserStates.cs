@@ -1,4 +1,4 @@
-﻿namespace Nine.Domain.Users.Enums;
+﻿namespace Nine.Identities.Domain.Users.Enums;
 
 public enum UserStates
 {

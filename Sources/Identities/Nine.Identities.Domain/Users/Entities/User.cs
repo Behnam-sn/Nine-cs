@@ -1,10 +1,10 @@
-﻿using Nine.Domain.Users.Enums;
-using Nine.Domain.Users.Events;
-using Nine.Domain.Users.ValueObjects;
+﻿using Nine.Identities.Domain.Users.Enums;
+using Nine.Identities.Domain.Users.Events;
+using Nine.Identities.Domain.Users.ValueObjects;
 using Nine.SharedKernel.Abstractions.AggregateRoots;
 using Nine.SharedKernel.Abstractions.ValueObjects;
 
-namespace Nine.Domain.Users.Entities;
+namespace Nine.Identities.Domain.Users.Entities;
 
 public sealed class User : EventSourcedAggregateRoot<UserId>
 {

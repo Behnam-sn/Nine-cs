@@ -1,9 +1,9 @@
-﻿namespace Nine.Domain.Users.ValueObjects;
+﻿namespace Nine.Identities.Domain.Users.ValueObjects;
 
 public readonly struct PhoneNumber
 {
     public string Value { get; }
-    
+
     private PhoneNumber(string value)
     {
         Value = value;

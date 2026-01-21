@@ -1,4 +1,4 @@
-﻿namespace Nine.Domain.Users.ValueObjects;
+﻿namespace Nine.Identities.Domain.Users.ValueObjects;
 
 public struct FirstName
 {
@@ -8,9 +8,9 @@ public struct FirstName
     {
         Value = value;
     }
-    
+
     public static FirstName Create(string value)
     {
         return new FirstName(value);
-    } 
+    }
 }
