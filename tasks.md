@@ -47,3 +47,4 @@
 - [x] Add `UserTests` class in `Nine.Identities.Domain.Tests`
 - [x] Add `NuGet.config` to `Nine.sln`
 - [x] Add `FluentAssertions` to `Nine.Identities.Domain.Tests.csproj`
+- [x] Move `UserTests` to `Users/Entities` in `Nine.Identities.Domain.Tests`
