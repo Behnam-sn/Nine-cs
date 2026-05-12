@@ -46,3 +46,4 @@
 - [x] Reference `Nine.Identities.Domain` to `Nine.Identities.Domain.Tests`
 - [x] Add `UserTests` class in `Nine.Identities.Domain.Tests`
 - [x] Add `NuGet.config` to `Nine.sln`
+- [x] Add `FluentAssertions` to `Nine.Identities.Domain.Tests.csproj`
