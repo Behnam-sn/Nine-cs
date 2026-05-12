@@ -13,6 +13,12 @@
 - [ ] Reference `Nine.Contents.Domain` to `Nine.Contents.Domain.Tests`
 - [ ] Add `Post` aggregate root in `Nine.Contents.Domain`
 - [ ] Add `PostTests` in `Nine.Contents.Domain.Tests`
+- [ ] Application
+- [ ] Presentation
+- [ ] Infrastructure
+- [ ] Host
+- [ ] BDD Tests
+- [ ] Auth
 
 ## Doing
 
