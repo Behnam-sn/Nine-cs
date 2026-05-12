@@ -45,3 +45,4 @@
 - [x] Add `Nine.Identities.Domain.Tests` project in `Identities` folder
 - [x] Reference `Nine.Identities.Domain` to `Nine.Identities.Domain.Tests`
 - [x] Add `UserTests` class in `Nine.Identities.Domain.Tests`
+- [x] Add `NuGet.config` to `Nine.sln`
