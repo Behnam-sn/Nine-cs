@@ -49,3 +49,4 @@
 - [x] Add `FluentAssertions` to `Nine.Identities.Domain.Tests.csproj`
 - [x] Move `UserTests` to `Users/Entities` in `Nine.Identities.Domain.Tests`
 - [x] Add `CreateInstance_ShouldRaiseUserCreatedDomainEvent` to `UsersTests`
+- [x] Rename `userCreatedEvent` to `userCreatedDomainEvent` in `CreateInstance` in `User`

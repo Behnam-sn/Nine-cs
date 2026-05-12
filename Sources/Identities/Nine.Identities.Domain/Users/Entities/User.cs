@@ -112,7 +112,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     public static User CreateInstance(Name name, Email email, PhoneNumber phoneNumber, Username username)
     {
         var user = new User();
-        var userCreatedEvent = new UserCreatedDomainEventV1(
+        var userCreatedDomainEvent = new UserCreatedDomainEventV1(
             Id: DomainEventId.Create(),
             UserId: UserId.Create(),
             Name: name,
@@ -121,7 +121,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             Username: username,
             OccurredAt: DateTime.UtcNow
         );
-        user.RaiseDomainEvent(userCreatedEvent);
+        user.RaiseDomainEvent(userCreatedDomainEvent);
         return user;
     }
 }
