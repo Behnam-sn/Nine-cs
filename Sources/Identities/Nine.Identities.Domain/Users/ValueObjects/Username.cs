@@ -2,7 +2,7 @@
 
 public readonly struct Username
 {
-    private string Value { get; }
+    public string Value { get; }
 
     private Username(string value)
     {
