@@ -2,6 +2,7 @@
 using Nine.Identities.Domain.Users.Events;
 using Nine.Identities.Domain.Users.ValueObjects;
 using Nine.SharedKernel.Abstractions.AggregateRoots;
+using Nine.SharedKernel.Abstractions.Events;
 using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Identities.Domain.Users.Entities;
@@ -14,6 +15,19 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     public PhoneNumber PhoneNumber { get; private set; }
     public Username Username { get; private set; }
     public UserStates State { get; private set; }
+
+    public User()
+    {
+        
+    }
+
+    public User(IEnumerable<IDomainEvent> domainEvents)
+    {
+        foreach (var domainEvent in domainEvents)  
+        {
+            ApplyDomainEvent(domainEvent);
+        }
+    }
 
     public void SetName(Name name)
     {

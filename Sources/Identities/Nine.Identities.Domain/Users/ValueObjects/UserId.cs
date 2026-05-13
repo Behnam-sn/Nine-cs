@@ -14,7 +14,7 @@ public readonly record struct UserId
         return Value.ToString();
     }
 
-    internal static UserId Create()
+    public static UserId Create()
     {
         return new(Guid.NewGuid());
     }

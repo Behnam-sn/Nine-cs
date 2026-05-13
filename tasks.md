@@ -63,3 +63,4 @@
 - [x] Rename `UserUsernameChangedDomainEvent` to `UserUsernameChangedDomainEventV1`
 - [x] Change `UserUsernameChangedDomainEventV1` type to `sealed`
 - [x] Add `SetUsername_ShouldRaiseUserUsernameChangedDomainEvent` to `UsersTests`
+- [x] Add `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `UsersTests`
