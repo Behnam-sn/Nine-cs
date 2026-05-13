@@ -75,4 +75,21 @@ public sealed class UserTests
         userPhoneNumberChangedDomainEvent.UserId.Should().Be(user.UserId);
         userPhoneNumberChangedDomainEvent.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
     }
+    
+    [Fact]
+    public void SetUsername_ShouldRaiseUserUsernameChangedDomainEvent()
+    {
+        // Arrange
+        var user = new UserBuilder().WithoutCreationEvent().Build();
+        var newUsername = Username.Create("janedoe");
+ 
+        // Act
+        user.SetUsername(newUsername);
+
+        // Assert
+        var userUsernameChangedDomainEvent = (UserUsernameChangedDomainEventV1)user.DomainEvents.Single();
+        userUsernameChangedDomainEvent.UserId.Should().Be(user.UserId);
+        userUsernameChangedDomainEvent.Username.Should().Be(newUsername);
+        userUsernameChangedDomainEvent.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+    }
 }

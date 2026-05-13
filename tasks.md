@@ -62,3 +62,4 @@
 - [x] Rename `UserPhoneNumberChangedDomainEvent` to `UserPhoneNumberChangedDomainEventV1`
 - [x] Rename `UserUsernameChangedDomainEvent` to `UserUsernameChangedDomainEventV1`
 - [x] Change `UserUsernameChangedDomainEventV1` type to `sealed`
+- [x] Add `SetUsername_ShouldRaiseUserUsernameChangedDomainEvent` to `UsersTests`
