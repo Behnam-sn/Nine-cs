@@ -17,13 +17,13 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
 
     public void SetName(Name name)
     {
-        var userFirstNameChangedDomainEvent = new UserNameChangedDomainEventV1(
+        var userNameChangedDomainEvent = new UserNameChangedDomainEventV1(
             Id: DomainEventId.Create(),
             UserId: UserId,
-            Name: Name,
+            Name: name,
             OccurredAt: DateTime.UtcNow
         );
-        RaiseDomainEvent(userFirstNameChangedDomainEvent);
+        RaiseDomainEvent(userNameChangedDomainEvent);
     }
 
     public void SetEmail(Email email)
