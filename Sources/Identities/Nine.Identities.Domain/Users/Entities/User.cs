@@ -50,7 +50,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
 
     public void SetUsername(Username username)
     {
-        var userUsernameChangedDomainEvent = new UserUsernameChangedDomainEvent(
+        var userUsernameChangedDomainEvent = new UserUsernameChangedDomainEventV1(
             Id: DomainEventId.Create(),
             UserId: UserId,
             Username: username,
@@ -104,7 +104,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         PhoneNumber = domainEvent.PhoneNumber;
     }
 
-    private void Apply(UserUsernameChangedDomainEvent domainEvent)
+    private void Apply(UserUsernameChangedDomainEventV1 domainEvent)
     {
         Username = domainEvent.Username;
     }
