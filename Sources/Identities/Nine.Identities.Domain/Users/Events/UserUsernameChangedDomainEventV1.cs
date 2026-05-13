@@ -4,5 +4,5 @@ using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Identities.Domain.Users.Events;
 
-public record UserUsernameChangedDomainEventV1(DomainEventId Id, UserId UserId, Username Username, DateTime OccurredAt)
+public sealed record UserUsernameChangedDomainEventV1(DomainEventId Id, UserId UserId, Username Username, DateTime OccurredAt)
     : IDomainEvent;
