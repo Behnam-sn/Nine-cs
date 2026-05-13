@@ -4,7 +4,7 @@ using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Identities.Domain.Users.Events;
 
-public sealed record UserPhoneNumberChangedDomainEvent(
+public sealed record UserPhoneNumberChangedDomainEventV1(
     DomainEventId Id,
     UserId UserId,
     PhoneNumber PhoneNumber,

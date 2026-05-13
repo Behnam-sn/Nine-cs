@@ -70,7 +70,7 @@ public sealed class UserTests
         user.SetPhoneNumber(newPhoneNumber);
 
         // Assert
-        var userPhoneNumberChangedDomainEvent = (UserPhoneNumberChangedDomainEvent)user.DomainEvents.Single();
+        var userPhoneNumberChangedDomainEvent = (UserPhoneNumberChangedDomainEventV1)user.DomainEvents.Single();
         userPhoneNumberChangedDomainEvent.PhoneNumber.Should().Be(newPhoneNumber);
         userPhoneNumberChangedDomainEvent.UserId.Should().Be(user.UserId);
         userPhoneNumberChangedDomainEvent.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));

@@ -39,7 +39,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
 
     public void SetPhoneNumber(PhoneNumber phoneNumber)
     {
-        var userPhoneNumberChangedDomainEvent = new UserPhoneNumberChangedDomainEvent(
+        var userPhoneNumberChangedDomainEvent = new UserPhoneNumberChangedDomainEventV1(
             Id: DomainEventId.Create(),
             UserId: UserId,
             PhoneNumber: phoneNumber,
@@ -99,7 +99,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         Email = domainEvent.Email;
     }
 
-    private void Apply(UserPhoneNumberChangedDomainEvent domainEvent)
+    private void Apply(UserPhoneNumberChangedDomainEventV1 domainEvent)
     {
         PhoneNumber = domainEvent.PhoneNumber;
     }
