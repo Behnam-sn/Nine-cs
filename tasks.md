@@ -22,6 +22,15 @@
 
 ## Doing
 
+- [ ] Rename `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` in `UserTests`
+- [ ] Create `UserApplyDomainEventTests` in `Nine.Identities.Domain.Tests.Users.Entities`
+- [ ] Move `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests` 
+- [ ] Rename `UserTests` to `UserRaiseDomainEventTests`
+- [ ] Add `ApplyingUserNameChangedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
+- [ ] Add `ApplyingUserEmailChangedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
+- [ ] Add `ApplyingUserPhoneNumberChangedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
+- [ ] Add `ApplyingUserUsernameChangedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
+
 ## Done
 
 - [x] Convert `UserFirstNameChangedDomainEventV1` constructor to a primary constructor
