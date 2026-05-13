@@ -17,7 +17,7 @@ public sealed class UserTests
         
         // Assert
         var userCreatedDomainEvent = (UserCreatedDomainEventV1)user.DomainEvents.Single();
-        userCreatedDomainEvent!.Name.Value.Should().Be(UserBuilder.DefaultNameValue);
+        userCreatedDomainEvent.Name.Value.Should().Be(UserBuilder.DefaultNameValue);
         userCreatedDomainEvent.Email.Value.Should().Be(UserBuilder.DefaultEmailValue);
         userCreatedDomainEvent.PhoneNumber.Value.Should().Be(UserBuilder.DefaultPhoneValue);
         userCreatedDomainEvent.Username.Value.Should().Be(UserBuilder.DefaultUsernameValue);
