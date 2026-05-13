@@ -58,3 +58,4 @@
 - [x] Rename `userCreatedEvent` to `userCreatedDomainEvent` in `CreateInstance` in `User`
 - [x] Add `SetName_ShouldRaiseUserNameChangedDomainEvent` to `UsersTests`
 - [x] Add `SetEmail_ShouldRaiseUserEmailChangedDomainEvent` to `UsersTests`
+- [x] Add `SetPhoneNumber_ShouldRaiseUserPhoneNumberChangedDomainEvent` to `UsersTests`
