@@ -8,7 +8,7 @@ namespace Nine.Identities.Domain.Tests.Users.Entities;
 public sealed class UserTests
 {
     [Fact]
-    public void CreateInstance_ShouldRaiseUserCreatedDomainEvent()
+    public void CreateInstance_ShouldRaiseUserCreatedDomainEventV1AndUpdateState()
     {
         // Arrange
         var user = new UserBuilder().Build();
@@ -16,13 +16,19 @@ public sealed class UserTests
         // Act
 
         // Assert
-        var userCreatedDomainEvent = (UserCreatedDomainEventV1)user.DomainEvents.Single();
-        userCreatedDomainEvent.Name.Value.Should().Be(UserBuilder.DefaultNameValue);
-        userCreatedDomainEvent.Email.Value.Should().Be(UserBuilder.DefaultEmailValue);
-        userCreatedDomainEvent.PhoneNumber.Value.Should().Be(UserBuilder.DefaultPhoneValue);
-        userCreatedDomainEvent.Username.Value.Should().Be(UserBuilder.DefaultUsernameValue);
-        userCreatedDomainEvent.UserId.Should().NotBeNull();
-        userCreatedDomainEvent.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        var userCreatedDomainEventV1 = (UserCreatedDomainEventV1)user.DomainEvents.Single();
+        userCreatedDomainEventV1.Name.Value.Should().Be(UserBuilder.DefaultNameValue);
+        userCreatedDomainEventV1.Email.Value.Should().Be(UserBuilder.DefaultEmailValue);
+        userCreatedDomainEventV1.PhoneNumber.Value.Should().Be(UserBuilder.DefaultPhoneValue);
+        userCreatedDomainEventV1.Username.Value.Should().Be(UserBuilder.DefaultUsernameValue);
+        userCreatedDomainEventV1.UserId.Should().NotBeNull();
+        userCreatedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        
+        user.Name.Value.Should().Be(UserBuilder.DefaultNameValue);
+        user.Email.Value.Should().Be(UserBuilder.DefaultEmailValue);
+        user.PhoneNumber.Value.Should().Be(UserBuilder.DefaultPhoneValue);
+        user.Username.Value.Should().Be(UserBuilder.DefaultUsernameValue);
+        user.UserId.Should().NotBeNull();
     }
 
     [Fact]

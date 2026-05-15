@@ -136,6 +136,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             OccurredAt: DateTime.UtcNow
         );
         user.RaiseDomainEvent(userCreatedDomainEvent);
+        user.Apply(userCreatedDomainEvent);
         return user;
     }
 }

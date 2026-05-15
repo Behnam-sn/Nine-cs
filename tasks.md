@@ -22,7 +22,6 @@
 
 ## Doing
 
-- [ ] Change `CreateInstance_ShouldRaiseUserCreatedDomainEvent` to `CreateInstance_ShouldRaiseUserCreatedDomainEventAndUpdateState` in `UserTests`
 
 ## Done
 
@@ -72,3 +71,4 @@
 - [x] Rename `UserTests` to `UserRaiseDomainEventTests`
 - [x] Rename `UserRaiseDomainEventTests` to `UserTests`
 - [x] Remove  `UserApplyDomainEventTests`
+- [x] Change `CreateInstance_ShouldRaiseUserCreatedDomainEvent` to `CreateInstance_ShouldRaiseUserCreatedDomainEventV1AndUpdateState` in `UserTests`
