@@ -97,7 +97,7 @@ public sealed class UserTests
     }
 
     [Fact]
-    public void ApplyingUserCreatedDomainEvent_ShouldInitializeProperties()
+    public void ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties()
     {
         // Arrange
         var userId = UserId.Create();

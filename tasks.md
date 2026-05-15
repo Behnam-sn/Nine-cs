@@ -22,7 +22,6 @@
 
 ## Doing
 
-- [ ] Rename `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` in `UserTests`
 - [ ] Create `UserApplyDomainEventTests` in `Nine.Identities.Domain.Tests.Users.Entities`
 - [ ] Move `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests` 
 - [ ] Rename `UserTests` to `UserRaiseDomainEventTests`
@@ -73,3 +72,4 @@
 - [x] Change `UserUsernameChangedDomainEventV1` type to `sealed`
 - [x] Add `SetUsername_ShouldRaiseUserUsernameChangedDomainEvent` to `UsersTests`
 - [x] Add `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `UsersTests`
+- [x] Rename `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` in `UserTests`
