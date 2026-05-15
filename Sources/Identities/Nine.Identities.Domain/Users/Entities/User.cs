@@ -50,6 +50,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             OccurredAt: DateTime.UtcNow
         );
         RaiseDomainEvent(userEmailChangedDomainEvent);
+        ApplyDomainEvent(userEmailChangedDomainEvent);
     }
 
     public void SetPhoneNumber(PhoneNumber phoneNumber)
