@@ -62,6 +62,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             OccurredAt: DateTime.UtcNow
         );
         RaiseDomainEvent(userPhoneNumberChangedDomainEvent);
+        ApplyDomainEvent(userPhoneNumberChangedDomainEvent);
     }
 
     public void SetUsername(Username username)
