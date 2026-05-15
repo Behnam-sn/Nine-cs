@@ -22,7 +22,6 @@
 
 ## Doing
 
-- [ ] Remove  `UserApplyDomainEventTests`
 - [ ] Change `CreateInstance_ShouldRaiseUserCreatedDomainEvent` to `CreateInstance_ShouldRaiseUserCreatedDomainEventAndUpdateState` in `UserTests`
 
 ## Done
@@ -72,3 +71,4 @@
 - [x] Move `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests` 
 - [x] Rename `UserTests` to `UserRaiseDomainEventTests`
 - [x] Rename `UserRaiseDomainEventTests` to `UserTests`
+- [x] Remove  `UserApplyDomainEventTests`
