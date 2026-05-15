@@ -51,7 +51,7 @@ public sealed class UserTests
     }
 
     [Fact]
-    public void SetEmail_ShouldRaiseUserEmailChangedDomainEvent()
+    public void SetEmail_ShouldRaiseAndApplyUserEmailChangedDomainEventV1()
     {
         // Arrange
         var user = new UserBuilder().WithoutCreationEvent().Build();
@@ -61,10 +61,12 @@ public sealed class UserTests
         user.SetEmail(newEmail);
 
         // Assert
-        var userEmailChangedDomainEvent = (UserEmailChangedDomainEventV1)user.DomainEvents.Single();
-        userEmailChangedDomainEvent.UserId.Should().Be(user.UserId);
-        userEmailChangedDomainEvent.Email.Should().Be(newEmail);
-        userEmailChangedDomainEvent.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        var userEmailChangedDomainEventV1 = (UserEmailChangedDomainEventV1)user.DomainEvents.Single();
+        userEmailChangedDomainEventV1.UserId.Should().Be(user.UserId);
+        userEmailChangedDomainEventV1.Email.Should().Be(newEmail);
+        userEmailChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        
+        user.Email.Should().Be(newEmail);
     }
 
     [Fact]

@@ -22,7 +22,6 @@
 
 ## Doing
 
-- [ ] Change `SetEmail_ShouldRaiseUserEmailChangedDomainEvent` to `SetEmail_ShouldRaiseAndApplyUserEmailChangedDomainEventV1` in `UserTests`
 - [ ] Apply `userEmailChangedDomainEvent` in `SetEmail` in `User`
 - [ ] Change `SetPhoneNumber_ShouldRaiseUserPhoneNumberChangedDomainEvent` to `SetPhoneNumber_ShouldRaiseAndApplyUserPhoneNumberChangedDomainEventV1` in `UserTests`
 - [ ] Apply `userPhoneNumberChangedDomainEvent` in `SetPhoneNumber` in `User`
@@ -82,3 +81,4 @@
 - [x] Change `SetName_ShouldRaiseUserNameChangedDomainEvent` to `SetName_ShouldRaiseAndApplyUserNameChangedDomainEventV1` in `UserTests`
 - [x] Apply `userNameChangedDomainEvent` in `SetPhoneNumber` in `User`
 - [x] Rename `Apply` to `ApplyDomainEvent` in `User`
+- [x] Change `SetEmail_ShouldRaiseUserEmailChangedDomainEvent` to `SetEmail_ShouldRaiseAndApplyUserEmailChangedDomainEventV1` in `UserTests`
