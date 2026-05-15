@@ -70,7 +70,7 @@ public sealed class UserTests
     }
 
     [Fact]
-    public void SetPhoneNumber_ShouldRaiseUserPhoneNumberChangedDomainEvent()
+    public void SetPhoneNumber_ShouldRaiseAndApplyUserPhoneNumberChangedDomainEventV1()
     {
         // Arrange
         var user = new UserBuilder().WithoutCreationEvent().Build();
@@ -80,10 +80,12 @@ public sealed class UserTests
         user.SetPhoneNumber(newPhoneNumber);
 
         // Assert
-        var userPhoneNumberChangedDomainEvent = (UserPhoneNumberChangedDomainEventV1)user.DomainEvents.Single();
-        userPhoneNumberChangedDomainEvent.PhoneNumber.Should().Be(newPhoneNumber);
-        userPhoneNumberChangedDomainEvent.UserId.Should().Be(user.UserId);
-        userPhoneNumberChangedDomainEvent.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        var userPhoneNumberChangedDomainEventV1 = (UserPhoneNumberChangedDomainEventV1)user.DomainEvents.Single();
+        userPhoneNumberChangedDomainEventV1.PhoneNumber.Should().Be(newPhoneNumber);
+        userPhoneNumberChangedDomainEventV1.UserId.Should().Be(user.UserId);
+        userPhoneNumberChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        
+        user.PhoneNumber.Should().Be(newPhoneNumber);
     }
 
     [Fact]
