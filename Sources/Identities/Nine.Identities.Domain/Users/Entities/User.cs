@@ -74,6 +74,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             OccurredAt: DateTime.UtcNow
         );
         RaiseDomainEvent(userUsernameChangedDomainEvent);
+        ApplyDomainEvent(userUsernameChangedDomainEvent);
     }
 
     private void Activate()
