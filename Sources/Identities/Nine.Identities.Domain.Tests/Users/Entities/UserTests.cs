@@ -32,7 +32,7 @@ public sealed class UserTests
     }
 
     [Fact]
-    public void SetName_ShouldRaiseUserNameChangedDomainEvent()
+    public void SetName_ShouldRaiseAndApplyUserNameChangedDomainEventV1()
     {
         // Arrange
         var user = new UserBuilder().WithoutCreationEvent().Build();
@@ -42,10 +42,12 @@ public sealed class UserTests
         user.SetName(newName);
 
         // Assert
-        var userNameChangedDomainEvent = (UserNameChangedDomainEventV1)user.DomainEvents.Single();
-        userNameChangedDomainEvent.UserId.Should().Be(user.UserId);
-        userNameChangedDomainEvent.Name.Should().Be(newName);
-        userNameChangedDomainEvent.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        var userNameChangedDomainEventV1 = (UserNameChangedDomainEventV1)user.DomainEvents.Single();
+        userNameChangedDomainEventV1.UserId.Should().Be(user.UserId);
+        userNameChangedDomainEventV1.Name.Should().Be(newName);
+        userNameChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        
+        user.Name.Should().Be(newName);
     }
 
     [Fact]
