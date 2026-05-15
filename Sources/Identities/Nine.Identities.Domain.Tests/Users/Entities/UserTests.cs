@@ -89,7 +89,7 @@ public sealed class UserTests
     }
 
     [Fact]
-    public void SetUsername_ShouldRaiseUserUsernameChangedDomainEvent()
+    public void SetUsername_ShouldRaiseAndApplyUserUsernameChangedDomainEventV1()
     {
         // Arrange
         var user = new UserBuilder().WithoutCreationEvent().Build();
@@ -99,9 +99,11 @@ public sealed class UserTests
         user.SetUsername(newUsername);
 
         // Assert
-        var userUsernameChangedDomainEvent = (UserUsernameChangedDomainEventV1)user.DomainEvents.Single();
-        userUsernameChangedDomainEvent.UserId.Should().Be(user.UserId);
-        userUsernameChangedDomainEvent.Username.Should().Be(newUsername);
-        userUsernameChangedDomainEvent.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        var userUsernameChangedDomainEventV1 = (UserUsernameChangedDomainEventV1)user.DomainEvents.Single();
+        userUsernameChangedDomainEventV1.UserId.Should().Be(user.UserId);
+        userUsernameChangedDomainEventV1.Username.Should().Be(newUsername);
+        userUsernameChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        
+        user.Username.Should().Be(newUsername);
     }
 }
