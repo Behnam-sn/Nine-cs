@@ -8,7 +8,7 @@ namespace Nine.Identities.Domain.Tests.Users.Entities;
 public sealed class UserTests
 {
     [Fact]
-    public void CreateInstance_ShouldRaiseUserCreatedDomainEventV1AndUpdateState()
+    public void CreateInstance_ShouldRaiseAndApplyUserCreatedDomainEventV1()
     {
         // Arrange
         var user = new UserBuilder().Build();
