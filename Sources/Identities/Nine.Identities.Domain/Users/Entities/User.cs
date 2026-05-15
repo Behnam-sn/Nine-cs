@@ -38,6 +38,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             OccurredAt: DateTime.UtcNow
         );
         RaiseDomainEvent(userNameChangedDomainEvent);
+        Apply(userNameChangedDomainEvent);
     }
 
     public void SetEmail(Email email)
