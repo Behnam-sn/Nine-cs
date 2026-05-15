@@ -3,7 +3,7 @@ using Nine.Identities.Domain.Users.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Users.Entities;
 
-public sealed class UserTestBuilder
+internal sealed class UserTestBuilder
 {
     public const string DefaultNameValue = "John Doe";
     public const string DefaultEmailValue = "john@example.com";

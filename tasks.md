@@ -83,3 +83,4 @@
 - [x] Change `SetUsername_ShouldRaiseUserUsernameChangedDomainEvent` to `SetUsername_ShouldRaiseAndApplyUserUsernameChangedDomainEventV1` in `UserTests`
 - [x] Apply `userUsernameChangedDomainEvent` in `SetUsername` in `User`
 - [x] Rename `UserBuilder` to `UserTestBuilder`
+- [x] Change `UserTestBuilder` access level from `public` to `internal`
