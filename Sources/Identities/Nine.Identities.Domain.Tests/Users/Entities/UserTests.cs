@@ -5,7 +5,7 @@ using Nine.Identities.Domain.Users.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Users.Entities;
 
-public sealed class UserRaiseDomainEventTests
+public sealed class UserTests
 {
     [Fact]
     public void CreateInstance_ShouldRaiseUserCreatedDomainEvent()

@@ -22,10 +22,8 @@
 
 ## Doing
 
-- [ ] Add `ApplyingUserNameChangedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
-- [ ] Add `ApplyingUserEmailChangedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
-- [ ] Add `ApplyingUserPhoneNumberChangedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
-- [ ] Add `ApplyingUserUsernameChangedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
+- [ ] Remove  `UserApplyDomainEventTests`
+- [ ] Change `CreateInstance_ShouldRaiseUserCreatedDomainEvent` to `CreateInstance_ShouldRaiseUserCreatedDomainEventAndUpdateState` in `UserTests`
 
 ## Done
 
@@ -73,3 +71,4 @@
 - [x] Create `UserApplyDomainEventTests` in `Nine.Identities.Domain.Tests.Users.Entities`
 - [x] Move `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests` 
 - [x] Rename `UserTests` to `UserRaiseDomainEventTests`
+- [x] Rename `UserRaiseDomainEventTests` to `UserTests`
