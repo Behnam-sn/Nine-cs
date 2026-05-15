@@ -16,11 +16,11 @@ public abstract class EventSourcedAggregateRoot<TId> : EventSourcedEntity<TId>, 
     
     protected void ApplyDomainEvent(IDomainEvent domainEvent)
     {
-        var applyMethod = this.GetType()
-            .GetMethod("Apply", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, 
+        var applyDomainEventMethod = this.GetType()
+            .GetMethod("ApplyDomainEvent", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, 
                 null, [domainEvent.GetType()], null);
     
-        applyMethod?.Invoke(this, [domainEvent]);
+        applyDomainEventMethod?.Invoke(this, [domainEvent]);
     }
 
     public void ClearDomainEvents()

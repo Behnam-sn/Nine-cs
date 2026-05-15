@@ -38,7 +38,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             OccurredAt: DateTime.UtcNow
         );
         RaiseDomainEvent(userNameChangedDomainEvent);
-        Apply(userNameChangedDomainEvent);
+        ApplyDomainEvent(userNameChangedDomainEvent);
     }
 
     public void SetEmail(Email email)
@@ -94,7 +94,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         throw new NotImplementedException();
     }
 
-    private void Apply(UserCreatedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(UserCreatedDomainEventV1 domainEvent)
     {
         UserId = domainEvent.UserId;
         Name = domainEvent.Name;
@@ -104,22 +104,22 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         State = UserStates.Active;
     }
 
-    private void Apply(UserNameChangedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(UserNameChangedDomainEventV1 domainEvent)
     {
         Name = domainEvent.Name;
     }
 
-    private void Apply(UserEmailChangedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(UserEmailChangedDomainEventV1 domainEvent)
     {
         Email = domainEvent.Email;
     }
 
-    private void Apply(UserPhoneNumberChangedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(UserPhoneNumberChangedDomainEventV1 domainEvent)
     {
         PhoneNumber = domainEvent.PhoneNumber;
     }
 
-    private void Apply(UserUsernameChangedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(UserUsernameChangedDomainEventV1 domainEvent)
     {
         Username = domainEvent.Username;
     }
@@ -137,7 +137,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             OccurredAt: DateTime.UtcNow
         );
         user.RaiseDomainEvent(userCreatedDomainEvent);
-        user.Apply(userCreatedDomainEvent);
+        user.ApplyDomainEvent(userCreatedDomainEvent);
         return user;
     }
 }
