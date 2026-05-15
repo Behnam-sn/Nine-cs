@@ -3,7 +3,7 @@ using Nine.Identities.Domain.Users.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Users.Entities;
 
-public sealed class UserBuilder
+public sealed class UserTestBuilder
 {
     public const string DefaultNameValue = "John Doe";
     public const string DefaultEmailValue = "john@example.com";
@@ -17,31 +17,31 @@ public sealed class UserBuilder
 
     private bool _raiseCreationEvent = true;
 
-    public UserBuilder WithName(string name)
+    public UserTestBuilder WithName(string name)
     {
         _name = Name.Create(name);
         return this;
     }
 
-    public UserBuilder WithEmail(string email)
+    public UserTestBuilder WithEmail(string email)
     {
         _email = Email.Create(email);
         return this;
     }
 
-    public UserBuilder WithPhoneNumber(string phone)
+    public UserTestBuilder WithPhoneNumber(string phone)
     {
         _phone = PhoneNumber.Create(phone);
         return this;
     }
 
-    public UserBuilder WithUsername(string username)
+    public UserTestBuilder WithUsername(string username)
     {
         _username = Username.Create(username);
         return this;
     }
 
-    public UserBuilder WithoutCreationEvent()
+    public UserTestBuilder WithoutCreationEvent()
     {
         _raiseCreationEvent = false;
         return this;
