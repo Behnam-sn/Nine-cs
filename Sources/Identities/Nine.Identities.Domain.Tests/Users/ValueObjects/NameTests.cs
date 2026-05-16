@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 
+using Nine.Identities.Domain.Users.Exceptions;
 using Nine.Identities.Domain.Users.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Users.ValueObjects;
@@ -19,5 +20,17 @@ public sealed class NameTests
         
         // Assert
         name.Value.Should().Be(value);
+    }
+    
+    [Fact]
+    public void Create_WithNull_ShouldThrowNameCannotBeEmptyException()
+    {
+        // Arrange
+
+        // Act
+        var act = () => Name.Create(null);
+
+        // Assert
+        act.Should().Throw<NameCannotBeEmptyException>();
     }
 }
