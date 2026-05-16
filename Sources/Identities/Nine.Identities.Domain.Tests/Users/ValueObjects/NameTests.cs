@@ -14,45 +14,24 @@ public sealed class NameTests
     public void Create_ShouldSetValue(string value)
     {
         // Arrange
-        
+
         // Act
         var name = Name.Create(value);
-        
+
         // Assert
         name.Value.Should().Be(value);
     }
-    
-    [Fact]
-    public void Create_WithNull_ShouldThrowNameCannotBeEmptyException()
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowNameCannotBeEmptyException(string invalidValue)
     {
         // Arrange
 
         // Act
-        var act = () => Name.Create(null);
-
-        // Assert
-        act.Should().Throw<NameCannotBeEmptyException>();
-    }
-    
-    [Fact]
-    public void Create_WithEmpty_ShouldThrowNameCannotBeEmptyException()
-    {
-        // Arrange
-
-        // Act
-        var act = () => Name.Create("");
-
-        // Assert
-        act.Should().Throw<NameCannotBeEmptyException>();
-    }
-    
-    [Fact]
-    public void Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException()
-    {
-        // Arrange
-
-        // Act
-        var act = () => Name.Create("   ");
+        var act = () => Name.Create(invalidValue);
 
         // Assert
         act.Should().Throw<NameCannotBeEmptyException>();
