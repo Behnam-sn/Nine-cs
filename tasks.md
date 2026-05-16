@@ -22,7 +22,6 @@
 
 ## Doing
 
-- [ ] Add `NameTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [ ] Add `EmailTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [ ] Add `PhoneNumberTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [ ] Add `UsernameTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
@@ -91,3 +90,4 @@
 - [x] Add `UserIdTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [x] Add `Create_ShouldGenerateUniqueId` to `UserIdTests`
 - [x] Add `Parse_ShouldReturnCorrectId` to `UserIdTests`
+- [x] Add `NameTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
