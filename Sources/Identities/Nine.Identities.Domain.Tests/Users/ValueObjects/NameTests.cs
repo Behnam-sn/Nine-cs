@@ -36,4 +36,17 @@ public sealed class NameTests
         // Assert
         act.Should().Throw<NameCannotBeEmptyException>();
     }
+    
+    [Fact]
+    public void Create_WithTooLongValue_ShouldThrowNameTooLongException()
+    {
+        // Arrange
+        var longName = new string('A', 101);
+
+        // Act
+        var act = () => Name.Create(longName);
+
+        // Assert
+        act.Should().Throw<NameTooLongException>();
+    }
 }

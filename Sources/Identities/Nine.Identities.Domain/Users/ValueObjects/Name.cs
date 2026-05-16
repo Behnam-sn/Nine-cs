@@ -4,6 +4,8 @@ namespace Nine.Identities.Domain.Users.ValueObjects;
 
 public readonly struct Name
 {
+    const int MaxLength = 100;
+
     public string Value { get; }
 
     private Name(string value)
@@ -17,7 +19,12 @@ public readonly struct Name
         {
             throw new NameCannotBeEmptyException();
         }
-        
+
+        if (value.Length > MaxLength)
+        {
+            throw new NameTooLongException();
+        }
+
         return new(value);
     }
 }
