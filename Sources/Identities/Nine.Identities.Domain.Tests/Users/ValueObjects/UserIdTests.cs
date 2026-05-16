@@ -16,4 +16,14 @@ public sealed class UserIdTests
         id2.Value.Should().NotBe(Guid.Empty);
         id1.Should().NotBe(id2);
     }
+    
+    [Fact]
+    public void Parse_ShouldReturnCorrectId()
+    {
+        var guid = Guid.NewGuid();
+        var userId = UserId.Parse(guid);
+
+        userId.Value.Should().Be(guid);
+        userId.ToString().Should().Be(guid.ToString());
+    }
 }

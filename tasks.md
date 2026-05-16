@@ -90,3 +90,4 @@
 - [x] Change `UserTestBuilder` access level from `public` to `internal`
 - [x] Add `UserIdTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [x] Add `Create_ShouldGenerateUniqueId` to `UserIdTests`
+- [x] Add `Parse_ShouldReturnCorrectId` to `UserIdTests`
