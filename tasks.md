@@ -94,3 +94,4 @@
 - [x] Add `Create_ShouldSetValue` to `NameTests`
 - [x] Add `Create_WithNull_ShouldThrowNameCannotBeEmptyException` to `NameTests`
 - [x] Throw `NameCannotBeEmptyException` if `value` is empty in `Create` in `Name` 
+- [x] Add `Create_WithEmpty_ShouldThrowNameCannotBeEmptyException` to `NameTests`
