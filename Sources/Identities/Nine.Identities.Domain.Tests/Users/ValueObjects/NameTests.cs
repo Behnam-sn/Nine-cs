@@ -45,4 +45,16 @@ public sealed class NameTests
         // Assert
         act.Should().Throw<NameCannotBeEmptyException>();
     }
+    
+    [Fact]
+    public void Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException()
+    {
+        // Arrange
+
+        // Act
+        var act = () => Name.Create("   ");
+
+        // Assert
+        act.Should().Throw<NameCannotBeEmptyException>();
+    }
 }
