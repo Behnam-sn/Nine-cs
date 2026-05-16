@@ -22,6 +22,10 @@
 
 ## Doing
 
+- [ ] Add `NameTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
+- [ ] Add `EmailTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
+- [ ] Add `PhoneNumberTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
+- [ ] Add `UsernameTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 
 ## Done
 
@@ -84,3 +88,4 @@
 - [x] Apply `userUsernameChangedDomainEvent` in `SetUsername` in `User`
 - [x] Rename `UserBuilder` to `UserTestBuilder`
 - [x] Change `UserTestBuilder` access level from `public` to `internal`
+- [x] Add `UserIdTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
