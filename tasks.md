@@ -98,3 +98,4 @@
 - [x] Add `Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException` to `NameTests`
 - [x] Merge `Create_WithNull_ShouldThrowNameCannotBeEmptyException`, `Create_WithEmpty_ShouldThrowNameCannotBeEmptyException` and `Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException` into `Create_WithNullOrEmptyOrWhitespace_ShouldThrowNameCannotBeEmptyException` to `NameTests`
 - [x] Add `Create_WithTooLongValue_ShouldThrowNameTooLongException` to `NameTests`
+- [x] Add `Arrange`, `Act`, `Assert` comments to `UserIdTests` 
