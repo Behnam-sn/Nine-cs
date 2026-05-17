@@ -23,6 +23,14 @@
 
 ## Doing
 
+- [ ] Rename `User` to `Account`
+- [ ] Add `Email` uniqueness domain service
+- [ ] Remove `Name` from `Account`
+- [ ] Add `FirstName` to `Account`
+- [ ] Add `LastName` to `Account`
+- [ ] What about password?
+- [ ] How about having multiple emails?
+- [ ] How about having multiple phone numbers?
 
 ## Done
 
