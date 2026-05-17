@@ -11,6 +11,7 @@ public readonly struct Email
 
     public static Email Create(string value)
     {
+        value = value.Trim();
         return new(value);
     }
 }

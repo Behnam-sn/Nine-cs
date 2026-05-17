@@ -20,4 +20,18 @@ public sealed class EmailTests
         // Assert
         e.Value.Should().Be(email);
     }
+    
+    [Theory]
+    [InlineData("  john@example.com  ", "john@example.com")]
+    [InlineData(" alice@domain.co ", "alice@domain.co")]
+    public void Create_ShouldTrimLeadingAndTrailingWhitespace(string input, string expected)
+    {
+        // Arrange
+
+        // Act
+        var e = Email.Create(input);
+
+        // Assert
+        e.Value.Should().Be(expected);
+    }
 }
