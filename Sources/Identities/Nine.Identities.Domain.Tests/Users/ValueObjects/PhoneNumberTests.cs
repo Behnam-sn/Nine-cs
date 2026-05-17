@@ -20,4 +20,18 @@ public sealed class PhoneNumberTests
         // Assert
         phoneNumber.Value.Should().Be(phone);
     }
+    
+    [Theory]
+    [InlineData(" 5551234567 ", "5551234567")]
+    [InlineData(" +1 555-123-4567 ", "+1 555-123-4567")]
+    public void Create_ShouldTrimLeadingAndTrailingWhitespace(string input, string expected)
+    {
+        // Arrange
+
+        // Act
+        var phoneNumber = PhoneNumber.Create(input);
+
+        // Assert
+        phoneNumber.Value.Should().Be(expected);
+    }
 }

@@ -11,6 +11,7 @@ public readonly struct PhoneNumber
 
     public static PhoneNumber Create(string value)
     {
+        value = value.Trim();
         return new(value);
     }
 }
