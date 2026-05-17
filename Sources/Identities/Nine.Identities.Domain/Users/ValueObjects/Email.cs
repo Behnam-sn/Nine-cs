@@ -6,6 +6,9 @@ namespace Nine.Identities.Domain.Users.ValueObjects;
 
 public readonly partial struct Email
 {
+    [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$")]
+    private static partial Regex ValidEmailRegex();
+
     public string Value { get; }
 
     private Email(string value)
@@ -21,6 +24,11 @@ public readonly partial struct Email
         }
 
         value = value.Trim();
+
+        if (string.IsNullOrWhiteSpace(value) || !ValidEmailRegex().IsMatch(value))
+        {
+            throw new EmailInvalidFormatException();
+        }
 
         return new(value);
     }

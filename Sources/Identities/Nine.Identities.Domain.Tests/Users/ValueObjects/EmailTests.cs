@@ -21,7 +21,7 @@ public sealed class EmailTests
         // Assert
         e.Value.Should().Be(email);
     }
-    
+
     [Theory]
     [InlineData("  john@example.com  ", "john@example.com")]
     [InlineData(" alice@domain.co ", "alice@domain.co")]
@@ -35,7 +35,7 @@ public sealed class EmailTests
         // Assert
         e.Value.Should().Be(expected);
     }
-    
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -49,5 +49,21 @@ public sealed class EmailTests
 
         // Assert
         act.Should().Throw<EmailCannotBeEmptyException>();
+    }
+
+    [Theory]
+    [InlineData("plainaddress")]
+    [InlineData("missing@domain")]
+    [InlineData("missing.domain.com")]
+    [InlineData("@nouser.com")]
+    public void Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException(string invalidEmail)
+    {
+        // Arrange
+
+        // Act
+        var act = () => Email.Create(invalidEmail);
+
+        // Assert
+        act.Should().Throw<EmailInvalidFormatException>();
     }
 }

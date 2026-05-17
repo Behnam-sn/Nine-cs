@@ -103,3 +103,4 @@
 - [x] Add `Create_ShouldSetValue` to `EmailTests` 
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `EmailTests` 
 - [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException` to `EmailTests` 
+- [x] Add `Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException` to `EmailTests` 
