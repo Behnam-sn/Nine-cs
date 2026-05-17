@@ -1,4 +1,6 @@
-﻿namespace Nine.Identities.Domain.Users.ValueObjects;
+﻿using Nine.Identities.Domain.Users.Exceptions;
+
+namespace Nine.Identities.Domain.Users.ValueObjects;
 
 public readonly struct PhoneNumber
 {
@@ -11,6 +13,11 @@ public readonly struct PhoneNumber
 
     public static PhoneNumber Create(string value)
     {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new PhoneNumberCannotBeEmptyException();
+        }
+        
         value = value.Trim();
         return new(value);
     }

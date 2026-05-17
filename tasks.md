@@ -4,6 +4,7 @@
 
 - Add `Password` to `User`
 - Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
+- Rename `value` in `Create` in value objects
 
 ## Todo
 
@@ -106,3 +107,5 @@
 - [x] Add `PhoneNumberTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [x] Add `Create_ShouldSetValue` to `PhoneNumberTests`
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `PhoneNumberTests`
+- [x] Rename `phone` to `input` in `Create_ShouldSetValue` in `PhoneNumberTests`
+- [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowPhoneNumberCannotBeEmptyException` to `PhoneNumberTests`
