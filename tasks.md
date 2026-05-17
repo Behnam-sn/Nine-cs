@@ -22,7 +22,6 @@
 
 ## Doing
 
-- [ ] Add `EmailTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [ ] Add `PhoneNumberTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [ ] Add `UsernameTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 
@@ -100,3 +99,4 @@
 - [x] Add `Create_WithTooLongValue_ShouldThrowNameTooLongException` to `NameTests`
 - [x] Add `Arrange`, `Act`, `Assert` comments to `UserIdTests` 
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `NameTests`
+- [x] Add `EmailTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
