@@ -20,14 +20,12 @@ public sealed class UserTests
         userCreatedDomainEventV1.Name.Value.Should().Be(UserTestBuilder.DefaultNameValue);
         userCreatedDomainEventV1.Email.Value.Should().Be(UserTestBuilder.DefaultEmailValue);
         userCreatedDomainEventV1.PhoneNumber.Value.Should().Be(UserTestBuilder.DefaultPhoneValue);
-        userCreatedDomainEventV1.Username.Value.Should().Be(UserTestBuilder.DefaultUsernameValue);
         userCreatedDomainEventV1.UserId.Should().NotBeNull();
         userCreatedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
         
         user.Name.Value.Should().Be(UserTestBuilder.DefaultNameValue);
         user.Email.Value.Should().Be(UserTestBuilder.DefaultEmailValue);
         user.PhoneNumber.Value.Should().Be(UserTestBuilder.DefaultPhoneValue);
-        user.Username.Value.Should().Be(UserTestBuilder.DefaultUsernameValue);
         user.UserId.Should().NotBeNull();
     }
 
@@ -86,24 +84,5 @@ public sealed class UserTests
         userPhoneNumberChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
         
         user.PhoneNumber.Should().Be(newPhoneNumber);
-    }
-
-    [Fact]
-    public void SetUsername_ShouldRaiseAndApplyUserUsernameChangedDomainEventV1()
-    {
-        // Arrange
-        var user = new UserTestBuilder().WithoutCreationEvent().Build();
-        var newUsername = Username.Create("janedoe");
-
-        // Act
-        user.SetUsername(newUsername);
-
-        // Assert
-        var userUsernameChangedDomainEventV1 = (UserUsernameChangedDomainEventV1)user.DomainEvents.Single();
-        userUsernameChangedDomainEventV1.UserId.Should().Be(user.UserId);
-        userUsernameChangedDomainEventV1.Username.Should().Be(newUsername);
-        userUsernameChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        
-        user.Username.Should().Be(newUsername);
     }
 }

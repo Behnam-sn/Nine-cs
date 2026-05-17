@@ -13,7 +13,6 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
     public Name Name { get; private set; }
     public Email Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
-    public Username Username { get; private set; }
     public UserStates State { get; private set; }
 
     public User()
@@ -65,18 +64,6 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         ApplyDomainEvent(userPhoneNumberChangedDomainEvent);
     }
 
-    public void SetUsername(Username username)
-    {
-        var userUsernameChangedDomainEvent = new UserUsernameChangedDomainEventV1(
-            Id: DomainEventId.Create(),
-            UserId: UserId,
-            Username: username,
-            OccurredAt: DateTime.UtcNow
-        );
-        RaiseDomainEvent(userUsernameChangedDomainEvent);
-        ApplyDomainEvent(userUsernameChangedDomainEvent);
-    }
-
     private void Activate()
     {
         throw new NotImplementedException();
@@ -103,7 +90,6 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         Name = domainEvent.Name;
         Email = domainEvent.Email;
         PhoneNumber = domainEvent.PhoneNumber;
-        Username = domainEvent.Username;
         State = UserStates.Active;
     }
 
@@ -122,12 +108,7 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
         PhoneNumber = domainEvent.PhoneNumber;
     }
 
-    private void ApplyDomainEvent(UserUsernameChangedDomainEventV1 domainEvent)
-    {
-        Username = domainEvent.Username;
-    }
-
-    public static User CreateInstance(Name name, Email email, PhoneNumber phoneNumber, Username username)
+    public static User CreateInstance(Name name, Email email, PhoneNumber phoneNumber)
     {
         var user = new User();
         var userCreatedDomainEvent = new UserCreatedDomainEventV1(
@@ -136,7 +117,6 @@ public sealed class User : EventSourcedAggregateRoot<UserId>
             Name: name,
             Email: email,
             PhoneNumber: phoneNumber,
-            Username: username,
             OccurredAt: DateTime.UtcNow
         );
         user.RaiseDomainEvent(userCreatedDomainEvent);

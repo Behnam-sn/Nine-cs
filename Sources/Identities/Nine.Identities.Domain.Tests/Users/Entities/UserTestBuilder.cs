@@ -8,12 +8,10 @@ internal sealed class UserTestBuilder
     public const string DefaultNameValue = "John Doe";
     public const string DefaultEmailValue = "john@example.com";
     public const string DefaultPhoneValue = "+123456789";
-    public const string DefaultUsernameValue = "johndoe";
 
     private Name _name = Name.Create(DefaultNameValue);
     private Email _email = Email.Create(DefaultEmailValue);
     private PhoneNumber _phone = PhoneNumber.Create(DefaultPhoneValue);
-    private Username _username = Username.Create(DefaultUsernameValue);
 
     private bool _raiseCreationEvent = true;
 
@@ -35,12 +33,6 @@ internal sealed class UserTestBuilder
         return this;
     }
 
-    public UserTestBuilder WithUsername(string username)
-    {
-        _username = Username.Create(username);
-        return this;
-    }
-
     public UserTestBuilder WithoutCreationEvent()
     {
         _raiseCreationEvent = false;
@@ -49,7 +41,7 @@ internal sealed class UserTestBuilder
 
     public User Build()
     {
-        var user = User.CreateInstance(_name, _email, _phone, _username);
+        var user = User.CreateInstance(_name, _email, _phone);
 
         if (!_raiseCreationEvent)
         {
