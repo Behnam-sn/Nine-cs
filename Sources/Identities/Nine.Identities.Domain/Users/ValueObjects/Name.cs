@@ -19,6 +19,8 @@ public readonly struct Name
         {
             throw new NameCannotBeEmptyException();
         }
+        
+        value = value.Trim();
 
         if (value.Length > MaxLength)
         {

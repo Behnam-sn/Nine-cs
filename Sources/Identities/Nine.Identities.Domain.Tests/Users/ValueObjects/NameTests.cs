@@ -37,6 +37,17 @@ public sealed class NameTests
         act.Should().Throw<NameCannotBeEmptyException>();
     }
     
+    [Theory]
+    [InlineData("   John   ", "John")]
+    [InlineData(" Alice ", "Alice")]
+    [InlineData(" Bob  ", "Bob")]
+    public void Create_ShouldTrimLeadingAndTrailingWhitespace(string input, string expected)
+    {
+        var name = Name.Create(input);
+
+        name.Value.Should().Be(expected);
+    }
+    
     [Fact]
     public void Create_WithTooLongValue_ShouldThrowNameTooLongException()
     {
