@@ -100,3 +100,4 @@
 - [x] Add `Arrange`, `Act`, `Assert` comments to `UserIdTests` 
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `NameTests`
 - [x] Add `EmailTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
+- [x] Add `Create_ShouldSetValue` to `EmailTests` 
