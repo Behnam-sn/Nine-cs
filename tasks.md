@@ -22,7 +22,6 @@
 
 ## Doing
 
-- [ ] Add `PhoneNumberTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [ ] Add `UsernameTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 
 ## Done
@@ -104,3 +103,4 @@
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `EmailTests` 
 - [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException` to `EmailTests` 
 - [x] Add `Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException` to `EmailTests` 
+- [x] Add `PhoneNumberTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
