@@ -11,6 +11,14 @@ public sealed class PhoneNumberTests
     [InlineData("+1 555-123-4567")]
     [InlineData("5551234567")]
     [InlineData("(555) 123-4567")]
+    [InlineData("11223344")]
+    [InlineData("11 22 33 44")]
+    [InlineData("01211223344")]
+    [InlineData("012 11 22 33 44")]
+    [InlineData("+98 11 22 33 44")]
+    [InlineData("01234567890")]
+    [InlineData("0123 456 7890")]
+    [InlineData("+98 123 456 7890")]
     public void Create_ShouldSetValue(string input)
     {
         // Arrange
@@ -49,5 +57,20 @@ public sealed class PhoneNumberTests
 
         // Assert
         act.Should().Throw<PhoneNumberCannotBeEmptyException>();
+    }
+    
+    [Theory]
+    [InlineData("abc123")]
+    [InlineData("123!@#")]
+    [InlineData("++1234567")]
+    public void Create_WithInvalidFormat_ShouldThrowPhoneNumberInvalidFormatException(string invalidPhone)
+    {
+        // Arrange
+
+        // Act
+        var act = () => PhoneNumber.Create(invalidPhone);
+
+        // Assert
+        act.Should().Throw<PhoneNumberInvalidFormatException>();
     }
 }

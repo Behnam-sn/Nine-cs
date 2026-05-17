@@ -1,9 +1,14 @@
-﻿using Nine.Identities.Domain.Users.Exceptions;
+﻿using System.Text.RegularExpressions;
+
+using Nine.Identities.Domain.Users.Exceptions;
 
 namespace Nine.Identities.Domain.Users.ValueObjects;
 
-public readonly struct PhoneNumber
+public readonly partial struct PhoneNumber
 {
+    [GeneratedRegex(@"^\+?[0-9\s\-\(\)]{7,20}$")]
+    private static partial Regex ValidPhoneNumberRegex();
+    
     public string Value { get; }
 
     private PhoneNumber(string value)
@@ -19,6 +24,14 @@ public readonly struct PhoneNumber
         }
         
         value = value.Trim();
+        
+        if (!ValidPhoneNumberRegex().IsMatch(value))
+        {
+            throw new PhoneNumberInvalidFormatException();
+        }
+        
         return new(value);
     }
+
+    
 }

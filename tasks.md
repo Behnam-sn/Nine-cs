@@ -109,3 +109,4 @@
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `PhoneNumberTests`
 - [x] Rename `phone` to `input` in `Create_ShouldSetValue` in `PhoneNumberTests`
 - [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowPhoneNumberCannotBeEmptyException` to `PhoneNumberTests`
+- [x] Add `Create_WithInvalidFormat_ShouldThrowPhoneNumberInvalidFormatException` to `PhoneNumberTests`
