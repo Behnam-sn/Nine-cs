@@ -102,3 +102,4 @@
 - [x] Add `EmailTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [x] Add `Create_ShouldSetValue` to `EmailTests` 
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `EmailTests` 
+- [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException` to `EmailTests` 

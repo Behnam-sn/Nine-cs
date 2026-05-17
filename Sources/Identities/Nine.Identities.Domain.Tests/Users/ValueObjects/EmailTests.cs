@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 
+using Nine.Identities.Domain.Users.Exceptions;
 using Nine.Identities.Domain.Users.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Users.ValueObjects;
@@ -33,5 +34,20 @@ public sealed class EmailTests
 
         // Assert
         e.Value.Should().Be(expected);
+    }
+    
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException(string invalidEmail)
+    {
+        // Arrange
+
+        // Act
+        var act = () => Email.Create(invalidEmail);
+
+        // Assert
+        act.Should().Throw<EmailCannotBeEmptyException>();
     }
 }
