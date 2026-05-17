@@ -10,15 +10,15 @@ public sealed class PhoneNumberTests
     [InlineData("+1 555-123-4567")]
     [InlineData("5551234567")]
     [InlineData("(555) 123-4567")]
-    public void Create_ShouldSetValue(string phone)
+    public void Create_ShouldSetValue(string input)
     {
         // Arrange
 
         // Act
-        var phoneNumber = PhoneNumber.Create(phone);
+        var phoneNumber = PhoneNumber.Create(input);
 
         // Assert
-        phoneNumber.Value.Should().Be(phone);
+        phoneNumber.Value.Should().Be(input);
     }
     
     [Theory]
