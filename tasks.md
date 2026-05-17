@@ -104,3 +104,4 @@
 - [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException` to `EmailTests` 
 - [x] Add `Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException` to `EmailTests` 
 - [x] Add `PhoneNumberTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
+- [x] Add `Create_ShouldSetValue` to `PhoneNumberTests`
