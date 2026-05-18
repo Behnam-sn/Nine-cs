@@ -1,5 +1,4 @@
-﻿using Nine.Identities.Domain.Accounts.Enums;
-using Nine.Identities.Domain.Accounts.Events;
+﻿using Nine.Identities.Domain.Accounts.Events;
 using Nine.Identities.Domain.Accounts.ValueObjects;
 using Nine.SharedKernel.Abstractions.AggregateRoots;
 using Nine.SharedKernel.Abstractions.Events;
@@ -12,7 +11,6 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     public AccountId AccountId { get; private set; }
     public Email Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
-    public AccountStates State { get; private set; }
 
     public Account()
     {
@@ -51,27 +49,11 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         ApplyDomainEvent(accountPhoneNumberChangedDomainEvent);
     }
 
-    private void Activate()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Suspend()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Delete()
-    {
-        throw new NotImplementedException();
-    }
-
     private void ApplyDomainEvent(AccountCreatedDomainEventV1 domainEvent)
     {
         AccountId = domainEvent.AccountId;
         Email = domainEvent.Email;
         PhoneNumber = domainEvent.PhoneNumber;
-        State = AccountStates.Active;
     }
 
     private void ApplyDomainEvent(AccountEmailChangedDomainEventV1 domainEvent)
