@@ -69,11 +69,6 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         throw new NotImplementedException();
     }
 
-    private void Archive()
-    {
-        throw new NotImplementedException();
-    }
-
     private void Suspend()
     {
         throw new NotImplementedException();

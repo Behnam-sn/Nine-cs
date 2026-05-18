@@ -118,3 +118,4 @@
 - [x] Add `Create_WithInvalidFormat_ShouldThrowPhoneNumberInvalidFormatException` to `PhoneNumberTests`
 - [x] Remove `Username` from `User`
 - [x] Rename `User` to `Account`
+- [x] Remove `Archived` from `AccountStates`
