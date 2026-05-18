@@ -7,7 +7,6 @@ namespace Nine.Identities.Domain.Accounts.Events;
 public sealed record AccountCreatedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
-    Name Name,
     Email Email,
     PhoneNumber PhoneNumber,
     DateTime OccurredAt

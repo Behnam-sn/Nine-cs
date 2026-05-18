@@ -24,12 +24,6 @@
 ## Doing
 
 - [ ] Add `Email` uniqueness domain service
-- [ ] Remove `Name` from `Account`
-- [ ] Add `FirstName` to `Account`
-- [ ] Add `LastName` to `Account`
-- [ ] What about password?
-- [ ] How about having multiple emails?
-- [ ] How about having multiple phone numbers?
 
 ## Done
 
@@ -119,3 +113,4 @@
 - [x] Remove `Username` from `User`
 - [x] Rename `User` to `Account`
 - [x] Remove `Archived` from `AccountStates`
+- [x] Remove `Name` from `Account`

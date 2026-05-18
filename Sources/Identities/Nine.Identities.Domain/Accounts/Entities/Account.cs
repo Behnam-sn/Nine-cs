@@ -10,7 +10,6 @@ namespace Nine.Identities.Domain.Accounts.Entities;
 public sealed class Account : EventSourcedAggregateRoot<AccountId>
 {
     public AccountId AccountId { get; private set; }
-    public Name Name { get; private set; }
     public Email Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
     public AccountStates State { get; private set; }
@@ -26,18 +25,6 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         {
             ApplyDomainEvent(domainEvent);
         }
-    }
-
-    public void SetName(Name name)
-    {
-        var accountNameChangedDomainEvent = new AccountNameChangedDomainEventV1(
-            Id: DomainEventId.Create(),
-            AccountId: AccountId,
-            Name: name,
-            OccurredAt: DateTime.UtcNow
-        );
-        RaiseDomainEvent(accountNameChangedDomainEvent);
-        ApplyDomainEvent(accountNameChangedDomainEvent);
     }
 
     public void SetEmail(Email email)
@@ -82,15 +69,9 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     private void ApplyDomainEvent(AccountCreatedDomainEventV1 domainEvent)
     {
         AccountId = domainEvent.AccountId;
-        Name = domainEvent.Name;
         Email = domainEvent.Email;
         PhoneNumber = domainEvent.PhoneNumber;
         State = AccountStates.Active;
-    }
-
-    private void ApplyDomainEvent(AccountNameChangedDomainEventV1 domainEvent)
-    {
-        Name = domainEvent.Name;
     }
 
     private void ApplyDomainEvent(AccountEmailChangedDomainEventV1 domainEvent)
@@ -103,13 +84,12 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         PhoneNumber = domainEvent.PhoneNumber;
     }
 
-    public static Account CreateInstance(Name name, Email email, PhoneNumber phoneNumber)
+    public static Account CreateInstance(Email email, PhoneNumber phoneNumber)
     {
         var account = new Account();
         var accountCreatedDomainEvent = new AccountCreatedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId.Create(),
-            Name: name,
             Email: email,
             PhoneNumber: phoneNumber,
             OccurredAt: DateTime.UtcNow
