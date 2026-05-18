@@ -4,7 +4,7 @@ using Nine.Identities.Domain.Accounts.Exceptions;
 
 namespace Nine.Identities.Domain.Accounts.ValueObjects;
 
-public readonly partial struct Email
+public readonly partial record struct Email
 {
     [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$")]
     private static partial Regex ValidEmailRegex();

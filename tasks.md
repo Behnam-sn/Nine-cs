@@ -121,3 +121,4 @@
 - [x] Add `From_ShouldReturnCorrectId` to `AccountIdTests`
 - [x] Add `From_WithEmptyGuid_ShouldThrowAccountIdCannotBeEmptyException` to `AccountIdTests`
 - [x] Add `Parse_ShouldThrow_WhenInvalidFormat` to `AccountIdTests`
+- [x] Change `Email` type to `readonly partial record struct` 
