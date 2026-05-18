@@ -123,3 +123,4 @@
 - [x] Add `Parse_ShouldThrow_WhenInvalidFormat` to `AccountIdTests`
 - [x] Change `Email` type to `readonly partial record struct` 
 - [x] Add `Create_ShouldNormaliseToLowercase` to `EmailTests`
+- [x] Merge `Create_ShouldTrimLeadingAndTrailingWhitespace` and `Create_ShouldNormaliseToLowercase` to `Create_ShouldNormaliseValue` in `EmailTests`

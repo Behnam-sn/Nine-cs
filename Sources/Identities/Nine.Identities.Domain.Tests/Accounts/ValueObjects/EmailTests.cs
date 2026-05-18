@@ -23,30 +23,18 @@ public sealed class EmailTests
     }
 
     [Theory]
-    [InlineData("  john@example.com  ", "john@example.com")]
-    [InlineData(" alice@domain.co ", "alice@domain.co")]
-    public void Create_ShouldTrimLeadingAndTrailingWhitespace(string input, string expected)
+    [InlineData("  John@Example.com  ", "john@example.com")]
+    [InlineData(" ALICE@DOMAIN.CO ", "alice@domain.co")]
+    [InlineData("a@b.io", "a@b.io")]
+    public void Create_ShouldNormaliseValue(string input, string expected)
     {
         // Arrange
 
         // Act
-        var e = Email.Create(input);
+        var email = Email.Create(input);
 
         // Assert
-        e.Value.Should().Be(expected);
-    }
-    
-    [Theory]
-    [InlineData("John@Example.com", "john@example.com")]
-    public void Create_ShouldNormaliseToLowercase(string input, string expected)
-    {
-        // Arrange
-
-        // Act
-        var e = Email.Create(input);
-        
-        // Assert
-        e.Value.Should().Be(expected);
+        email.Value.Should().Be(expected);
     }
 
     [Theory]
