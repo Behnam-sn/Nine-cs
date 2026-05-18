@@ -23,6 +23,10 @@
 
 ## Doing
 
+- [ ] Add `EmailVerified` to `Account`
+- [ ] Add `PhoneNumberVerified` to `Account`
+- [ ] Add `Credentials` to `Account`
+- [ ] Add `Version` to `Account`
 - [ ] Add `Email` uniqueness domain service
 
 ## Done
@@ -114,3 +118,4 @@
 - [x] Rename `User` to `Account`
 - [x] Remove `Archived` from `AccountStates`
 - [x] Remove `Name` from `Account`
+- [x] Add `From_ShouldReturnCorrectId` to `AccountIdTests`

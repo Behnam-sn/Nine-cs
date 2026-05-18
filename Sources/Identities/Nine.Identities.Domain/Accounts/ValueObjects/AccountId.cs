@@ -1,4 +1,6 @@
-﻿namespace Nine.Identities.Domain.Accounts.ValueObjects;
+﻿using Nine.Identities.Domain.Accounts.Exceptions;
+
+namespace Nine.Identities.Domain.Accounts.ValueObjects;
 
 public readonly record struct AccountId
 {
@@ -17,6 +19,16 @@ public readonly record struct AccountId
     public static AccountId Create()
     {
         return new(Guid.NewGuid());
+    }
+    
+    public static AccountId From(Guid value)
+    {
+        if (value == Guid.Empty)
+        {
+            throw new AccountIdCannotBeEmptyException();
+        }
+
+        return new(value);
     }
 
     public static AccountId Parse(Guid value)

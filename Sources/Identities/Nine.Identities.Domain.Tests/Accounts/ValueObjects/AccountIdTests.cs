@@ -22,6 +22,19 @@ public sealed class AccountIdTests
     }
     
     [Fact]
+    public void From_ShouldReturnCorrectId()
+    {
+        // Arrange
+        var guid = Guid.NewGuid();
+
+        // Act
+        var accountId = AccountId.From(guid);
+
+        // Assert
+        accountId.Value.Should().Be(guid);
+    }
+    
+    [Fact]
     public void Parse_ShouldReturnCorrectId()
     {
         // Arrange
