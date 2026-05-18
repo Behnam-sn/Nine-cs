@@ -11,15 +11,15 @@ public sealed class EmailTests
     [InlineData("john@example.com")]
     [InlineData("alice@domain.co")]
     [InlineData("a@b.io")]
-    public void Create_ShouldSetValue(string email)
+    public void Create_ShouldSetValue(string input)
     {
         // Arrange
 
         // Act
-        var e = Email.Create(email);
+        var email = Email.Create(input);
 
         // Assert
-        e.Value.Should().Be(email);
+        email.Value.Should().Be(input);
     }
 
     [Theory]
@@ -41,12 +41,12 @@ public sealed class EmailTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException(string invalidEmail)
+    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException(string input)
     {
         // Arrange
 
         // Act
-        var act = () => Email.Create(invalidEmail);
+        var act = () => Email.Create(input);
 
         // Assert
         act.Should().Throw<EmailCannotBeEmptyException>();
@@ -57,12 +57,12 @@ public sealed class EmailTests
     [InlineData("missing@domain")]
     [InlineData("missing.domain.com")]
     [InlineData("@nouser.com")]
-    public void Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException(string invalidEmail)
+    public void Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException(string input)
     {
         // Arrange
 
         // Act
-        var act = () => Email.Create(invalidEmail);
+        var act = () => Email.Create(input);
 
         // Assert
         act.Should().Throw<EmailInvalidFormatException>();
