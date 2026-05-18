@@ -8,7 +8,7 @@ public readonly partial record struct PhoneNumber
 {
     [GeneratedRegex(@"^\+?[0-9\s\-\(\)]{7,20}$")]
     private static partial Regex ValidPhoneNumberRegex();
-    
+
     public string Value { get; }
 
     private PhoneNumber(string value)
@@ -22,16 +22,14 @@ public readonly partial record struct PhoneNumber
         {
             throw new PhoneNumberCannotBeEmptyException();
         }
-        
+
         value = value.Trim();
-        
+
         if (!ValidPhoneNumberRegex().IsMatch(value))
         {
             throw new PhoneNumberInvalidFormatException();
         }
-        
+
         return new(value);
     }
-
-    
 }

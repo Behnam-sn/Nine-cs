@@ -43,7 +43,7 @@ public sealed class PhoneNumberTests
         // Assert
         phoneNumber.Value.Should().Be(expected);
     }
-    
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -58,7 +58,7 @@ public sealed class PhoneNumberTests
         // Assert
         act.Should().Throw<PhoneNumberCannotBeEmptyException>();
     }
-    
+
     [Theory]
     [InlineData("abc123")]
     [InlineData("123!@#")]
