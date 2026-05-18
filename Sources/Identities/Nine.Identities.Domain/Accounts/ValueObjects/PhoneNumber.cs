@@ -6,8 +6,8 @@ namespace Nine.Identities.Domain.Accounts.ValueObjects;
 
 public readonly partial record struct PhoneNumber
 {
-    [GeneratedRegex(@"^\+?[0-9\s\-\(\)]{7,20}$")]
-    private static partial Regex ValidPhoneNumberRegex();
+    [GeneratedRegex(@"^\+[1-9]\d{6,14}$")]
+    private static partial Regex E164Regex();
 
     public string Value { get; }
 
@@ -22,14 +22,24 @@ public readonly partial record struct PhoneNumber
         {
             throw new PhoneNumberCannotBeEmptyException();
         }
-
+        
         value = value.Trim();
 
-        if (!ValidPhoneNumberRegex().IsMatch(value))
+        string digitsOnly;
+        if (value.StartsWith('+'))
+        {
+            digitsOnly = '+' + new string(value[1..].Where(char.IsDigit).ToArray());
+        }
+        else
         {
             throw new PhoneNumberInvalidFormatException();
         }
 
-        return new(value);
+        if (!E164Regex().IsMatch(digitsOnly))
+        {
+            throw new PhoneNumberInvalidFormatException();
+        }
+
+        return new PhoneNumber(digitsOnly);
     }
 }

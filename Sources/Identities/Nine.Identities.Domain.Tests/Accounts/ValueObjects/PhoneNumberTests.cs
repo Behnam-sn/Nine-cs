@@ -8,18 +8,10 @@ namespace Nine.Identities.Domain.Tests.Accounts.ValueObjects;
 public sealed class PhoneNumberTests
 {
     [Theory]
-    [InlineData("+1 555-123-4567")]
-    [InlineData("5551234567")]
-    [InlineData("(555) 123-4567")]
-    [InlineData("11223344")]
-    [InlineData("11 22 33 44")]
-    [InlineData("01211223344")]
-    [InlineData("012 11 22 33 44")]
-    [InlineData("+98 11 22 33 44")]
-    [InlineData("01234567890")]
-    [InlineData("0123 456 7890")]
-    [InlineData("+98 123 456 7890")]
-    public void Create_ShouldSetValue(string input)
+    [InlineData("+1 555-123-4567", "+15551234567")]
+    [InlineData("+98 11 22 33 44", "+9811223344")]
+    [InlineData("+44 20 7946 0958", "+442079460958")]
+    public void Create_ShouldNormaliseToE164(string input, string expected)
     {
         // Arrange
 
@@ -27,12 +19,11 @@ public sealed class PhoneNumberTests
         var phoneNumber = PhoneNumber.Create(input);
 
         // Assert
-        phoneNumber.Value.Should().Be(input);
+        phoneNumber.Value.Should().Be(expected);
     }
 
     [Theory]
-    [InlineData(" 5551234567 ", "5551234567")]
-    [InlineData(" +1 555-123-4567 ", "+1 555-123-4567")]
+    [InlineData("  +1 555-123-4567  ", "+15551234567")]
     public void Create_ShouldTrimLeadingAndTrailingWhitespace(string input, string expected)
     {
         // Arrange
@@ -60,9 +51,11 @@ public sealed class PhoneNumberTests
     }
 
     [Theory]
-    [InlineData("abc123")]
-    [InlineData("123!@#")]
-    [InlineData("++1234567")]
+    [InlineData("5551234567")]            // no leading +
+    [InlineData("abc123")]                // letters
+    [InlineData("+")]                     // just plus
+    [InlineData("+123")]                  // too short (< 7 digits after country code)
+    [InlineData("+12345678901234567")]    // too long (>15 digits total)
     public void Create_WithInvalidFormat_ShouldThrowPhoneNumberInvalidFormatException(string invalidPhone)
     {
         // Arrange

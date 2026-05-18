@@ -126,3 +126,4 @@
 - [x] Merge `Create_ShouldTrimLeadingAndTrailingWhitespace` and `Create_ShouldNormaliseToLowercase` to `Create_ShouldNormaliseValue` in `EmailTests`
 - [x] Rename `InvalidAccountIdFormatException` to `AccountIdInvalidFormatException`
 - [x] Change `PhoneNumber` type to `readonly partial record struct`
+- [x] Change `Create_ShouldSetValue` to `Create_ShouldNormaliseToE164` in `PhoneNumberTests`
