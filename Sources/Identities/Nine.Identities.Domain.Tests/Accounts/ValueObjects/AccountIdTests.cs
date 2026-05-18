@@ -59,7 +59,7 @@ public sealed class AccountIdTests
         // Assert
         accountId.Value.Should().Be(guid);
     }
-    
+
     [Fact]
     public void Parse_ShouldThrow_WhenInvalidFormat()
     {
@@ -71,5 +71,4 @@ public sealed class AccountIdTests
         // Assert
         act.Should().Throw<InvalidAccountIdFormatException>();
     }
-
 }
