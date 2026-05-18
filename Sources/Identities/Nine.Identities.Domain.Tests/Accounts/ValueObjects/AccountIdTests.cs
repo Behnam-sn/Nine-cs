@@ -36,6 +36,18 @@ public sealed class AccountIdTests
     }
 
     [Fact]
+    public void From_WithEmptyGuid_ShouldThrowAccountIdCannotBeEmptyException()
+    {
+        // Arrange
+
+        // Act
+        var act = () => AccountId.From(Guid.Empty);
+
+        // Assert
+        act.Should().Throw<AccountIdCannotBeEmptyException>();
+    }
+
+    [Fact]
     public void Parse_ShouldReturnCorrectId()
     {
         // Arrange
@@ -47,17 +59,5 @@ public sealed class AccountIdTests
         // Assert
         accountId.Value.Should().Be(guid);
         accountId.ToString().Should().Be(guid.ToString());
-    }
-
-    [Fact]
-    public void From_WithEmptyGuid_ShouldThrowAccountIdCannotBeEmptyException()
-    {
-        // Arrange
-
-        // Act
-        var act = () => AccountId.From(Guid.Empty);
-
-        // Assert
-        act.Should().Throw<AccountIdCannotBeEmptyException>();
     }
 }
