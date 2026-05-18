@@ -20,7 +20,7 @@ public readonly record struct AccountId
     {
         return new(Guid.NewGuid());
     }
-    
+
     public static AccountId From(Guid value)
     {
         if (value == Guid.Empty)
@@ -31,8 +31,13 @@ public readonly record struct AccountId
         return new(value);
     }
 
-    public static AccountId Parse(Guid value)
+    public static AccountId Parse(string value)
     {
-        return new(value);
+        if (!Guid.TryParse(value, out var guid))
+        {
+            throw new InvalidAccountIdFormatException();
+        }
+
+        return From(guid);
     }
 }

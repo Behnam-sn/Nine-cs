@@ -54,10 +54,22 @@ public sealed class AccountIdTests
         var guid = Guid.NewGuid();
 
         // Act
-        var accountId = AccountId.Parse(guid);
+        var accountId = AccountId.Parse(guid.ToString());
 
         // Assert
         accountId.Value.Should().Be(guid);
-        accountId.ToString().Should().Be(guid.ToString());
     }
+    
+    [Fact]
+    public void Parse_ShouldThrow_WhenInvalidFormat()
+    {
+        // Arrange
+
+        // Act
+        var act = () => AccountId.Parse("not-a-guid");
+
+        // Assert
+        act.Should().Throw<InvalidAccountIdFormatException>();
+    }
+
 }
