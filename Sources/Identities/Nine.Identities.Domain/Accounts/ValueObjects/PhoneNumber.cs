@@ -4,7 +4,7 @@ using Nine.Identities.Domain.Accounts.Exceptions;
 
 namespace Nine.Identities.Domain.Accounts.ValueObjects;
 
-public readonly partial struct PhoneNumber
+public readonly partial record struct PhoneNumber
 {
     [GeneratedRegex(@"^\+?[0-9\s\-\(\)]{7,20}$")]
     private static partial Regex ValidPhoneNumberRegex();
