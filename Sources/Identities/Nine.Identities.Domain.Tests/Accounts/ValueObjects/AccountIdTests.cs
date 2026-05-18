@@ -61,7 +61,7 @@ public sealed class AccountIdTests
     }
 
     [Fact]
-    public void Parse_ShouldThrow_WhenInvalidFormat()
+    public void Parse_WithInvalidFormat_ShouldThrowAccountIdInvalidFormatException()
     {
         // Arrange
 
@@ -69,6 +69,6 @@ public sealed class AccountIdTests
         var act = () => AccountId.Parse("not-a-guid");
 
         // Assert
-        act.Should().Throw<InvalidAccountIdFormatException>();
+        act.Should().Throw<AccountIdInvalidFormatException>();
     }
 }

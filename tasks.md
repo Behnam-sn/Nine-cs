@@ -124,3 +124,4 @@
 - [x] Change `Email` type to `readonly partial record struct` 
 - [x] Add `Create_ShouldNormaliseToLowercase` to `EmailTests`
 - [x] Merge `Create_ShouldTrimLeadingAndTrailingWhitespace` and `Create_ShouldNormaliseToLowercase` to `Create_ShouldNormaliseValue` in `EmailTests`
+- [x] Rename `InvalidAccountIdFormatException` to `AccountIdInvalidFormatException`

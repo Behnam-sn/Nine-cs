@@ -35,7 +35,7 @@ public readonly record struct AccountId
     {
         if (!Guid.TryParse(value, out var guid))
         {
-            throw new InvalidAccountIdFormatException();
+            throw new AccountIdInvalidFormatException();
         }
 
         return From(guid);
