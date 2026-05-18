@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 
+using Nine.Identities.Domain.Accounts.Exceptions;
 using Nine.Identities.Domain.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Accounts.ValueObjects;
@@ -20,7 +21,7 @@ public sealed class AccountIdTests
         id2.Value.Should().NotBe(Guid.Empty);
         id1.Should().NotBe(id2);
     }
-    
+
     [Fact]
     public void From_ShouldReturnCorrectId()
     {
@@ -33,18 +34,30 @@ public sealed class AccountIdTests
         // Assert
         accountId.Value.Should().Be(guid);
     }
-    
+
     [Fact]
     public void Parse_ShouldReturnCorrectId()
     {
         // Arrange
         var guid = Guid.NewGuid();
-        
+
         // Act
         var accountId = AccountId.Parse(guid);
 
         // Assert
         accountId.Value.Should().Be(guid);
         accountId.ToString().Should().Be(guid.ToString());
+    }
+
+    [Fact]
+    public void From_WithEmptyGuid_ShouldThrowAccountIdCannotBeEmptyException()
+    {
+        // Arrange
+
+        // Act
+        var act = () => AccountId.From(Guid.Empty);
+
+        // Assert
+        act.Should().Throw<AccountIdCannotBeEmptyException>();
     }
 }

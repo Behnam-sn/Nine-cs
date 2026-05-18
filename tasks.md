@@ -119,3 +119,4 @@
 - [x] Remove `Archived` from `AccountStates`
 - [x] Remove `Name` from `Account`
 - [x] Add `From_ShouldReturnCorrectId` to `AccountIdTests`
+- [x] Add `From_WithEmptyGuid_ShouldThrowAccountIdCannotBeEmptyException` to `AccountIdTests`
