@@ -35,6 +35,19 @@ public sealed class EmailTests
         // Assert
         e.Value.Should().Be(expected);
     }
+    
+    [Theory]
+    [InlineData("John@Example.com", "john@example.com")]
+    public void Create_ShouldNormaliseToLowercase(string input, string expected)
+    {
+        // Arrange
+
+        // Act
+        var e = Email.Create(input);
+        
+        // Assert
+        e.Value.Should().Be(expected);
+    }
 
     [Theory]
     [InlineData(null)]

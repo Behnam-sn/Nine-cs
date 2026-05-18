@@ -23,7 +23,7 @@ public readonly partial record struct Email
             throw new EmailCannotBeEmptyException();
         }
 
-        value = value.Trim();
+        value = value.Trim().ToLowerInvariant();
 
         if (string.IsNullOrWhiteSpace(value) || !ValidEmailRegex().IsMatch(value))
         {
