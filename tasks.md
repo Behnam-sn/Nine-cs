@@ -23,7 +23,6 @@
 
 ## Doing
 
-- [ ] Rename `User` to `Account`
 - [ ] Add `Email` uniqueness domain service
 - [ ] Remove `Name` from `Account`
 - [ ] Add `FirstName` to `Account`
@@ -118,3 +117,4 @@
 - [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowPhoneNumberCannotBeEmptyException` to `PhoneNumberTests`
 - [x] Add `Create_WithInvalidFormat_ShouldThrowPhoneNumberInvalidFormatException` to `PhoneNumberTests`
 - [x] Remove `Username` from `User`
+- [x] Rename `User` to `Account`
