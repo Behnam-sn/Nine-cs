@@ -41,6 +41,11 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
 
     public void VerifyEmail()
     {
+        if (IsEmailVerified)
+        {
+            return;
+        }
+        
         var accountEmailVerifiedDomainEvent = new AccountEmailVerifiedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId,

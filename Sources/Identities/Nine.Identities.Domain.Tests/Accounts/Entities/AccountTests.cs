@@ -86,6 +86,21 @@ public sealed class AccountTests
     }
 
     [Fact]
+    public void VerifyEmail_ShouldNotRaiseAccountEmailVerifiedDomainEventV1_WhenEmailIsAlreadyVerified()
+    {
+        // Arrange
+        var account = new AccountTestBuilder().WithRequiredParameters().Build();
+        account.VerifyEmail();
+        account.ClearDomainEvents();
+
+        // Act
+        account.VerifyEmail();
+        
+        // Assert
+        account.DomainEvents.Should().BeEmpty();
+    }
+
+    [Fact]
     public void SetPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberChangedDomainEventV1()
     {
         // Arrange
