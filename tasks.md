@@ -128,3 +128,4 @@
 - [x] Change `PhoneNumber` type to `readonly partial record struct`
 - [x] Change `Create_ShouldSetValue` to `Create_ShouldNormaliseToE164` in `PhoneNumberTests`
 - [x] Remove `State` from `Account`
+- [x] Remove `AccountNameChangedDomainEventV1`
