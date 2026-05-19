@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 
+using Nine.Identities.Domain.Accounts.Exceptions;
 using Nine.Identities.Domain.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Accounts.ValueObjects;
@@ -32,5 +33,17 @@ public sealed class CredentialIdTests
 
         // Assert
         credentialId.Value.Should().Be(guid);
+    }
+
+    [Fact]
+    public void From_WithEmptyGuid_ShouldThrowCredentialIdCannotBeEmptyException()
+    {
+        // Arrange
+
+        // Act
+        var act = () => CredentialId.From(Guid.Empty);
+
+        // Assert
+        act.Should().Throw<CredentialIdCannotBeEmptyException>();
     }
 }

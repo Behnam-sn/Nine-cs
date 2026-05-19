@@ -23,6 +23,11 @@ public readonly record struct CredentialId
 
     public static CredentialId From(Guid input)
     {
+        if (input == Guid.Empty)
+        {
+            throw new CredentialIdCannotBeEmptyException();
+        }
+
         return new(input);
     }
 }
