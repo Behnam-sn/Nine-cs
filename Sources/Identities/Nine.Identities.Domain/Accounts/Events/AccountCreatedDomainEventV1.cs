@@ -8,6 +8,6 @@ public sealed record AccountCreatedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
     Email Email,
-    PhoneNumber PhoneNumber,
+    PhoneNumber? PhoneNumber,
     DateTime OccurredAt
 ) : IDomainEvent;

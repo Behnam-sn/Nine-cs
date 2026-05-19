@@ -8,8 +8,8 @@ internal sealed class AccountTestBuilder
     public const string DefaultEmailValue = "john@example.com";
     public const string DefaultPhoneValue = "+123456789";
 
-    private Email _email = Email.Create(DefaultEmailValue);
-    private PhoneNumber _phone = PhoneNumber.Create(DefaultPhoneValue);
+    private Email _email;
+    private PhoneNumber? _phone;
 
     private bool _raiseCreationEvent = true;
 
@@ -19,15 +19,27 @@ internal sealed class AccountTestBuilder
         return this;
     }
 
-    public AccountTestBuilder WithPhoneNumber(string phone)
+    public AccountTestBuilder WithPhoneNumber(string phoneNumber)
     {
-        _phone = PhoneNumber.Create(phone);
+        _phone = PhoneNumber.Create(phoneNumber);
         return this;
     }
 
     public AccountTestBuilder WithoutCreationEvent()
     {
         _raiseCreationEvent = false;
+        return this;
+    }
+
+    public AccountTestBuilder WithRequiredParameters()
+    {
+        WithEmail(DefaultEmailValue);
+        return this;
+    }
+
+    public AccountTestBuilder WithOptionalParameters()
+    {
+        WithPhoneNumber(DefaultPhoneValue);
         return this;
     }
 

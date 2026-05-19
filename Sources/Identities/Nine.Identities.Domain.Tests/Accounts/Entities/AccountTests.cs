@@ -8,22 +8,42 @@ namespace Nine.Identities.Domain.Tests.Accounts.Entities;
 public sealed class AccountTests
 {
     [Fact]
-    public void CreateInstance_ShouldRaiseAndApplyAccountCreatedDomainEventV1()
+    public void CreateInstance_WithRequiredParameters_ShouldRaiseAndApplyAccountCreatedDomainEventV1()
     {
         // Arrange
-        var account = new AccountTestBuilder().Build();
+        var account = new AccountTestBuilder().WithRequiredParameters().Build();
 
         // Act
 
         // Assert
         var accountCreatedDomainEventV1 = (AccountCreatedDomainEventV1)account.DomainEvents.Single();
         accountCreatedDomainEventV1.Email.Value.Should().Be(AccountTestBuilder.DefaultEmailValue);
-        accountCreatedDomainEventV1.PhoneNumber.Value.Should().Be(AccountTestBuilder.DefaultPhoneValue);
+        accountCreatedDomainEventV1.PhoneNumber?.Should().BeNull();
         accountCreatedDomainEventV1.AccountId.Should().NotBeNull();
         accountCreatedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        
+
         account.Email.Value.Should().Be(AccountTestBuilder.DefaultEmailValue);
-        account.PhoneNumber.Value.Should().Be(AccountTestBuilder.DefaultPhoneValue);
+        account.PhoneNumber.Should().BeNull();
+        account.AccountId.Should().NotBeNull();
+    }
+
+    [Fact]
+    public void CreateInstance_WithAllParameters_ShouldRaiseAndApplyAccountCreatedDomainEventV1()
+    {
+        // Arrange
+        var account = new AccountTestBuilder().WithRequiredParameters().WithOptionalParameters().Build();
+
+        // Act
+
+        // Assert
+        var accountCreatedDomainEventV1 = (AccountCreatedDomainEventV1)account.DomainEvents.Single();
+        accountCreatedDomainEventV1.Email.Value.Should().Be(AccountTestBuilder.DefaultEmailValue);
+        accountCreatedDomainEventV1.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneValue);
+        accountCreatedDomainEventV1.AccountId.Should().NotBeNull();
+        accountCreatedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+
+        account.Email.Value.Should().Be(AccountTestBuilder.DefaultEmailValue);
+        account.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneValue);
         account.AccountId.Should().NotBeNull();
     }
 
@@ -31,7 +51,7 @@ public sealed class AccountTests
     public void SetEmail_ShouldRaiseAndApplyAccountEmailChangedDomainEventV1()
     {
         // Arrange
-        var account = new AccountTestBuilder().WithoutCreationEvent().Build();
+        var account = new AccountTestBuilder().WithRequiredParameters().WithoutCreationEvent().Build();
         var newEmail = Email.Create("jane@example.com");
 
         // Act
@@ -42,7 +62,7 @@ public sealed class AccountTests
         accountEmailChangedDomainEventV1.AccountId.Should().Be(account.AccountId);
         accountEmailChangedDomainEventV1.Email.Should().Be(newEmail);
         accountEmailChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        
+
         account.Email.Should().Be(newEmail);
         account.IsEmailVerified.Should().Be(false);
     }
@@ -51,7 +71,7 @@ public sealed class AccountTests
     public void VerifyEmail_ShouldRaiseAndApplyAccountEmailVerifiedDomainEventV1()
     {
         // Arrange
-        var account = new AccountTestBuilder().WithoutCreationEvent().Build();
+        var account = new AccountTestBuilder().WithRequiredParameters().WithoutCreationEvent().Build();
 
         // Act
         account.VerifyEmail();
@@ -61,7 +81,7 @@ public sealed class AccountTests
         accountEmailVerifiedDomainEventV1.AccountId.Should().Be(account.AccountId);
         accountEmailVerifiedDomainEventV1.Email.Should().Be(account.Email);
         accountEmailVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        
+
         account.IsEmailVerified.Should().Be(true);
     }
 
@@ -69,7 +89,7 @@ public sealed class AccountTests
     public void SetPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberChangedDomainEventV1()
     {
         // Arrange
-        var account = new AccountTestBuilder().WithoutCreationEvent().Build();
+        var account = new AccountTestBuilder().WithRequiredParameters().WithoutCreationEvent().Build();
         var newPhoneNumber = PhoneNumber.Create("+987654321");
 
         // Act
@@ -80,7 +100,7 @@ public sealed class AccountTests
         accountPhoneNumberChangedDomainEventV1.PhoneNumber.Should().Be(newPhoneNumber);
         accountPhoneNumberChangedDomainEventV1.AccountId.Should().Be(account.AccountId);
         accountPhoneNumberChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        
+
         account.PhoneNumber.Should().Be(newPhoneNumber);
         account.IsPhoneNumberVerified.Should().Be(false);
     }
@@ -89,7 +109,11 @@ public sealed class AccountTests
     public void VerifyPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberVerifiedDomainEventV1()
     {
         // Arrange
-        var account = new AccountTestBuilder().WithoutCreationEvent().Build();
+        var account = new AccountTestBuilder()
+            .WithRequiredParameters()
+            .WithOptionalParameters()
+            .WithoutCreationEvent()
+            .Build();
 
         // Act
         account.VerifyPhoneNumber();
@@ -99,7 +123,7 @@ public sealed class AccountTests
         accountPhoneNumberVerifiedDomainEventV1.AccountId.Should().Be(account.AccountId);
         accountPhoneNumberVerifiedDomainEventV1.PhoneNumber.Should().Be(account.PhoneNumber);
         accountPhoneNumberVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        
+
         account.IsPhoneNumberVerified.Should().Be(true);
     }
 }

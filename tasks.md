@@ -129,3 +129,4 @@
 - [x] Remove `AccountNameChangedDomainEventV1`
 - [x] Add `VerifyEmail_ShouldRaiseAndApplyAccountEmailVerifiedDomainEventV1` to `AccountIdTests`
 - [x] Add `VerifyPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberVerifiedDomainEventV1` to `AccountIdTests`
+- [x] Change `PhoneNumber` in `Account` to optional

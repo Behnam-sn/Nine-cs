@@ -1,4 +1,5 @@
 ﻿using Nine.Identities.Domain.Accounts.Events;
+using Nine.Identities.Domain.Accounts.Exceptions;
 using Nine.Identities.Domain.Accounts.ValueObjects;
 using Nine.SharedKernel.Abstractions.AggregateRoots;
 using Nine.SharedKernel.Abstractions.Events;
@@ -11,7 +12,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     public AccountId AccountId { get; private set; }
     public Email Email { get; private set; }
     public bool IsEmailVerified { get; private set; }
-    public PhoneNumber PhoneNumber { get; private set; }
+    public PhoneNumber? PhoneNumber { get; private set; }
     public bool IsPhoneNumberVerified { get; private set; }
 
     public Account()
@@ -64,10 +65,15 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
 
     public void VerifyPhoneNumber()
     {
+        if (!PhoneNumber.HasValue)
+        {
+            throw new AccountPhoneNumberNotSetException();
+        }
+        
         var accountPhoneNumberVerifiedDomainEvent = new AccountPhoneNumberVerifiedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId,
-            PhoneNumber: PhoneNumber,
+            PhoneNumber: PhoneNumber.Value,
             OccurredAt: DateTime.UtcNow
         );
         RaiseDomainEvent(accountPhoneNumberVerifiedDomainEvent);
@@ -105,7 +111,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         IsPhoneNumberVerified = true;
     }
 
-    public static Account CreateInstance(Email email, PhoneNumber phoneNumber)
+    public static Account CreateInstance(Email email, PhoneNumber? phoneNumber = null)
     {
         var account = new Account();
         var accountCreatedDomainEvent = new AccountCreatedDomainEventV1(
