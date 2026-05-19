@@ -59,4 +59,16 @@ public sealed class CredentialIdTests
         // Assert
         credentialId.Value.Should().Be(guid);
     }
+
+    [Fact]
+    public void Parse_WithInvalidFormat_ShouldThrowCredentialIdInvalidFormatException()
+    {
+        // Arrange
+
+        // Act
+        var act = () => CredentialId.Parse("not-a-guid");
+
+        // Assert
+        act.Should().Throw<CredentialIdInvalidFormatException>();
+    }
 }

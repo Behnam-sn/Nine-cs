@@ -33,6 +33,11 @@ public readonly record struct CredentialId
 
     public static CredentialId Parse(string input)
     {
-        return From(Guid.Parse(input));
+        if (!Guid.TryParse(input, out var guid))
+        {
+            throw new CredentialIdInvalidFormatException();
+        }
+        
+        return From(guid);
     }
 }
