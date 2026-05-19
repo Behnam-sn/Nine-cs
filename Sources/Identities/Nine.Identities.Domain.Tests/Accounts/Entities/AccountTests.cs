@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 
 using Nine.Identities.Domain.Accounts.Events;
+using Nine.Identities.Domain.Accounts.Exceptions;
 using Nine.Identities.Domain.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Accounts.Entities;
@@ -140,6 +141,22 @@ public sealed class AccountTests
         accountPhoneNumberVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.IsPhoneNumberVerified.Should().Be(true);
+    }
+    
+    [Fact]
+    public void VerifyPhoneNumber_WhenPhoneNotSet_ShouldThrowAccountPhoneNumberNotSetException()
+    {
+        // Arrange
+        var account = new AccountTestBuilder()
+            .WithRequiredParameters()
+            .WithoutCreationEvent()
+            .Build();
+
+        // Act
+        var act = () => account.VerifyPhoneNumber();
+        
+        // Assert
+        act.Should().Throw<AccountPhoneNumberNotSetException>();
     }
     
     [Fact]
