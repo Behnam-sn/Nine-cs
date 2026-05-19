@@ -44,6 +44,25 @@ public sealed class AccountTests
         accountEmailChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
         
         account.Email.Should().Be(newEmail);
+        account.IsEmailVerified.Should().Be(false);
+    }
+
+    [Fact]
+    public void VerifyEmail_ShouldRaiseAndApplyAccountEmailVerifiedDomainEventV1()
+    {
+        // Arrange
+        var account = new AccountTestBuilder().WithoutCreationEvent().Build();
+
+        // Act
+        account.VerifyEmail();
+
+        // Assert
+        var accountEmailVerifiedDomainEventV1 = (AccountEmailVerifiedDomainEventV1)account.DomainEvents.Single();
+        accountEmailVerifiedDomainEventV1.AccountId.Should().Be(account.AccountId);
+        accountEmailVerifiedDomainEventV1.Email.Should().Be(account.Email);
+        accountEmailVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        
+        account.IsEmailVerified.Should().Be(true);
     }
 
     [Fact]

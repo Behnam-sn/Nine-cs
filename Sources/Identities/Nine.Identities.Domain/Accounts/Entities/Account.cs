@@ -10,16 +10,16 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
 {
     public AccountId AccountId { get; private set; }
     public Email Email { get; private set; }
+    public bool IsEmailVerified { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
 
     public Account()
     {
-        
     }
 
     public Account(IEnumerable<IDomainEvent> domainEvents)
     {
-        foreach (var domainEvent in domainEvents)  
+        foreach (var domainEvent in domainEvents)
         {
             ApplyDomainEvent(domainEvent);
         }
@@ -35,6 +35,18 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         );
         RaiseDomainEvent(accountEmailChangedDomainEvent);
         ApplyDomainEvent(accountEmailChangedDomainEvent);
+    }
+
+    public void VerifyEmail()
+    {
+        var accountEmailVerifiedDomainEvent = new AccountEmailVerifiedDomainEventV1(
+            Id: DomainEventId.Create(),
+            AccountId: AccountId,
+            Email: Email,
+            OccurredAt: DateTime.UtcNow
+        );
+        RaiseDomainEvent(accountEmailVerifiedDomainEvent);
+        ApplyDomainEvent(accountEmailVerifiedDomainEvent);
     }
 
     public void SetPhoneNumber(PhoneNumber phoneNumber)
@@ -53,12 +65,20 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     {
         AccountId = domainEvent.AccountId;
         Email = domainEvent.Email;
+        IsEmailVerified = false;
         PhoneNumber = domainEvent.PhoneNumber;
     }
 
     private void ApplyDomainEvent(AccountEmailChangedDomainEventV1 domainEvent)
     {
         Email = domainEvent.Email;
+        IsEmailVerified = false;
+    }
+
+
+    private void ApplyDomainEvent(AccountEmailVerifiedDomainEventV1 domainEvent)
+    {
+        IsEmailVerified = true;
     }
 
     private void ApplyDomainEvent(AccountPhoneNumberChangedDomainEventV1 domainEvent)

@@ -23,7 +23,6 @@
 
 ## Doing
 
-- [ ] Add `EmailVerified` to `Account`
 - [ ] Add `PhoneNumberVerified` to `Account`
 - [ ] Add `Credentials` to `Account`
 - [ ] Add `Version` to `Account`
@@ -129,3 +128,4 @@
 - [x] Change `Create_ShouldSetValue` to `Create_ShouldNormaliseToE164` in `PhoneNumberTests`
 - [x] Remove `State` from `Account`
 - [x] Remove `AccountNameChangedDomainEventV1`
+- [x] Add `VerifyEmail_ShouldRaiseAndApplyAccountEmailVerifiedDomainEventV1` to `AccountIdTests`
