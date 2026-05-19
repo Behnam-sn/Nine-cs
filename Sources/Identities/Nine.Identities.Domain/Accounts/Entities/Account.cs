@@ -94,9 +94,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     {
         AccountId = domainEvent.AccountId;
         Email = domainEvent.Email;
-        IsEmailVerified = false;
         PhoneNumber = domainEvent.PhoneNumber;
-        IsPhoneNumberVerified = false;
     }
 
     private void ApplyDomainEvent(AccountEmailChangedDomainEventV1 domainEvent)
