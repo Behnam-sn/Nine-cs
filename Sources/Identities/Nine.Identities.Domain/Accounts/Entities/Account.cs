@@ -12,6 +12,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     public Email Email { get; private set; }
     public bool IsEmailVerified { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
+    public bool IsPhoneNumberVerified { get; private set; }
 
     public Account()
     {
@@ -61,12 +62,25 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         ApplyDomainEvent(accountPhoneNumberChangedDomainEvent);
     }
 
+    public void VerifyPhoneNumber()
+    {
+        var accountPhoneNumberVerifiedDomainEvent = new AccountPhoneNumberVerifiedDomainEventV1(
+            Id: DomainEventId.Create(),
+            AccountId: AccountId,
+            PhoneNumber: PhoneNumber,
+            OccurredAt: DateTime.UtcNow
+        );
+        RaiseDomainEvent(accountPhoneNumberVerifiedDomainEvent);
+        ApplyDomainEvent(accountPhoneNumberVerifiedDomainEvent);
+    }
+
     private void ApplyDomainEvent(AccountCreatedDomainEventV1 domainEvent)
     {
         AccountId = domainEvent.AccountId;
         Email = domainEvent.Email;
         IsEmailVerified = false;
         PhoneNumber = domainEvent.PhoneNumber;
+        IsPhoneNumberVerified = false;
     }
 
     private void ApplyDomainEvent(AccountEmailChangedDomainEventV1 domainEvent)
@@ -74,7 +88,6 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         Email = domainEvent.Email;
         IsEmailVerified = false;
     }
-
 
     private void ApplyDomainEvent(AccountEmailVerifiedDomainEventV1 domainEvent)
     {
@@ -84,6 +97,12 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     private void ApplyDomainEvent(AccountPhoneNumberChangedDomainEventV1 domainEvent)
     {
         PhoneNumber = domainEvent.PhoneNumber;
+        IsPhoneNumberVerified = false;
+    }
+
+    private void ApplyDomainEvent(AccountPhoneNumberVerifiedDomainEventV1 domainEvent)
+    {
+        IsPhoneNumberVerified = true;
     }
 
     public static Account CreateInstance(Email email, PhoneNumber phoneNumber)

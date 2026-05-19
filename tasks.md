@@ -23,7 +23,6 @@
 
 ## Doing
 
-- [ ] Add `PhoneNumberVerified` to `Account`
 - [ ] Add `Credentials` to `Account`
 - [ ] Add `Version` to `Account`
 - [ ] Add `Email` uniqueness domain service
@@ -129,3 +128,4 @@
 - [x] Remove `State` from `Account`
 - [x] Remove `AccountNameChangedDomainEventV1`
 - [x] Add `VerifyEmail_ShouldRaiseAndApplyAccountEmailVerifiedDomainEventV1` to `AccountIdTests`
+- [x] Add `VerifyPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberVerifiedDomainEventV1` to `AccountIdTests`

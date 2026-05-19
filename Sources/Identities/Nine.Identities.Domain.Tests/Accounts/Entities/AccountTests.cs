@@ -82,5 +82,24 @@ public sealed class AccountTests
         accountPhoneNumberChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
         
         account.PhoneNumber.Should().Be(newPhoneNumber);
+        account.IsPhoneNumberVerified.Should().Be(false);
+    }
+
+    [Fact]
+    public void VerifyPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberVerifiedDomainEventV1()
+    {
+        // Arrange
+        var account = new AccountTestBuilder().WithoutCreationEvent().Build();
+
+        // Act
+        account.VerifyPhoneNumber();
+
+        // Assert
+        var accountPhoneNumberVerifiedDomainEventV1 = (AccountPhoneNumberVerifiedDomainEventV1)account.DomainEvents.Single();
+        accountPhoneNumberVerifiedDomainEventV1.AccountId.Should().Be(account.AccountId);
+        accountPhoneNumberVerifiedDomainEventV1.PhoneNumber.Should().Be(account.PhoneNumber);
+        accountPhoneNumberVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        
+        account.IsPhoneNumberVerified.Should().Be(true);
     }
 }
