@@ -134,3 +134,4 @@
 - [x] Add `VerifyPhoneNumber_ShouldNotRaiseAccountPhoneNumberVerifiedDomainEventV1_WhenPhoneNumberIsAlreadyVerified` to `AccountIdTests` 
 - [x] Add `VerifyPhoneNumber_WhenPhoneNotSet_ShouldThrowAccountPhoneNumberNotSetException` to `AccountIdTests`
 - [x] Add `CredentialId` to `Nine.Identities.Domain.Accounts.ValueObjects`
+- [x] Add `CredentialIdTests` to `Nine.Identities.Domain.Tests.Accounts.ValueObjects`
