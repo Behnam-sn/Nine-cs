@@ -133,3 +133,4 @@
 - [x] Add `VerifyEmail_ShouldNotRaiseAccountEmailVerifiedDomainEventV1_WhenEmailIsAlreadyVerified` to `AccountIdTests` 
 - [x] Add `VerifyPhoneNumber_ShouldNotRaiseAccountPhoneNumberVerifiedDomainEventV1_WhenPhoneNumberIsAlreadyVerified` to `AccountIdTests` 
 - [x] Add `VerifyPhoneNumber_WhenPhoneNotSet_ShouldThrowAccountPhoneNumberNotSetException` to `AccountIdTests`
+- [x] Add `CredentialId` to `Nine.Identities.Domain.Accounts.ValueObjects`
