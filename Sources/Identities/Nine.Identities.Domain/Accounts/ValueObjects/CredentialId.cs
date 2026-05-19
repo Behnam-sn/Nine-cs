@@ -30,4 +30,9 @@ public readonly record struct CredentialId
 
         return new(input);
     }
+
+    public static CredentialId Parse(string input)
+    {
+        return From(Guid.Parse(input));
+    }
 }

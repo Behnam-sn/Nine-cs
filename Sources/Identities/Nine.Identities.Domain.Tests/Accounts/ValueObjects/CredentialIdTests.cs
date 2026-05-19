@@ -46,4 +46,17 @@ public sealed class CredentialIdTests
         // Assert
         act.Should().Throw<CredentialIdCannotBeEmptyException>();
     }
+
+    [Fact]
+    public void Parse_ShouldReturnCorrectId()
+    {
+        // Arrange
+        var guid = Guid.NewGuid();
+
+        // Act
+        var credentialId = CredentialId.Parse(guid.ToString());
+
+        // Assert
+        credentialId.Value.Should().Be(guid);
+    }
 }

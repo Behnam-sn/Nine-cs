@@ -23,7 +23,6 @@
 
 ## Doing
 
-- [ ] Add `Parse_ShouldReturnCorrectId` to `CredentialIdTests`
 - [ ] Add `Parse_WithInvalidFormat_ShouldThrowCredentialIdInvalidFormatException` to `CredentialIdTests`
 - [ ] Add `Credentials` to `Account`
 - [ ] Add `Version` to `Account`
@@ -140,3 +139,4 @@
 - [x] Add `Create_ShouldGenerateUniqueId` to `CredentialIdTests`
 - [x] Add `From_ShouldReturnCorrectId` to `CredentialIdTests`
 - [x] Add `From_WithEmptyGuid_ShouldThrowCredentialIdCannotBeEmptyException` to `CredentialIdTests`
+- [x] Add `Parse_ShouldReturnCorrectId` to `CredentialIdTests`
