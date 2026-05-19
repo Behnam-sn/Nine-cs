@@ -23,6 +23,11 @@
 
 ## Doing
 
+- [ ] Add `Create_ShouldGenerateUniqueId` to `CredentialIdTests`
+- [ ] Add `From_ShouldReturnCorrectId` to `CredentialIdTests`
+- [ ] Add `From_WithEmptyGuid_ShouldThrowCredentialIdCannotBeEmptyException` to `CredentialIdTests`
+- [ ] Add `Parse_ShouldReturnCorrectId` to `CredentialIdTests`
+- [ ] Add `Parse_WithInvalidFormat_ShouldThrowCredentialIdInvalidFormatException` to `CredentialIdTests`
 - [ ] Add `Credentials` to `Account`
 - [ ] Add `Version` to `Account`
 - [ ] Add `Email` uniqueness domain service
@@ -135,3 +140,4 @@
 - [x] Add `VerifyPhoneNumber_WhenPhoneNotSet_ShouldThrowAccountPhoneNumberNotSetException` to `AccountIdTests`
 - [x] Add `CredentialId` to `Nine.Identities.Domain.Accounts.ValueObjects`
 - [x] Add `CredentialIdTests` to `Nine.Identities.Domain.Tests.Accounts.ValueObjects`
+- [x] Add `Create_ShouldGenerateUniqueId` to `CredentialIdTests`
