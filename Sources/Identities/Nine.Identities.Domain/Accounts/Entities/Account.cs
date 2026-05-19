@@ -74,6 +74,11 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         {
             throw new AccountPhoneNumberNotSetException();
         }
+
+        if (IsPhoneNumberVerified)
+        {
+            return;
+        }
         
         var accountPhoneNumberVerifiedDomainEvent = new AccountPhoneNumberVerifiedDomainEventV1(
             Id: DomainEventId.Create(),

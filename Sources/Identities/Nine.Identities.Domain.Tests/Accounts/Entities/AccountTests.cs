@@ -141,4 +141,22 @@ public sealed class AccountTests
 
         account.IsPhoneNumberVerified.Should().Be(true);
     }
+    
+    [Fact]
+    public void VerifyPhoneNumber_ShouldNotRaiseAccountPhoneNumberVerifiedDomainEventV1_WhenPhoneNumberIsAlreadyVerified()
+    {
+        // Arrange
+        var account = new AccountTestBuilder()
+            .WithRequiredParameters()
+            .WithPhoneNumber(AccountTestBuilder.DefaultPhoneValue)
+            .Build();
+        account.VerifyPhoneNumber();
+        account.ClearDomainEvents();
+
+        // Act
+        account.VerifyPhoneNumber();
+        
+        // Assert
+        account.DomainEvents.Should().BeEmpty();
+    }
 }

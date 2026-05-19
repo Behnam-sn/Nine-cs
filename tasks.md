@@ -131,3 +131,4 @@
 - [x] Add `VerifyPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberVerifiedDomainEventV1` to `AccountIdTests`
 - [x] Change `PhoneNumber` in `Account` to optional
 - [x] Add `VerifyEmail_ShouldNotRaiseAccountEmailVerifiedDomainEventV1_WhenEmailIsAlreadyVerified` to `AccountIdTests` 
+- [x] Add `VerifyPhoneNumber_ShouldNotRaiseAccountPhoneNumberVerifiedDomainEventV1_WhenPhoneNumberIsAlreadyVerified` to `AccountIdTests` 
