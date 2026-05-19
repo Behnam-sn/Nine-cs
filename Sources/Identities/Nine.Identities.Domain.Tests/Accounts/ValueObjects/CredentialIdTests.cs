@@ -20,4 +20,17 @@ public sealed class CredentialIdTests
         id2.Value.Should().NotBe(Guid.Empty);
         id1.Should().NotBe(id2);
     }
+
+    [Fact]
+    public void From_ShouldReturnCorrectId()
+    {
+        // Arrange
+        var guid = Guid.NewGuid();
+
+        // Act
+        var credentialId = CredentialId.From(guid);
+
+        // Assert
+        credentialId.Value.Should().Be(guid);
+    }
 }

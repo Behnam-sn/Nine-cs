@@ -1,4 +1,6 @@
-﻿namespace Nine.Identities.Domain.Accounts.ValueObjects;
+﻿using Nine.Identities.Domain.Accounts.Exceptions;
+
+namespace Nine.Identities.Domain.Accounts.ValueObjects;
 
 public readonly record struct CredentialId
 {
@@ -17,5 +19,10 @@ public readonly record struct CredentialId
     public static CredentialId Create()
     {
         return new(Guid.NewGuid());
+    }
+
+    public static CredentialId From(Guid input)
+    {
+        return new(input);
     }
 }
