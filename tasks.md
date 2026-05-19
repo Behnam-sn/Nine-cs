@@ -140,3 +140,4 @@
 - [x] Add `From_WithEmptyGuid_ShouldThrowCredentialIdCannotBeEmptyException` to `CredentialIdTests`
 - [x] Add `Parse_ShouldReturnCorrectId` to `CredentialIdTests`
 - [x] Add `Parse_WithInvalidFormat_ShouldThrowCredentialIdInvalidFormatException` to `CredentialIdTests`
+- [x] Add `HashedSecret` to `Nine.Identities.Domain.Accounts.ValueObjects`
