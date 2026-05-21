@@ -141,3 +141,4 @@
 - [x] Add `Parse_WithInvalidFormat_ShouldThrowCredentialIdInvalidFormatException` to `CredentialIdTests`
 - [x] Add `HashedSecret` to `Nine.Identities.Domain.Accounts.ValueObjects`
 - [x] Add `Credential ` to `Nine.Identities.Domain.Accounts.Entities`
+- [x] Add `AddCredential_WithDuplicateType_ShouldThrowCredentialAlreadyExistsException` to `AccountTests`

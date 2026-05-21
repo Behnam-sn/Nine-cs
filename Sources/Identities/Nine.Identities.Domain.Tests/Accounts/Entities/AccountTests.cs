@@ -249,6 +249,20 @@ public sealed class AccountTests
         act.Should().Throw<CredentialAlreadyExistsException>();
     }
 
+    [Fact]
+    public void AddCredential_WithDuplicateType_ShouldThrowCredentialAlreadyExistsException()
+    {
+        // Arrange
+        var account = new AccountTestBuilder().WithRequiredParameters().Build();
+        var credential = account.Credentials.First();
+
+        // Act
+        var act = () => account.AddCredential(CredentialId.Create(), credential.Type, HashedSecret.Create("new-secret"));
+
+        // Assert
+        act.Should().Throw<CredentialAlreadyExistsException>();
+    }
+
     #endregion
 
     #region RemoveCredential
@@ -259,7 +273,7 @@ public sealed class AccountTests
         // Arrange
         var account = new AccountTestBuilder().WithRequiredParameters().WithoutCreationEvent().Build();
         var extraId = CredentialId.Create();
-        account.AddCredential(extraId, CredentialType.Password, HashedSecret.Create("extra"));
+        account.AddCredential(extraId, CredentialType.OAuthGoogle, HashedSecret.Create("extra"));
         account.ClearDomainEvents();
 
         // Act

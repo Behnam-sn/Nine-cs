@@ -96,7 +96,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
 
     public void AddCredential(CredentialId credentialId, CredentialType type, HashedSecret secret)
     {
-        if (_credentials.Any(i => i.Id == credentialId))
+        if (_credentials.Any(i => i.Id == credentialId) || _credentials.Any(i => i.Type == type))
         {
             throw new CredentialAlreadyExistsException();
         }
