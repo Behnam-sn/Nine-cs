@@ -1,4 +1,5 @@
 ﻿using Nine.Identities.Domain.Accounts.Entities;
+using Nine.Identities.Domain.Accounts.Enums;
 using Nine.Identities.Domain.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Accounts.Entities;
@@ -7,10 +8,15 @@ internal sealed class AccountTestBuilder
 {
     public const string DefaultEmailValue = "john@example.com";
     public const string DefaultPhoneValue = "+123456789";
+    public static readonly CredentialId DefaultCredentialId = CredentialId.Create();
+    public static readonly CredentialType DefaultCredentialType = CredentialType.Password;
+    public static readonly HashedSecret DefaultHashedSecret = HashedSecret.Create("hashedpassword");
 
     private Email _email;
     private PhoneNumber? _phone;
-
+    private CredentialId _credentialId;
+    private CredentialType _credentialType;
+    private HashedSecret _hashedSecret;
     private bool _raiseCreationEvent = true;
 
     public AccountTestBuilder WithEmail(string email)
@@ -25,6 +31,14 @@ internal sealed class AccountTestBuilder
         return this;
     }
 
+    public AccountTestBuilder AddCredential(CredentialId id, CredentialType type, HashedSecret secret)
+    {
+        _credentialId = id;
+        _credentialType = type;
+        _hashedSecret = secret;
+        return this;
+    }
+
     public AccountTestBuilder WithoutCreationEvent()
     {
         _raiseCreationEvent = false;
@@ -34,6 +48,7 @@ internal sealed class AccountTestBuilder
     public AccountTestBuilder WithRequiredParameters()
     {
         WithEmail(DefaultEmailValue);
+        AddCredential(DefaultCredentialId, DefaultCredentialType, DefaultHashedSecret);
         return this;
     }
 
@@ -45,7 +60,13 @@ internal sealed class AccountTestBuilder
 
     public Account Build()
     {
-        var account = Account.CreateInstance(_email, _phone);
+        var account = Account.CreateInstance(
+            email: _email,
+            phoneNumber: _phone,
+            credentialId: _credentialId,
+            credentialType: _credentialType,
+            hashedSecret: _hashedSecret
+        );
 
         if (!_raiseCreationEvent)
         {

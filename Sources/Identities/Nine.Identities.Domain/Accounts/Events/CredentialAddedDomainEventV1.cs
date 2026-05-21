@@ -5,13 +5,11 @@ using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Identities.Domain.Accounts.Events;
 
-public sealed record AccountCreatedDomainEventV1(
+public sealed record CredentialAddedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
-    Email Email,
-    PhoneNumber? PhoneNumber,
-    CredentialId InitialCredentialId,
-    CredentialType InitialCredentialType,
-    HashedSecret InitialHashedSecret,
+    CredentialId CredentialId,
+    CredentialType CredentialType,
+    HashedSecret HashedSecret,
     DateTime OccurredAt
 ) : IDomainEvent;

@@ -2,9 +2,9 @@
 
 ## Backlog
 
-- Add `Password` to `User`
 - Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
 - Rename `value` in `Create` in value objects
+- Adding an existing credential type should not be allowed
 
 ## Todo
 
@@ -23,7 +23,6 @@
 
 ## Doing
 
-- [ ] Add `Credentials` to `Account`
 - [ ] Add `Version` to `Account`
 - [ ] Add `Email` uniqueness domain service
 
@@ -141,3 +140,4 @@
 - [x] Add `Parse_ShouldReturnCorrectId` to `CredentialIdTests`
 - [x] Add `Parse_WithInvalidFormat_ShouldThrowCredentialIdInvalidFormatException` to `CredentialIdTests`
 - [x] Add `HashedSecret` to `Nine.Identities.Domain.Accounts.ValueObjects`
+- [x] Add `Credential ` to `Nine.Identities.Domain.Accounts.Entities`
