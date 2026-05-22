@@ -4,7 +4,6 @@
 
 - Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
 - Rename `value` in `Create` in value objects
-- Adding an existing credential type should not be allowed
 
 ## Todo
 
@@ -23,6 +22,8 @@
 
 ## Doing
 
+- [ ] Rename `Email` to `EmailAddress`
+- [ ] Rename `PhoneNumber` to `Phone` in `Account`
 - [ ] Add `Version` to `Account`
 - [ ] Add `Email` uniqueness domain service
 
