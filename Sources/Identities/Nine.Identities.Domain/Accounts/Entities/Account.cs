@@ -13,8 +13,8 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     private List<Credential> _credentials = [];
 
     public AccountId AccountId { get; private set; }
-    public Email Email { get; private set; }
-    public bool IsEmailVerified { get; private set; }
+    public EmailAddress EmailAddress { get; private set; }
+    public bool IsEmailAddressVerified { get; private set; }
     public PhoneNumber? PhoneNumber { get; private set; }
     public bool IsPhoneNumberVerified { get; private set; }
     public IEnumerable<Credential> Credentials => _credentials;
@@ -31,33 +31,33 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         }
     }
 
-    public void SetEmail(Email email)
+    public void SetEmailAddress(EmailAddress emailAddress)
     {
-        var accountEmailChangedDomainEvent = new AccountEmailChangedDomainEventV1(
+        var accountEmailAddressChangedDomainEvent = new AccountEmailAddressChangedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId,
-            Email: email,
+            EmailAddress: emailAddress,
             OccurredAt: DateTime.UtcNow
         );
-        RaiseDomainEvent(accountEmailChangedDomainEvent);
-        ApplyDomainEvent(accountEmailChangedDomainEvent);
+        RaiseDomainEvent(accountEmailAddressChangedDomainEvent);
+        ApplyDomainEvent(accountEmailAddressChangedDomainEvent);
     }
 
-    public void VerifyEmail()
+    public void VerifyEmailAddress()
     {
-        if (IsEmailVerified)
+        if (IsEmailAddressVerified)
         {
             return;
         }
 
-        var accountEmailVerifiedDomainEvent = new AccountEmailVerifiedDomainEventV1(
+        var accountEmailAddressVerifiedDomainEvent = new AccountEmailAddressVerifiedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId,
-            Email: Email,
+            EmailAddress: EmailAddress,
             OccurredAt: DateTime.UtcNow
         );
-        RaiseDomainEvent(accountEmailVerifiedDomainEvent);
-        ApplyDomainEvent(accountEmailVerifiedDomainEvent);
+        RaiseDomainEvent(accountEmailAddressVerifiedDomainEvent);
+        ApplyDomainEvent(accountEmailAddressVerifiedDomainEvent);
     }
 
     public void SetPhoneNumber(PhoneNumber phoneNumber)
@@ -158,7 +158,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
     private void ApplyDomainEvent(AccountCreatedDomainEventV1 domainEvent)
     {
         AccountId = domainEvent.AccountId;
-        Email = domainEvent.Email;
+        EmailAddress = domainEvent.EmailAddress;
         PhoneNumber = domainEvent.PhoneNumber;
         _credentials =
         [
@@ -170,15 +170,15 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         ];
     }
 
-    private void ApplyDomainEvent(AccountEmailChangedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(AccountEmailAddressChangedDomainEventV1 domainEvent)
     {
-        Email = domainEvent.Email;
-        IsEmailVerified = false;
+        EmailAddress = domainEvent.EmailAddress;
+        IsEmailAddressVerified = false;
     }
 
-    private void ApplyDomainEvent(AccountEmailVerifiedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(AccountEmailAddressVerifiedDomainEventV1 domainEvent)
     {
-        IsEmailVerified = true;
+        IsEmailAddressVerified = true;
     }
 
     private void ApplyDomainEvent(AccountPhoneNumberChangedDomainEventV1 domainEvent)
@@ -213,13 +213,13 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         credential.SetSecret(domainEvent.NewHashedSecret);
     }
 
-    public static Account CreateInstance(Email email, CredentialId credentialId, CredentialType credentialType, HashedSecret hashedSecret, PhoneNumber? phoneNumber = null)
+    public static Account CreateInstance(EmailAddress emailAddress, CredentialId credentialId, CredentialType credentialType, HashedSecret hashedSecret, PhoneNumber? phoneNumber = null)
     {
         var account = new Account();
         var accountCreatedDomainEvent = new AccountCreatedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId.Create(),
-            Email: email,
+            EmailAddress: emailAddress,
             PhoneNumber: phoneNumber,
             InitialCredentialId: credentialId,
             InitialCredentialType: credentialType,

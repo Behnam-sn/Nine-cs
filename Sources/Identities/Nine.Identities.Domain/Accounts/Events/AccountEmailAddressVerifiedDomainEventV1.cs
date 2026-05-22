@@ -4,9 +4,9 @@ using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Identities.Domain.Accounts.Events;
 
-public sealed record AccountEmailVerifiedDomainEventV1(
+public sealed record AccountEmailAddressVerifiedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
-    Email Email,
+    EmailAddress EmailAddress,
     DateTime OccurredAt
 ) : IDomainEvent;

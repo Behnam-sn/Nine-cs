@@ -22,7 +22,7 @@ public sealed class AccountTests
         // Assert
         var accountCreatedDomainEventV1 = (AccountCreatedDomainEventV1)account.DomainEvents.Single();
         accountCreatedDomainEventV1.AccountId.Should().NotBeNull();
-        accountCreatedDomainEventV1.Email.Value.Should().Be(AccountTestBuilder.DefaultEmailValue);
+        accountCreatedDomainEventV1.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
         accountCreatedDomainEventV1.PhoneNumber?.Should().BeNull();
         accountCreatedDomainEventV1.InitialCredentialId.Should().NotBeNull();
         accountCreatedDomainEventV1.InitialCredentialType.Should().Be(AccountTestBuilder.DefaultCredentialType);
@@ -30,7 +30,7 @@ public sealed class AccountTests
         accountCreatedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.AccountId.Should().NotBeNull();
-        account.Email.Value.Should().Be(AccountTestBuilder.DefaultEmailValue);
+        account.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
         account.PhoneNumber.Should().BeNull();
         var credential = account.Credentials.Single();
         credential.Type.Should().Be(AccountTestBuilder.DefaultCredentialType);
@@ -47,72 +47,72 @@ public sealed class AccountTests
 
         // Assert
         var accountCreatedDomainEventV1 = (AccountCreatedDomainEventV1)account.DomainEvents.Single();
-        accountCreatedDomainEventV1.Email.Value.Should().Be(AccountTestBuilder.DefaultEmailValue);
-        accountCreatedDomainEventV1.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneValue);
+        accountCreatedDomainEventV1.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
+        accountCreatedDomainEventV1.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneNumberValue);
         accountCreatedDomainEventV1.AccountId.Should().NotBeNull();
         accountCreatedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
-        account.Email.Value.Should().Be(AccountTestBuilder.DefaultEmailValue);
-        account.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneValue);
+        account.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
+        account.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneNumberValue);
         account.AccountId.Should().NotBeNull();
     }
 
     #endregion
 
-    #region SetEmail
+    #region SetEmailAddress
 
     [Fact]
-    public void SetEmail_ShouldRaiseAndApplyAccountEmailChangedDomainEventV1()
+    public void SetEmailAddress_ShouldRaiseAndApplyAccountEmailAddressChangedDomainEventV1()
     {
         // Arrange
         var account = new AccountTestBuilder().WithRequiredParameters().WithoutCreationEvent().Build();
-        var newEmail = Email.Create("jane@example.com");
+        var newEmailAddress = EmailAddress.Create("jane@example.com");
 
         // Act
-        account.SetEmail(newEmail);
+        account.SetEmailAddress(newEmailAddress);
 
         // Assert
-        var accountEmailChangedDomainEventV1 = (AccountEmailChangedDomainEventV1)account.DomainEvents.Single();
-        accountEmailChangedDomainEventV1.AccountId.Should().Be(account.AccountId);
-        accountEmailChangedDomainEventV1.Email.Should().Be(newEmail);
-        accountEmailChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        var accountEmailAddressChangedDomainEventV1 = (AccountEmailAddressChangedDomainEventV1)account.DomainEvents.Single();
+        accountEmailAddressChangedDomainEventV1.AccountId.Should().Be(account.AccountId);
+        accountEmailAddressChangedDomainEventV1.EmailAddress.Should().Be(newEmailAddress);
+        accountEmailAddressChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
-        account.Email.Should().Be(newEmail);
-        account.IsEmailVerified.Should().Be(false);
+        account.EmailAddress.Should().Be(newEmailAddress);
+        account.IsEmailAddressVerified.Should().Be(false);
     }
 
     #endregion
 
-    #region VerifyEmail
+    #region VerifyEmailAddress
 
     [Fact]
-    public void VerifyEmail_ShouldRaiseAndApplyAccountEmailVerifiedDomainEventV1()
+    public void VerifyEmailAddress_ShouldRaiseAndApplyAccountEmailAddressVerifiedDomainEventV1()
     {
         // Arrange
         var account = new AccountTestBuilder().WithRequiredParameters().WithoutCreationEvent().Build();
 
         // Act
-        account.VerifyEmail();
+        account.VerifyEmailAddress();
 
         // Assert
-        var accountEmailVerifiedDomainEventV1 = (AccountEmailVerifiedDomainEventV1)account.DomainEvents.Single();
-        accountEmailVerifiedDomainEventV1.AccountId.Should().Be(account.AccountId);
-        accountEmailVerifiedDomainEventV1.Email.Should().Be(account.Email);
-        accountEmailVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        var accountEmailAddressVerifiedDomainEventV1 = (AccountEmailAddressVerifiedDomainEventV1)account.DomainEvents.Single();
+        accountEmailAddressVerifiedDomainEventV1.AccountId.Should().Be(account.AccountId);
+        accountEmailAddressVerifiedDomainEventV1.EmailAddress.Should().Be(account.EmailAddress);
+        accountEmailAddressVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
-        account.IsEmailVerified.Should().Be(true);
+        account.IsEmailAddressVerified.Should().Be(true);
     }
 
     [Fact]
-    public void VerifyEmail_ShouldNotRaiseAccountEmailVerifiedDomainEventV1_WhenEmailIsAlreadyVerified()
+    public void VerifyEmailAddress_ShouldNotRaiseAccountEmailAddressVerifiedDomainEventV1_WhenEmailAddressIsAlreadyVerified()
     {
         // Arrange
         var account = new AccountTestBuilder().WithRequiredParameters().Build();
-        account.VerifyEmail();
+        account.VerifyEmailAddress();
         account.ClearDomainEvents();
 
         // Act
-        account.VerifyEmail();
+        account.VerifyEmailAddress();
 
         // Assert
         account.DomainEvents.Should().BeEmpty();
@@ -191,7 +191,7 @@ public sealed class AccountTests
         // Arrange
         var account = new AccountTestBuilder()
             .WithRequiredParameters()
-            .WithPhoneNumber(AccountTestBuilder.DefaultPhoneValue)
+            .WithPhoneNumber(AccountTestBuilder.DefaultPhoneNumberValue)
             .Build();
         account.VerifyPhoneNumber();
         account.ClearDomainEvents();

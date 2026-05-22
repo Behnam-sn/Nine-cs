@@ -2,8 +2,7 @@
 
 ## Backlog
 
-- Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
-- Rename `value` in `Create` in value objects
+- [ ] Add `Version` to `Account`
 
 ## Todo
 
@@ -22,10 +21,9 @@
 
 ## Doing
 
-- [ ] Rename `Email` to `EmailAddress`
-- [ ] Rename `PhoneNumber` to `Phone` in `Account`
-- [ ] Add `Version` to `Account`
-- [ ] Add `Email` uniqueness domain service
+- [ ] Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
+- [ ] Rename `value` in `Create` in value objects
+- [ ] Add `Nine.Identities.Domain.Contracts` project
 
 ## Done
 
@@ -52,7 +50,7 @@
 - [x] Reference `Nine.SharedKernel` to `Nine.Identities.Domain`
 - [x] Move `Users` from `Nine.Domain` to `Nine.Identities.Domain`
 - [x] Change `Create` method access level from `internal` to `public` in `DomainEventId`
-- [x] Remove `Nine.Domain` project 
+- [x] Remove `Nine.Domain` project
 - [x] Add `Nine.Identities.Domain.Tests` project in `Identities` folder
 - [x] Reference `Nine.Identities.Domain` to `Nine.Identities.Domain.Tests`
 - [x] Add `UserTests` class in `Nine.Identities.Domain.Tests`
@@ -71,7 +69,7 @@
 - [x] Add `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `UsersTests`
 - [x] Rename `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` in `UserTests`
 - [x] Create `UserApplyDomainEventTests` in `Nine.Identities.Domain.Tests.Users.Entities`
-- [x] Move `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests` 
+- [x] Move `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
 - [x] Rename `UserTests` to `UserRaiseDomainEventTests`
 - [x] Rename `UserRaiseDomainEventTests` to `UserTests`
 - [x] Remove  `UserApplyDomainEventTests`
@@ -94,18 +92,18 @@
 - [x] Add `NameTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [x] Add `Create_ShouldSetValue` to `NameTests`
 - [x] Add `Create_WithNull_ShouldThrowNameCannotBeEmptyException` to `NameTests`
-- [x] Throw `NameCannotBeEmptyException` if `value` is empty in `Create` in `Name` 
+- [x] Throw `NameCannotBeEmptyException` if `value` is empty in `Create` in `Name`
 - [x] Add `Create_WithEmpty_ShouldThrowNameCannotBeEmptyException` to `NameTests`
 - [x] Add `Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException` to `NameTests`
 - [x] Merge `Create_WithNull_ShouldThrowNameCannotBeEmptyException`, `Create_WithEmpty_ShouldThrowNameCannotBeEmptyException` and `Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException` into `Create_WithNullOrEmptyOrWhitespace_ShouldThrowNameCannotBeEmptyException` to `NameTests`
 - [x] Add `Create_WithTooLongValue_ShouldThrowNameTooLongException` to `NameTests`
-- [x] Add `Arrange`, `Act`, `Assert` comments to `UserIdTests` 
+- [x] Add `Arrange`, `Act`, `Assert` comments to `UserIdTests`
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `NameTests`
 - [x] Add `EmailTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
-- [x] Add `Create_ShouldSetValue` to `EmailTests` 
-- [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `EmailTests` 
-- [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException` to `EmailTests` 
-- [x] Add `Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException` to `EmailTests` 
+- [x] Add `Create_ShouldSetValue` to `EmailTests`
+- [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `EmailTests`
+- [x] Add `Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException` to `EmailTests`
+- [x] Add `Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException` to `EmailTests`
 - [x] Add `PhoneNumberTests` to `Nine.Identities.Domain.Tests.Users.ValueObjects`
 - [x] Add `Create_ShouldSetValue` to `PhoneNumberTests`
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `PhoneNumberTests`
@@ -119,7 +117,7 @@
 - [x] Add `From_ShouldReturnCorrectId` to `AccountIdTests`
 - [x] Add `From_WithEmptyGuid_ShouldThrowAccountIdCannotBeEmptyException` to `AccountIdTests`
 - [x] Add `Parse_ShouldThrow_WhenInvalidFormat` to `AccountIdTests`
-- [x] Change `Email` type to `readonly partial record struct` 
+- [x] Change `Email` type to `readonly partial record struct`
 - [x] Add `Create_ShouldNormaliseToLowercase` to `EmailTests`
 - [x] Merge `Create_ShouldTrimLeadingAndTrailingWhitespace` and `Create_ShouldNormaliseToLowercase` to `Create_ShouldNormaliseValue` in `EmailTests`
 - [x] Rename `InvalidAccountIdFormatException` to `AccountIdInvalidFormatException`
@@ -130,8 +128,8 @@
 - [x] Add `VerifyEmail_ShouldRaiseAndApplyAccountEmailVerifiedDomainEventV1` to `AccountIdTests`
 - [x] Add `VerifyPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberVerifiedDomainEventV1` to `AccountIdTests`
 - [x] Change `PhoneNumber` in `Account` to optional
-- [x] Add `VerifyEmail_ShouldNotRaiseAccountEmailVerifiedDomainEventV1_WhenEmailIsAlreadyVerified` to `AccountIdTests` 
-- [x] Add `VerifyPhoneNumber_ShouldNotRaiseAccountPhoneNumberVerifiedDomainEventV1_WhenPhoneNumberIsAlreadyVerified` to `AccountIdTests` 
+- [x] Add `VerifyEmail_ShouldNotRaiseAccountEmailVerifiedDomainEventV1_WhenEmailIsAlreadyVerified` to `AccountIdTests`
+- [x] Add `VerifyPhoneNumber_ShouldNotRaiseAccountPhoneNumberVerifiedDomainEventV1_WhenPhoneNumberIsAlreadyVerified` to `AccountIdTests`
 - [x] Add `VerifyPhoneNumber_WhenPhoneNotSet_ShouldThrowAccountPhoneNumberNotSetException` to `AccountIdTests`
 - [x] Add `CredentialId` to `Nine.Identities.Domain.Accounts.ValueObjects`
 - [x] Add `CredentialIdTests` to `Nine.Identities.Domain.Tests.Accounts.ValueObjects`
@@ -143,3 +141,4 @@
 - [x] Add `HashedSecret` to `Nine.Identities.Domain.Accounts.ValueObjects`
 - [x] Add `Credential ` to `Nine.Identities.Domain.Accounts.Entities`
 - [x] Add `AddCredential_WithDuplicateType_ShouldThrowCredentialAlreadyExistsException` to `AccountTests`
+- [x] Rename `Email` to `EmailAddress`

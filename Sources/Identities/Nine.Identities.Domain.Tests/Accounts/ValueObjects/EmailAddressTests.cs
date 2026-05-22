@@ -5,7 +5,7 @@ using Nine.Identities.Domain.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Accounts.ValueObjects;
 
-public sealed class EmailTests
+public sealed class EmailAddressTests
 {
     [Theory]
     [InlineData("john@example.com")]
@@ -16,10 +16,10 @@ public sealed class EmailTests
         // Arrange
 
         // Act
-        var email = Email.Create(input);
+        var emailAddress = EmailAddress.Create(input);
 
         // Assert
-        email.Value.Should().Be(input);
+        emailAddress.Value.Should().Be(input);
     }
 
     [Theory]
@@ -31,25 +31,25 @@ public sealed class EmailTests
         // Arrange
 
         // Act
-        var email = Email.Create(input);
+        var emailAddress = EmailAddress.Create(input);
 
         // Assert
-        email.Value.Should().Be(expected);
+        emailAddress.Value.Should().Be(expected);
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailCannotBeEmptyException(string input)
+    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailAddressCannotBeEmptyException(string input)
     {
         // Arrange
 
         // Act
-        var act = () => Email.Create(input);
+        var act = () => EmailAddress.Create(input);
 
         // Assert
-        act.Should().Throw<EmailCannotBeEmptyException>();
+        act.Should().Throw<EmailAddressCannotBeEmptyException>();
     }
 
     [Theory]
@@ -57,14 +57,14 @@ public sealed class EmailTests
     [InlineData("missing@domain")]
     [InlineData("missing.domain.com")]
     [InlineData("@nouser.com")]
-    public void Create_WithInvalidFormat_ShouldThrowEmailInvalidFormatException(string input)
+    public void Create_WithInvalidFormat_ShouldThrowEmailAddressInvalidFormatException(string input)
     {
         // Arrange
 
         // Act
-        var act = () => Email.Create(input);
+        var act = () => EmailAddress.Create(input);
 
         // Assert
-        act.Should().Throw<EmailInvalidFormatException>();
+        act.Should().Throw<EmailAddressInvalidFormatException>();
     }
 }

@@ -4,30 +4,30 @@ using Nine.Identities.Domain.Accounts.Exceptions;
 
 namespace Nine.Identities.Domain.Accounts.ValueObjects;
 
-public readonly partial record struct Email
+public readonly partial record struct EmailAddress
 {
     [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$")]
-    private static partial Regex ValidEmailRegex();
+    private static partial Regex ValidEmailAddressRegex();
 
     public string Value { get; }
 
-    private Email(string value)
+    private EmailAddress(string value)
     {
         Value = value;
     }
 
-    public static Email Create(string value)
+    public static EmailAddress Create(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new EmailCannotBeEmptyException();
+            throw new EmailAddressCannotBeEmptyException();
         }
 
         value = value.Trim().ToLowerInvariant();
 
-        if (string.IsNullOrWhiteSpace(value) || !ValidEmailRegex().IsMatch(value))
+        if (string.IsNullOrWhiteSpace(value) || !ValidEmailAddressRegex().IsMatch(value))
         {
-            throw new EmailInvalidFormatException();
+            throw new EmailAddressInvalidFormatException();
         }
 
         return new(value);

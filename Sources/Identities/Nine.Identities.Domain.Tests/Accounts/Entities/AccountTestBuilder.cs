@@ -6,28 +6,28 @@ namespace Nine.Identities.Domain.Tests.Accounts.Entities;
 
 internal sealed class AccountTestBuilder
 {
-    public const string DefaultEmailValue = "john@example.com";
-    public const string DefaultPhoneValue = "+123456789";
+    public const string DefaultEmailAddressValue = "john@example.com";
+    public const string DefaultPhoneNumberValue = "+123456789";
     public static readonly CredentialId DefaultCredentialId = CredentialId.Create();
     public static readonly CredentialType DefaultCredentialType = CredentialType.Password;
     public static readonly HashedSecret DefaultHashedSecret = HashedSecret.Create("hashedpassword");
 
-    private Email _email;
-    private PhoneNumber? _phone;
+    private EmailAddress _emailAddress;
+    private PhoneNumber? _phoneNumber;
     private CredentialId _credentialId;
     private CredentialType _credentialType;
     private HashedSecret _hashedSecret;
     private bool _raiseCreationEvent = true;
 
-    public AccountTestBuilder WithEmail(string email)
+    public AccountTestBuilder WithEmailAddress(string emailAddress)
     {
-        _email = Email.Create(email);
+        _emailAddress = EmailAddress.Create(emailAddress);
         return this;
     }
 
     public AccountTestBuilder WithPhoneNumber(string phoneNumber)
     {
-        _phone = PhoneNumber.Create(phoneNumber);
+        _phoneNumber = PhoneNumber.Create(phoneNumber);
         return this;
     }
 
@@ -47,22 +47,22 @@ internal sealed class AccountTestBuilder
 
     public AccountTestBuilder WithRequiredParameters()
     {
-        WithEmail(DefaultEmailValue);
+        WithEmailAddress(DefaultEmailAddressValue);
         AddCredential(DefaultCredentialId, DefaultCredentialType, DefaultHashedSecret);
         return this;
     }
 
     public AccountTestBuilder WithOptionalParameters()
     {
-        WithPhoneNumber(DefaultPhoneValue);
+        WithPhoneNumber(DefaultPhoneNumberValue);
         return this;
     }
 
     public Account Build()
     {
         var account = Account.CreateInstance(
-            email: _email,
-            phoneNumber: _phone,
+            emailAddress: _emailAddress,
+            phoneNumber: _phoneNumber,
             credentialId: _credentialId,
             credentialType: _credentialType,
             hashedSecret: _hashedSecret
