@@ -21,7 +21,6 @@
 
 ## Doing
 
-- [ ] Add `Nine.Identities.Domain.Contracts` project
 
 ## Done
 
@@ -142,3 +141,4 @@
 - [x] Rename `Email` to `EmailAddress`
 - [x] Rename `Phone` to `PhoneNumber`
 - [x] Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
+- [ ] Add `Nine.Identities.Domain.Contracts` project

@@ -1,5 +1,5 @@
-﻿using Nine.Identities.Domain.Accounts.Enums;
-using Nine.Identities.Domain.Accounts.ValueObjects;
+﻿using Nine.Identities.Domain.Contracts.Accounts.Enums;
+using Nine.Identities.Domain.Contracts.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Accounts.Entities;
 

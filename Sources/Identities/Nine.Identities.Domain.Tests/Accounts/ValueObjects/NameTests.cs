@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 
-using Nine.Identities.Domain.Accounts.Exceptions;
-using Nine.Identities.Domain.Accounts.ValueObjects;
+using Nine.Identities.Domain.Contracts.Accounts.Exceptions;
+using Nine.Identities.Domain.Contracts.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Accounts.ValueObjects;
 

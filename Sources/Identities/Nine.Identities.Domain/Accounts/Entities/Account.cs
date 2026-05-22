@@ -1,7 +1,7 @@
-﻿using Nine.Identities.Domain.Accounts.Enums;
-using Nine.Identities.Domain.Accounts.Events;
-using Nine.Identities.Domain.Accounts.Exceptions;
-using Nine.Identities.Domain.Accounts.ValueObjects;
+﻿using Nine.Identities.Domain.Contracts.Accounts.Enums;
+using Nine.Identities.Domain.Contracts.Accounts.Events;
+using Nine.Identities.Domain.Contracts.Accounts.Exceptions;
+using Nine.Identities.Domain.Contracts.Accounts.ValueObjects;
 using Nine.SharedKernel.Abstractions.AggregateRoots;
 using Nine.SharedKernel.Abstractions.Events;
 using Nine.SharedKernel.Abstractions.ValueObjects;
