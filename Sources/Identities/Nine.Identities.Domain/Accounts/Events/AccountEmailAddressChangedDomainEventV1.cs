@@ -4,5 +4,5 @@ using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Identities.Domain.Accounts.Events;
 
-public sealed record AccountEmailAddressChangedDomainEventV1(DomainEventId Id, AccountId AccountId, EmailAddress EmailAddress, DateTime OccurredAt)
+public sealed record AccountEmailAddressChangedDomainEventV1(DomainEventId Id, AccountId AccountId, EmailAddress EmailAddress, DateTime Timestamp)
     : IDomainEvent;

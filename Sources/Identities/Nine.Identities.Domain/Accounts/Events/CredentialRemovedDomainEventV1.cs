@@ -8,5 +8,5 @@ public sealed record CredentialRemovedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
     CredentialId CredentialId,
-    DateTime OccurredAt
+    DateTime Timestamp
 ) : IDomainEvent;

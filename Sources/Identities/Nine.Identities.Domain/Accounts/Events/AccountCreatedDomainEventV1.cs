@@ -13,5 +13,5 @@ public sealed record AccountCreatedDomainEventV1(
     CredentialId InitialCredentialId,
     CredentialType InitialCredentialType,
     HashedSecret InitialHashedSecret,
-    DateTime OccurredAt
+    DateTime Timestamp
 ) : IDomainEvent;

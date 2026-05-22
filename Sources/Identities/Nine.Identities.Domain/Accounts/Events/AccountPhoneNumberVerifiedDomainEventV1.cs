@@ -8,5 +8,5 @@ public sealed record AccountPhoneNumberVerifiedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
     PhoneNumber PhoneNumber,
-    DateTime OccurredAt
+    DateTime Timestamp
 ) : IDomainEvent;

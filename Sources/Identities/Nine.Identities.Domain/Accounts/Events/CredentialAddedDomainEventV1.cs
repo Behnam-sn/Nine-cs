@@ -11,5 +11,5 @@ public sealed record CredentialAddedDomainEventV1(
     CredentialId CredentialId,
     CredentialType CredentialType,
     HashedSecret HashedSecret,
-    DateTime OccurredAt
+    DateTime Timestamp
 ) : IDomainEvent;

@@ -8,5 +8,5 @@ public sealed record AccountEmailAddressVerifiedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
     EmailAddress EmailAddress,
-    DateTime OccurredAt
+    DateTime Timestamp
 ) : IDomainEvent;

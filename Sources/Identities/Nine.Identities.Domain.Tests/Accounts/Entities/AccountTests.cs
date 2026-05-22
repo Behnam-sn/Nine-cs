@@ -27,7 +27,7 @@ public sealed class AccountTests
         accountCreatedDomainEventV1.InitialCredentialId.Should().NotBeNull();
         accountCreatedDomainEventV1.InitialCredentialType.Should().Be(AccountTestBuilder.DefaultCredentialType);
         accountCreatedDomainEventV1.InitialHashedSecret.Should().Be(AccountTestBuilder.DefaultHashedSecret);
-        accountCreatedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        accountCreatedDomainEventV1.Timestamp.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.AccountId.Should().NotBeNull();
         account.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
@@ -50,7 +50,7 @@ public sealed class AccountTests
         accountCreatedDomainEventV1.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
         accountCreatedDomainEventV1.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneNumberValue);
         accountCreatedDomainEventV1.AccountId.Should().NotBeNull();
-        accountCreatedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        accountCreatedDomainEventV1.Timestamp.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
         account.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneNumberValue);
@@ -75,7 +75,7 @@ public sealed class AccountTests
         var accountEmailAddressChangedDomainEventV1 = (AccountEmailAddressChangedDomainEventV1)account.DomainEvents.Single();
         accountEmailAddressChangedDomainEventV1.AccountId.Should().Be(account.AccountId);
         accountEmailAddressChangedDomainEventV1.EmailAddress.Should().Be(newEmailAddress);
-        accountEmailAddressChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        accountEmailAddressChangedDomainEventV1.Timestamp.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.EmailAddress.Should().Be(newEmailAddress);
         account.IsEmailAddressVerified.Should().Be(false);
@@ -98,7 +98,7 @@ public sealed class AccountTests
         var accountEmailAddressVerifiedDomainEventV1 = (AccountEmailAddressVerifiedDomainEventV1)account.DomainEvents.Single();
         accountEmailAddressVerifiedDomainEventV1.AccountId.Should().Be(account.AccountId);
         accountEmailAddressVerifiedDomainEventV1.EmailAddress.Should().Be(account.EmailAddress);
-        accountEmailAddressVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        accountEmailAddressVerifiedDomainEventV1.Timestamp.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.IsEmailAddressVerified.Should().Be(true);
     }
@@ -137,7 +137,7 @@ public sealed class AccountTests
             (AccountPhoneNumberChangedDomainEventV1)account.DomainEvents.Single();
         accountPhoneNumberChangedDomainEventV1.PhoneNumber.Should().Be(newPhoneNumber);
         accountPhoneNumberChangedDomainEventV1.AccountId.Should().Be(account.AccountId);
-        accountPhoneNumberChangedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        accountPhoneNumberChangedDomainEventV1.Timestamp.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.PhoneNumber.Should().Be(newPhoneNumber);
         account.IsPhoneNumberVerified.Should().Be(false);
@@ -164,7 +164,7 @@ public sealed class AccountTests
         var accountPhoneNumberVerifiedDomainEventV1 = (AccountPhoneNumberVerifiedDomainEventV1)account.DomainEvents.Single();
         accountPhoneNumberVerifiedDomainEventV1.AccountId.Should().Be(account.AccountId);
         accountPhoneNumberVerifiedDomainEventV1.PhoneNumber.Should().Be(account.PhoneNumber);
-        accountPhoneNumberVerifiedDomainEventV1.OccurredAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        accountPhoneNumberVerifiedDomainEventV1.Timestamp.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.IsPhoneNumberVerified.Should().Be(true);
     }

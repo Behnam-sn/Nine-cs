@@ -21,7 +21,6 @@
 
 ## Doing
 
-- [ ] Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
 - [ ] Rename `value` in `Create` in value objects
 - [ ] Add `Nine.Identities.Domain.Contracts` project
 
@@ -143,3 +142,4 @@
 - [x] Add `AddCredential_WithDuplicateType_ShouldThrowCredentialAlreadyExistsException` to `AccountTests`
 - [x] Rename `Email` to `EmailAddress`
 - [x] Rename `Phone` to `PhoneNumber`
+- [x] Rename `OccurredAt` to `Timestamp` in `IDomainEvent`

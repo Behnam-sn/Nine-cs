@@ -6,5 +6,5 @@ public interface IDomainEvent
 {
     DomainEventId Id { get; }
 
-    DateTime OccurredAt { get; }
+    DateTime Timestamp { get; }
 }

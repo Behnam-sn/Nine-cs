@@ -9,5 +9,5 @@ public sealed record CredentialChangedDomainEventV1(
     AccountId AccountId,
     CredentialId CredentialId,
     HashedSecret NewHashedSecret,
-    DateTime OccurredAt
+    DateTime Timestamp
 ) : IDomainEvent;

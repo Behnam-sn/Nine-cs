@@ -37,7 +37,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             Id: DomainEventId.Create(),
             AccountId: AccountId,
             EmailAddress: emailAddress,
-            OccurredAt: DateTime.UtcNow
+            Timestamp: DateTime.UtcNow
         );
         RaiseDomainEvent(accountEmailAddressChangedDomainEvent);
         ApplyDomainEvent(accountEmailAddressChangedDomainEvent);
@@ -54,7 +54,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             Id: DomainEventId.Create(),
             AccountId: AccountId,
             EmailAddress: EmailAddress,
-            OccurredAt: DateTime.UtcNow
+            Timestamp: DateTime.UtcNow
         );
         RaiseDomainEvent(accountEmailAddressVerifiedDomainEvent);
         ApplyDomainEvent(accountEmailAddressVerifiedDomainEvent);
@@ -66,7 +66,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             Id: DomainEventId.Create(),
             AccountId: AccountId,
             PhoneNumber: phoneNumber,
-            OccurredAt: DateTime.UtcNow
+            Timestamp: DateTime.UtcNow
         );
         RaiseDomainEvent(accountPhoneNumberChangedDomainEvent);
         ApplyDomainEvent(accountPhoneNumberChangedDomainEvent);
@@ -88,7 +88,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             Id: DomainEventId.Create(),
             AccountId: AccountId,
             PhoneNumber: PhoneNumber.Value,
-            OccurredAt: DateTime.UtcNow
+            Timestamp: DateTime.UtcNow
         );
         RaiseDomainEvent(accountPhoneNumberVerifiedDomainEvent);
         ApplyDomainEvent(accountPhoneNumberVerifiedDomainEvent);
@@ -107,7 +107,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             CredentialId: credentialId,
             CredentialType: type,
             HashedSecret: secret,
-            OccurredAt: DateTime.UtcNow
+            Timestamp: DateTime.UtcNow
         );
         RaiseDomainEvent(credentialAddedDomainEvent);
         ApplyDomainEvent(credentialAddedDomainEvent);
@@ -130,7 +130,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             Id: DomainEventId.Create(),
             AccountId: AccountId,
             CredentialId: credentialId,
-            OccurredAt: DateTime.UtcNow
+            Timestamp: DateTime.UtcNow
         );
         RaiseDomainEvent(credentialRemovedDomainEvent);
         ApplyDomainEvent(credentialRemovedDomainEvent);
@@ -149,7 +149,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             AccountId: AccountId,
             CredentialId: credentialId,
             NewHashedSecret: newSecret,
-            OccurredAt: DateTime.UtcNow
+            Timestamp: DateTime.UtcNow
         );
         RaiseDomainEvent(credentialChangedDomainEvent);
         ApplyDomainEvent(credentialChangedDomainEvent);
@@ -224,7 +224,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             InitialCredentialId: credentialId,
             InitialCredentialType: credentialType,
             InitialHashedSecret: hashedSecret,
-            OccurredAt: DateTime.UtcNow
+            Timestamp: DateTime.UtcNow
         );
         account.RaiseDomainEvent(accountCreatedDomainEvent);
         account.ApplyDomainEvent(accountCreatedDomainEvent);
