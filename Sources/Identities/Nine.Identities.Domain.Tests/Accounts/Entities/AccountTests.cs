@@ -170,7 +170,7 @@ public sealed class AccountTests
     }
 
     [Fact]
-    public void VerifyPhoneNumber_WhenPhoneNotSet_ShouldThrowAccountPhoneNumberNotSetException()
+    public void VerifyPhoneNumber_WhenPhoneNumberNotSet_ShouldThrowAccountPhoneNumberNotSetException()
     {
         // Arrange
         var account = new AccountTestBuilder()

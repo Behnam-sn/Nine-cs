@@ -142,3 +142,4 @@
 - [x] Add `Credential ` to `Nine.Identities.Domain.Accounts.Entities`
 - [x] Add `AddCredential_WithDuplicateType_ShouldThrowCredentialAlreadyExistsException` to `AccountTests`
 - [x] Rename `Email` to `EmailAddress`
+- [x] Rename `Phone` to `PhoneNumber`

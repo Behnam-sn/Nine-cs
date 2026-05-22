@@ -56,12 +56,12 @@ public sealed class PhoneNumberTests
     [InlineData("+")]                     // just plus
     [InlineData("+123")]                  // too short (< 7 digits after country code)
     [InlineData("+12345678901234567")]    // too long (>15 digits total)
-    public void Create_WithInvalidFormat_ShouldThrowPhoneNumberInvalidFormatException(string invalidPhone)
+    public void Create_WithInvalidFormat_ShouldThrowPhoneNumberInvalidFormatException(string invalidPhoneNumber)
     {
         // Arrange
 
         // Act
-        var act = () => PhoneNumber.Create(invalidPhone);
+        var act = () => PhoneNumber.Create(invalidPhoneNumber);
 
         // Assert
         act.Should().Throw<PhoneNumberInvalidFormatException>();
