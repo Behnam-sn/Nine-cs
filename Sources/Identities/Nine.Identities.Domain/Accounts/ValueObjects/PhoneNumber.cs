@@ -22,7 +22,7 @@ public readonly partial record struct PhoneNumber
         {
             throw new PhoneNumberCannotBeEmptyException();
         }
-        
+
         value = value.Trim();
 
         string digitsOnly;

@@ -13,13 +13,13 @@ public abstract class EventSourcedAggregateRoot<TId> : EventSourcedEntity<TId>, 
     {
         _domainEvents.Add(domainEvent);
     }
-    
+
     protected void ApplyDomainEvent(IDomainEvent domainEvent)
     {
         var applyDomainEventMethod = this.GetType()
-            .GetMethod("ApplyDomainEvent", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, 
+            .GetMethod("ApplyDomainEvent", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
                 null, [domainEvent.GetType()], null);
-    
+
         applyDomainEventMethod?.Invoke(this, [domainEvent]);
     }
 

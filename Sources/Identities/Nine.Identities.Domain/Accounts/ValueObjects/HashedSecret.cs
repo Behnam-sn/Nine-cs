@@ -10,7 +10,7 @@ public readonly record struct HashedSecret
     {
         Value = value;
     }
-    
+
     public override string ToString()
     {
         return Value;
@@ -22,7 +22,7 @@ public readonly record struct HashedSecret
         {
             throw new HashedSecretCannotBeEmptyException();
         }
-        
-        return new (value.Trim());
+
+        return new(value.Trim());
     }
 }

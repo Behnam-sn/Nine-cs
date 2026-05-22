@@ -41,7 +41,7 @@ public sealed class EmailAddressTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailAddressCannotBeEmptyException(string input)
+    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowEmailAddressCannotBeEmptyException(string? input)
     {
         // Arrange
 

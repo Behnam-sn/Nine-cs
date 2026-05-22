@@ -26,7 +26,7 @@ public sealed class NameTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowNameCannotBeEmptyException(string invalidValue)
+    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowNameCannotBeEmptyException(string? invalidValue)
     {
         // Arrange
 
@@ -36,7 +36,7 @@ public sealed class NameTests
         // Assert
         act.Should().Throw<NameCannotBeEmptyException>();
     }
-    
+
     [Theory]
     [InlineData("   John   ", "John")]
     [InlineData(" Alice ", "Alice")]
@@ -47,7 +47,7 @@ public sealed class NameTests
 
         name.Value.Should().Be(expected);
     }
-    
+
     [Fact]
     public void Create_WithTooLongValue_ShouldThrowNameTooLongException()
     {

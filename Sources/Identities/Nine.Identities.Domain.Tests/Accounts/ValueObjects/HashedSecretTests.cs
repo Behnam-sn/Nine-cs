@@ -38,7 +38,7 @@ public sealed class HashedSecretTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowHashedSecretCannotBeEmptyException(string invalidInput)
+    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowHashedSecretCannotBeEmptyException(string? invalidInput)
     {
         // Arrange
 
@@ -56,7 +56,7 @@ public sealed class HashedSecretTests
         var secret1 = HashedSecret.Create("hash");
         var secret2 = HashedSecret.Create("hash");
         var secret3 = HashedSecret.Create("different");
-        
+
         // Act
 
         // Assert

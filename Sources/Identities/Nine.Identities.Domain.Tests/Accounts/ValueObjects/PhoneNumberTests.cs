@@ -39,7 +39,7 @@ public sealed class PhoneNumberTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowPhoneNumberCannotBeEmptyException(string invalidInput)
+    public void Create_WithNullOrEmptyOrWhitespace_ShouldThrowPhoneNumberCannotBeEmptyException(string? invalidInput)
     {
         // Arrange
 

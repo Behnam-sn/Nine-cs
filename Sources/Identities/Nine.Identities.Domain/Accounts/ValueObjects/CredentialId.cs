@@ -37,7 +37,7 @@ public readonly record struct CredentialId
         {
             throw new CredentialIdInvalidFormatException();
         }
-        
+
         return From(guid);
     }
 }
