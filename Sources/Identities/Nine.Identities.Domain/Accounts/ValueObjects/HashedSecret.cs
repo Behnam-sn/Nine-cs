@@ -16,13 +16,13 @@ public readonly record struct HashedSecret
         return Value;
     }
 
-    public static HashedSecret Create(string input)
+    public static HashedSecret Create(string value)
     {
-        if (string.IsNullOrWhiteSpace(input))
+        if (string.IsNullOrWhiteSpace(value))
         {
             throw new HashedSecretCannotBeEmptyException();
         }
         
-        return new (input.Trim());
+        return new (value.Trim());
     }
 }
