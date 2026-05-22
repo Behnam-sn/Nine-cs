@@ -2,7 +2,7 @@
 using Nine.Identities.Domain.Accounts.Enums;
 using Nine.Identities.Domain.Accounts.ValueObjects;
 
-namespace Nine.Identities.Domain.Tests.Accounts.Entities;
+namespace Nine.Identities.Domain.Tests.Accounts.Builders;
 
 internal sealed class AccountTestBuilder
 {

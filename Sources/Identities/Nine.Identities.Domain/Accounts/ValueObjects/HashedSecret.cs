@@ -4,8 +4,6 @@ namespace Nine.Identities.Domain.Accounts.ValueObjects;
 
 public readonly record struct HashedSecret
 {
-    public string Value { get; }
-
     private HashedSecret(string value)
     {
         Value = value;
@@ -15,6 +13,8 @@ public readonly record struct HashedSecret
     {
         return Value;
     }
+
+    public string Value { get; }
 
     public static HashedSecret Create(string value)
     {

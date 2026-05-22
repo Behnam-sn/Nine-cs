@@ -4,12 +4,12 @@ namespace Nine.Identities.Domain.Accounts.ValueObjects;
 
 public readonly record struct AccountId
 {
-    public Guid Value { get; }
-
     private AccountId(Guid value)
     {
         Value = value;
     }
+
+    public Guid Value { get; }
 
     public override string ToString()
     {

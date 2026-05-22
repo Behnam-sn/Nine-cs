@@ -2,12 +2,12 @@
 
 public struct LastName
 {
-    public string Value { get; }
-
     public LastName(string value)
     {
         Value = value;
     }
+
+    public string Value { get; }
 
     public static LastName Create(string value)
     {

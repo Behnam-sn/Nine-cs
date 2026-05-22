@@ -4,6 +4,7 @@ using Nine.Identities.Domain.Accounts.Enums;
 using Nine.Identities.Domain.Accounts.Events;
 using Nine.Identities.Domain.Accounts.Exceptions;
 using Nine.Identities.Domain.Accounts.ValueObjects;
+using Nine.Identities.Domain.Tests.Accounts.Builders;
 
 namespace Nine.Identities.Domain.Tests.Accounts.Entities;
 

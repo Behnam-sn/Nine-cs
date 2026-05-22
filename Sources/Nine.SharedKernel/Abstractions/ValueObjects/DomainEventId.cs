@@ -2,12 +2,12 @@ namespace Nine.SharedKernel.Abstractions.ValueObjects;
 
 public readonly record struct DomainEventId
 {
-    public Guid Value { get; }
-
     private DomainEventId(Guid value)
     {
         Value = value;
     }
+
+    public Guid Value { get; }
 
     public override string ToString()
     {

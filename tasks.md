@@ -21,7 +21,6 @@
 
 ## Doing
 
-- [ ] Rename `value` in `Create` in value objects
 - [ ] Add `Nine.Identities.Domain.Contracts` project
 
 ## Done

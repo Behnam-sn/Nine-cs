@@ -6,9 +6,7 @@ namespace Nine.SharedKernel.Abstractions.AggregateRoots;
 public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
 {
     private readonly List<IDomainEvent> _domainEvents = [];
-
-    public IEnumerable<IDomainEvent> DomainEvents => _domainEvents;
-
+    
     protected AggregateRoot(
         TId id,
         bool isDeleted,
@@ -17,6 +15,8 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
     ) : base(id, isDeleted, createdAtUtc, modifiedAtUtc)
     {
     }
+
+    public IEnumerable<IDomainEvent> DomainEvents => _domainEvents;
 
     protected void RaiseDomainEvent(IDomainEvent domainEvent)
     {

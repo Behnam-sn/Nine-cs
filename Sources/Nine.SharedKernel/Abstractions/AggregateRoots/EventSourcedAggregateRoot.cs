@@ -7,12 +7,12 @@ public abstract class EventSourcedAggregateRoot<TId> : EventSourcedEntity<TId>, 
 {
     private readonly List<IDomainEvent> _domainEvents = [];
 
-    public IEnumerable<IDomainEvent> DomainEvents => _domainEvents;
-
     protected void RaiseDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }
+
+    public IEnumerable<IDomainEvent> DomainEvents => _domainEvents;
 
     protected void ApplyDomainEvent(IDomainEvent domainEvent)
     {

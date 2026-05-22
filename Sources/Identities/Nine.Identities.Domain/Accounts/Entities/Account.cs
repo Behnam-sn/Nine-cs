@@ -12,13 +12,6 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
 {
     private List<Credential> _credentials = [];
 
-    public AccountId AccountId { get; private set; }
-    public EmailAddress EmailAddress { get; private set; }
-    public bool IsEmailAddressVerified { get; private set; }
-    public PhoneNumber? PhoneNumber { get; private set; }
-    public bool IsPhoneNumberVerified { get; private set; }
-    public IEnumerable<Credential> Credentials => _credentials;
-
     private Account()
     {
     }
@@ -30,6 +23,13 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             ApplyDomainEvent(domainEvent);
         }
     }
+
+    public AccountId AccountId { get; private set; }
+    public EmailAddress EmailAddress { get; private set; }
+    public bool IsEmailAddressVerified { get; private set; }
+    public PhoneNumber? PhoneNumber { get; private set; }
+    public bool IsPhoneNumberVerified { get; private set; }
+    public IEnumerable<Credential> Credentials => _credentials;
 
     public void SetEmailAddress(EmailAddress emailAddress)
     {

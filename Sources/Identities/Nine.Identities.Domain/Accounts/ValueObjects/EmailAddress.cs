@@ -9,12 +9,13 @@ public readonly partial record struct EmailAddress
     [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$")]
     private static partial Regex ValidEmailAddressRegex();
 
-    public string Value { get; }
 
     private EmailAddress(string value)
     {
         Value = value;
     }
+
+    public string Value { get; }
 
     public static EmailAddress Create(string value)
     {

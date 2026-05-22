@@ -8,13 +8,13 @@ public readonly partial record struct PhoneNumber
 {
     [GeneratedRegex(@"^\+[1-9]\d{6,14}$")]
     private static partial Regex E164Regex();
-
-    public string Value { get; }
-
+    
     private PhoneNumber(string value)
     {
         Value = value;
     }
+
+    public string Value { get; }
 
     public static PhoneNumber Create(string value)
     {
