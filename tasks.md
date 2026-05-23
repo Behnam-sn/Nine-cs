@@ -22,7 +22,6 @@
 
 ## Doing
 
-- [ ] Add `Messaging` to `Nine.SharedKernel.Abstractions`
 - [ ] Add `CreateAccountCommand` to `Nine.Identities.Application.Accounts.Commands`
 
 ## Done
@@ -159,3 +158,4 @@
 - [x] Add `Nine.Identities.Domain.Contracts` project
 - [x] Add `Nine.Identities.Application` project
 - [x] Install `MediatR` in `Nine.SharedKernel`
+- [x] Add `Messaging` to `Nine.SharedKernel.Abstractions`
