@@ -22,6 +22,9 @@
 
 ## Doing
 
+- [ ] Add `Messaging` to `Nine.SharedKernel.Abstractions`
+- [ ] Add `CreateAccountCommand` to `Nine.Identities.Application.Accounts.Commands`
+
 ## Done
 
 - [x] Convert `UserFirstNameChangedDomainEventV1` constructor to a primary constructor
@@ -154,4 +157,5 @@
 - [x] Rename `Phone` to `PhoneNumber`
 - [x] Rename `OccurredAt` to `Timestamp` in `IDomainEvent`
 - [x] Add `Nine.Identities.Domain.Contracts` project
-- [ ] Add `Nine.Identities.Application` project
+- [x] Add `Nine.Identities.Application` project
+- [x] Install `MediatR` in `Nine.SharedKernel`
