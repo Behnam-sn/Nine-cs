@@ -10,7 +10,7 @@ namespace Nine.Identities.Domain.Accounts.Entities;
 
 public sealed class Account : EventSourcedAggregateRoot<AccountId>
 {
-    private List<Credential> _credentials = [];
+    private readonly List<Credential> _credentials = [];
 
     private Account()
     {
@@ -94,23 +94,41 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         ApplyDomainEvent(accountPhoneNumberVerifiedDomainEvent);
     }
 
-    public void AddCredential(CredentialId credentialId, CredentialType type, HashedSecret secret)
+    public void AddPasswordCredential(HashedSecret hashedPassword)
     {
-        if (_credentials.Any(i => i.Id == credentialId) || _credentials.Any(i => i.Type == type))
+        if (_credentials.Any(i => i.Type == CredentialType.Password))
         {
             throw new CredentialAlreadyExistsException();
         }
 
-        var credentialAddedDomainEvent = new CredentialAddedDomainEventV1(
+        var accountPasswordCredentialAddedDomainEvent = new AccountPasswordCredentialAddedDomainEventV1(
+            Id: DomainEventId.Create(),
+            AccountId: AccountId,
+            CredentialId: CredentialId.Create(),
+            HashedPassword: hashedPassword,
+            Timestamp: DateTime.UtcNow
+        );
+        RaiseDomainEvent(accountPasswordCredentialAddedDomainEvent);
+        ApplyDomainEvent(accountPasswordCredentialAddedDomainEvent);
+    }
+
+    public void ChangePasswordCredential(CredentialId credentialId, HashedSecret newHashedPassword)
+    {
+        var credential = _credentials.FirstOrDefault(i => i.Id == credentialId);
+        if (credential == null)
+        {
+            throw new CredentialNotFoundException();
+        }
+
+        var accountPasswordCredentialChangedDomainEvent = new AccountPasswordCredentialChangedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId,
             CredentialId: credentialId,
-            CredentialType: type,
-            HashedSecret: secret,
+            NewHashedPassword: newHashedPassword,
             Timestamp: DateTime.UtcNow
         );
-        RaiseDomainEvent(credentialAddedDomainEvent);
-        ApplyDomainEvent(credentialAddedDomainEvent);
+        RaiseDomainEvent(accountPasswordCredentialChangedDomainEvent);
+        ApplyDomainEvent(accountPasswordCredentialChangedDomainEvent);
     }
 
     public void RemoveCredential(CredentialId credentialId)
@@ -126,7 +144,7 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
             throw new CannotRemoveLastCredentialException();
         }
 
-        var credentialRemovedDomainEvent = new CredentialRemovedDomainEventV1(
+        var credentialRemovedDomainEvent = new AccountCredentialRemovedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId,
             CredentialId: credentialId,
@@ -136,38 +154,14 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         ApplyDomainEvent(credentialRemovedDomainEvent);
     }
 
-    public void ChangeCredential(CredentialId credentialId, HashedSecret newSecret)
-    {
-        var credential = _credentials.FirstOrDefault(i => i.Id == credentialId);
-        if (credential == null)
-        {
-            throw new CredentialNotFoundException();
-        }
-
-        var credentialChangedDomainEvent = new CredentialChangedDomainEventV1(
-            Id: DomainEventId.Create(),
-            AccountId: AccountId,
-            CredentialId: credentialId,
-            NewHashedSecret: newSecret,
-            Timestamp: DateTime.UtcNow
-        );
-        RaiseDomainEvent(credentialChangedDomainEvent);
-        ApplyDomainEvent(credentialChangedDomainEvent);
-    }
-
-    private void ApplyDomainEvent(AccountCreatedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(AccountWithPasswordCreatedDomainEventV1 domainEvent)
     {
         AccountId = domainEvent.AccountId;
         EmailAddress = domainEvent.EmailAddress;
         PhoneNumber = domainEvent.PhoneNumber;
-        _credentials =
-        [
-            Credential.CreateInstance(
-                id: domainEvent.InitialCredentialId,
-                type: domainEvent.InitialCredentialType,
-                secret: domainEvent.InitialHashedSecret
-            )
-        ];
+        _credentials.Add(
+            new PasswordCredential(domainEvent.CredentialId, domainEvent.HashedPassword)
+        );
     }
 
     private void ApplyDomainEvent(AccountEmailAddressChangedDomainEventV1 domainEvent)
@@ -192,38 +186,33 @@ public sealed class Account : EventSourcedAggregateRoot<AccountId>
         IsPhoneNumberVerified = true;
     }
 
-    private void ApplyDomainEvent(CredentialAddedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(AccountPasswordCredentialAddedDomainEventV1 domainEvent)
     {
-        var credential = Credential.CreateInstance(
-            id: domainEvent.CredentialId,
-            type: domainEvent.CredentialType,
-            secret: domainEvent.HashedSecret
-        );
+        var credential = new PasswordCredential(domainEvent.CredentialId, domainEvent.HashedPassword);
         _credentials.Add(credential);
     }
 
-    private void ApplyDomainEvent(CredentialRemovedDomainEventV1 domainEvent)
+    private void ApplyDomainEvent(AccountPasswordCredentialChangedDomainEventV1 domainEvent)
+    {
+        var credential = (PasswordCredential)_credentials.First(i => i.Id == domainEvent.CredentialId);
+        credential.SetHashedPassword(domainEvent.NewHashedPassword);
+    }
+
+    private void ApplyDomainEvent(AccountCredentialRemovedDomainEventV1 domainEvent)
     {
         _credentials.RemoveAll(i => i.Id == domainEvent.CredentialId);
     }
 
-    private void ApplyDomainEvent(CredentialChangedDomainEventV1 domainEvent)
-    {
-        var credential = _credentials.First(i => i.Id == domainEvent.CredentialId);
-        credential.SetSecret(domainEvent.NewHashedSecret);
-    }
-
-    public static Account CreateInstance(EmailAddress emailAddress, CredentialId credentialId, CredentialType credentialType, HashedSecret hashedSecret, PhoneNumber? phoneNumber = null)
+    public static Account CreateWithPassword(EmailAddress emailAddress, HashedSecret hashedPassword, PhoneNumber? phoneNumber = null)
     {
         var account = new Account();
-        var accountCreatedDomainEvent = new AccountCreatedDomainEventV1(
+        var accountCreatedDomainEvent = new AccountWithPasswordCreatedDomainEventV1(
             Id: DomainEventId.Create(),
             AccountId: AccountId.Create(),
             EmailAddress: emailAddress,
             PhoneNumber: phoneNumber,
-            InitialCredentialId: credentialId,
-            InitialCredentialType: credentialType,
-            InitialHashedSecret: hashedSecret,
+            CredentialId: CredentialId.Create(),
+            HashedPassword: hashedPassword,
             Timestamp: DateTime.UtcNow
         );
         account.RaiseDomainEvent(accountCreatedDomainEvent);

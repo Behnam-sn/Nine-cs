@@ -1,5 +1,4 @@
 ﻿using Nine.Identities.Domain.Accounts.Entities;
-using Nine.Identities.Domain.Contracts.Accounts.Enums;
 using Nine.Identities.Domain.Contracts.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Tests.Accounts.Builders;
@@ -8,15 +7,11 @@ internal sealed class AccountTestBuilder
 {
     public const string DefaultEmailAddressValue = "john@example.com";
     public const string DefaultPhoneNumberValue = "+123456789";
-    public static readonly CredentialId DefaultCredentialId = CredentialId.Create();
-    public static readonly CredentialType DefaultCredentialType = CredentialType.Password;
-    public static readonly HashedSecret DefaultHashedSecret = HashedSecret.Create("hashedpassword");
+    public static readonly HashedSecret DefaultHashedPassword = HashedSecret.Create("hashedpassword");
 
     private EmailAddress _emailAddress;
     private PhoneNumber? _phoneNumber;
-    private CredentialId _credentialId;
-    private CredentialType _credentialType;
-    private HashedSecret _hashedSecret;
+    private HashedSecret _hashedPassword;
     private bool _raiseCreationEvent = true;
 
     public AccountTestBuilder WithEmailAddress(string emailAddress)
@@ -31,11 +26,9 @@ internal sealed class AccountTestBuilder
         return this;
     }
 
-    public AccountTestBuilder AddCredential(CredentialId id, CredentialType type, HashedSecret secret)
+    public AccountTestBuilder WithPasswordCredential(HashedSecret hashedPassword)
     {
-        _credentialId = id;
-        _credentialType = type;
-        _hashedSecret = secret;
+        _hashedPassword = hashedPassword;
         return this;
     }
 
@@ -45,27 +38,25 @@ internal sealed class AccountTestBuilder
         return this;
     }
 
-    public AccountTestBuilder WithRequiredParameters()
+    public AccountTestBuilder WithPasswordRequiredParameters()
     {
         WithEmailAddress(DefaultEmailAddressValue);
-        AddCredential(DefaultCredentialId, DefaultCredentialType, DefaultHashedSecret);
+        WithPasswordCredential(DefaultHashedPassword);
         return this;
     }
 
-    public AccountTestBuilder WithOptionalParameters()
+    public AccountTestBuilder WithPasswordOptionalParameters()
     {
         WithPhoneNumber(DefaultPhoneNumberValue);
         return this;
     }
 
-    public Account Build()
+    public Account BuildWithPassword()
     {
-        var account = Account.CreateInstance(
+        var account = Account.CreateWithPassword(
             emailAddress: _emailAddress,
             phoneNumber: _phoneNumber,
-            credentialId: _credentialId,
-            credentialType: _credentialType,
-            hashedSecret: _hashedSecret
+            hashedPassword: _hashedPassword
         );
 
         if (!_raiseCreationEvent)

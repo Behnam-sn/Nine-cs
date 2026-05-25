@@ -22,8 +22,6 @@
 
 ## Doing
 
-- [ ] Add `CreateAccountCommand` to `Nine.Identities.Application.Accounts.Commands`
-
 ## Done
 
 - [x] Convert `UserFirstNameChangedDomainEventV1` constructor to a primary constructor
@@ -66,29 +64,22 @@
 - [x] Change `UserUsernameChangedDomainEventV1` type to `sealed`
 - [x] Add `SetUsername_ShouldRaiseUserUsernameChangedDomainEvent` to `UsersTests`
 - [x] Add `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `UsersTests`
-- [x] Rename `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to
-  `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` in `UserTests`
+- [x] Rename `ApplyingUserCreatedDomainEvent_ShouldInitializeProperties` to `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` in `UserTests`
 - [x] Create `UserApplyDomainEventTests` in `Nine.Identities.Domain.Tests.Users.Entities`
 - [x] Move `ApplyingUserCreatedDomainEventV1_ShouldInitializeProperties` to `UserApplyDomainEventTests`
 - [x] Rename `UserTests` to `UserRaiseDomainEventTests`
 - [x] Rename `UserRaiseDomainEventTests` to `UserTests`
 - [x] Remove  `UserApplyDomainEventTests`
-- [x] Change `CreateInstance_ShouldRaiseUserCreatedDomainEvent` to
-  `CreateInstance_ShouldRaiseUserCreatedDomainEventV1AndUpdateState` in `UserTests`
-- [x] Rename `CreateInstance_ShouldRaiseUserCreatedDomainEventV1AndUpdateState` to
-  `CreateInstance_ShouldRaiseAndApplyUserCreatedDomainEventV1` in `UserTests`
-- [x] Change `SetName_ShouldRaiseUserNameChangedDomainEvent` to
-  `SetName_ShouldRaiseAndApplyUserNameChangedDomainEventV1` in `UserTests`
+- [x] Change `CreateInstance_ShouldRaiseUserCreatedDomainEvent` to `CreateInstance_ShouldRaiseUserCreatedDomainEventV1AndUpdateState` in `UserTests`
+- [x] Rename `CreateInstance_ShouldRaiseUserCreatedDomainEventV1AndUpdateState` to `CreateInstance_ShouldRaiseAndApplyUserCreatedDomainEventV1` in `UserTests`
+- [x] Change `SetName_ShouldRaiseUserNameChangedDomainEvent` to `SetName_ShouldRaiseAndApplyUserNameChangedDomainEventV1` in `UserTests`
 - [x] Apply `userNameChangedDomainEvent` in `SetPhoneNumber` in `User`
 - [x] Rename `Apply` to `ApplyDomainEvent` in `User`
-- [x] Change `SetEmail_ShouldRaiseUserEmailChangedDomainEvent` to
-  `SetEmail_ShouldRaiseAndApplyUserEmailChangedDomainEventV1` in `UserTests`
+- [x] Change `SetEmail_ShouldRaiseUserEmailChangedDomainEvent` to `SetEmail_ShouldRaiseAndApplyUserEmailChangedDomainEventV1` in `UserTests`
 - [x] Apply `userEmailChangedDomainEvent` in `SetEmail` in `User`
-- [x] Change `SetPhoneNumber_ShouldRaiseUserPhoneNumberChangedDomainEvent` to
-  `SetPhoneNumber_ShouldRaiseAndApplyUserPhoneNumberChangedDomainEventV1` in `UserTests`
+- [x] Change `SetPhoneNumber_ShouldRaiseUserPhoneNumberChangedDomainEvent` to `SetPhoneNumber_ShouldRaiseAndApplyUserPhoneNumberChangedDomainEventV1` in `UserTests`
 - [x] Apply `userPhoneNumberChangedDomainEvent` in `SetPhoneNumber` in `User`
-- [x] Change `SetUsername_ShouldRaiseUserUsernameChangedDomainEvent` to
-  `SetUsername_ShouldRaiseAndApplyUserUsernameChangedDomainEventV1` in `UserTests`
+- [x] Change `SetUsername_ShouldRaiseUserUsernameChangedDomainEvent` to `SetUsername_ShouldRaiseAndApplyUserUsernameChangedDomainEventV1` in `UserTests`
 - [x] Apply `userUsernameChangedDomainEvent` in `SetUsername` in `User`
 - [x] Rename `UserBuilder` to `UserTestBuilder`
 - [x] Change `UserTestBuilder` access level from `public` to `internal`
@@ -101,10 +92,7 @@
 - [x] Throw `NameCannotBeEmptyException` if `value` is empty in `Create` in `Name`
 - [x] Add `Create_WithEmpty_ShouldThrowNameCannotBeEmptyException` to `NameTests`
 - [x] Add `Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException` to `NameTests`
-- [x] Merge `Create_WithNull_ShouldThrowNameCannotBeEmptyException`,
-  `Create_WithEmpty_ShouldThrowNameCannotBeEmptyException` and
-  `Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException` into
-  `Create_WithNullOrEmptyOrWhitespace_ShouldThrowNameCannotBeEmptyException` to `NameTests`
+- [x] Merge `Create_WithNull_ShouldThrowNameCannotBeEmptyException`, `Create_WithEmpty_ShouldThrowNameCannotBeEmptyException` and `Create_WithWhitespace_ShouldThrowNameCannotBeEmptyException` into `Create_WithNullOrEmptyOrWhitespace_ShouldThrowNameCannotBeEmptyException` to `NameTests`
 - [x] Add `Create_WithTooLongValue_ShouldThrowNameTooLongException` to `NameTests`
 - [x] Add `Arrange`, `Act`, `Assert` comments to `UserIdTests`
 - [x] Add `Create_ShouldTrimLeadingAndTrailingWhitespace` to `NameTests`
@@ -128,8 +116,7 @@
 - [x] Add `Parse_ShouldThrow_WhenInvalidFormat` to `AccountIdTests`
 - [x] Change `Email` type to `readonly partial record struct`
 - [x] Add `Create_ShouldNormaliseToLowercase` to `EmailTests`
-- [x] Merge `Create_ShouldTrimLeadingAndTrailingWhitespace` and `Create_ShouldNormaliseToLowercase` to
-  `Create_ShouldNormaliseValue` in `EmailTests`
+- [x] Merge `Create_ShouldTrimLeadingAndTrailingWhitespace` and `Create_ShouldNormaliseToLowercase` to `Create_ShouldNormaliseValue` in `EmailTests`
 - [x] Rename `InvalidAccountIdFormatException` to `AccountIdInvalidFormatException`
 - [x] Change `PhoneNumber` type to `readonly partial record struct`
 - [x] Change `Create_ShouldSetValue` to `Create_ShouldNormaliseToE164` in `PhoneNumberTests`
@@ -139,8 +126,7 @@
 - [x] Add `VerifyPhoneNumber_ShouldRaiseAndApplyAccountPhoneNumberVerifiedDomainEventV1` to `AccountIdTests`
 - [x] Change `PhoneNumber` in `Account` to optional
 - [x] Add `VerifyEmail_ShouldNotRaiseAccountEmailVerifiedDomainEventV1_WhenEmailIsAlreadyVerified` to `AccountIdTests`
-- [x] Add `VerifyPhoneNumber_ShouldNotRaiseAccountPhoneNumberVerifiedDomainEventV1_WhenPhoneNumberIsAlreadyVerified` to
-  `AccountIdTests`
+- [x] Add `VerifyPhoneNumber_ShouldNotRaiseAccountPhoneNumberVerifiedDomainEventV1_WhenPhoneNumberIsAlreadyVerified` to `AccountIdTests`
 - [x] Add `VerifyPhoneNumber_WhenPhoneNotSet_ShouldThrowAccountPhoneNumberNotSetException` to `AccountIdTests`
 - [x] Add `CredentialId` to `Nine.Identities.Domain.Accounts.ValueObjects`
 - [x] Add `CredentialIdTests` to `Nine.Identities.Domain.Tests.Accounts.ValueObjects`
@@ -159,3 +145,4 @@
 - [x] Add `Nine.Identities.Application` project
 - [x] Install `MediatR` in `Nine.SharedKernel`
 - [x] Add `Messaging` to `Nine.SharedKernel.Abstractions`
+- [x] Add `CreateAccountWithPasswordCommand` to `Nine.Identities.Application.Accounts.Commands`

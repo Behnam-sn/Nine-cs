@@ -4,10 +4,10 @@ using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Identities.Domain.Contracts.Accounts.Events;
 
-public sealed record CredentialChangedDomainEventV1(
+public sealed record AccountPasswordCredentialAddedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
     CredentialId CredentialId,
-    HashedSecret NewHashedSecret,
+    HashedSecret HashedPassword,
     DateTime Timestamp
 ) : IDomainEvent;

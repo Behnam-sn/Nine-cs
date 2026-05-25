@@ -4,7 +4,7 @@ using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.Identities.Domain.Contracts.Accounts.Events;
 
-public sealed record CredentialRemovedDomainEventV1(
+public sealed record AccountCredentialRemovedDomainEventV1(
     DomainEventId Id,
     AccountId AccountId,
     CredentialId CredentialId,

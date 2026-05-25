@@ -1,4 +1,3 @@
-using Nine.SharedKernel.Abstractions.Entities;
 using Nine.SharedKernel.Abstractions.ValueObjects;
 
 namespace Nine.SharedKernel.Abstractions.Events;

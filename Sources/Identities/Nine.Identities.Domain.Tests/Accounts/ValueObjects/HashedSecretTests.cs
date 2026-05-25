@@ -21,20 +21,6 @@ public sealed class HashedSecretTests
     }
 
     [Theory]
-    [InlineData("  some-hash  ", "some-hash")]
-    [InlineData("  another  ", "another")]
-    public void Create_ShouldTrimLeadingAndTrailingWhitespace(string input, string expected)
-    {
-        // Arrange
-
-        // Act
-        var hashedSecret = HashedSecret.Create(input);
-
-        // Assert
-        hashedSecret.Value.Should().Be(expected);
-    }
-
-    [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]

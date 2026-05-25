@@ -23,6 +23,6 @@ public readonly record struct HashedSecret
             throw new HashedSecretCannotBeEmptyException();
         }
 
-        return new(value.Trim());
+        return new(value);
     }
 }

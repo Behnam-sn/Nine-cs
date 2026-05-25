@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Accounts\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\Nine.SharedKernel\Nine.SharedKernel.csproj" />
     </ItemGroup>
 

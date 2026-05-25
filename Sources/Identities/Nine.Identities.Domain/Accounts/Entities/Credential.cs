@@ -3,26 +3,14 @@ using Nine.Identities.Domain.Contracts.Accounts.ValueObjects;
 
 namespace Nine.Identities.Domain.Accounts.Entities;
 
-public sealed class Credential
+public abstract class Credential
 {
-    private Credential(CredentialId id, CredentialType type, HashedSecret secret)
+    protected Credential(CredentialId id, CredentialType type)
     {
         Id = id;
         Type = type;
-        Secret = secret;
     }
 
     public CredentialId Id { get; }
     public CredentialType Type { get; }
-    public HashedSecret Secret { get; private set; }
-
-    internal void SetSecret(HashedSecret newSecret)
-    {
-        Secret = newSecret;
-    }
-
-    public static Credential CreateInstance(CredentialId id, CredentialType type, HashedSecret secret)
-    {
-        return new(id, type, secret);
-    }
 }
