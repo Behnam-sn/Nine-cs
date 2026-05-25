@@ -26,14 +26,14 @@ public sealed class AccountTests
         // Assert
         var domainEvent = (AccountWithPasswordCreatedDomainEventV1)account.DomainEvents.Single();
         domainEvent.AccountId.Should().NotBeNull();
-        domainEvent.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
+        domainEvent.EmailAddress.Should().Be(AccountTestBuilder.DefaultEmailAddress);
         domainEvent.PhoneNumber?.Should().BeNull();
         domainEvent.CredentialId.Should().NotBeNull();
         domainEvent.HashedPassword.Should().Be(AccountTestBuilder.DefaultHashedPassword);
         domainEvent.Timestamp.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.AccountId.Should().NotBeNull();
-        account.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
+        account.EmailAddress.Should().Be(AccountTestBuilder.DefaultEmailAddress);
         account.PhoneNumber.Should().BeNull();
         var credential = (PasswordCredential)account.Credentials.Single();
         credential.Type.Should().Be(CredentialType.Password);
@@ -54,15 +54,15 @@ public sealed class AccountTests
         // Assert
         var domainEvent = (AccountWithPasswordCreatedDomainEventV1)account.DomainEvents.Single();
         domainEvent.AccountId.Should().NotBeNull();
-        domainEvent.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
-        domainEvent.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneNumberValue);
+        domainEvent.EmailAddress.Should().Be(AccountTestBuilder.DefaultEmailAddress);
+        domainEvent.PhoneNumber.Should().Be(AccountTestBuilder.DefaultPhoneNumber);
         domainEvent.CredentialId.Should().NotBeNull();
         domainEvent.HashedPassword.Should().Be(AccountTestBuilder.DefaultHashedPassword);
         domainEvent.Timestamp.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
 
         account.AccountId.Should().NotBeNull();
-        account.EmailAddress.Value.Should().Be(AccountTestBuilder.DefaultEmailAddressValue);
-        account.PhoneNumber?.Value.Should().Be(AccountTestBuilder.DefaultPhoneNumberValue);
+        account.EmailAddress.Should().Be(AccountTestBuilder.DefaultEmailAddress);
+        account.PhoneNumber.Should().Be(AccountTestBuilder.DefaultPhoneNumber);
         var credential = (PasswordCredential)account.Credentials.Single();
         credential.Type.Should().Be(CredentialType.Password);
         credential.HashedPassword.Should().Be(AccountTestBuilder.DefaultHashedPassword);
@@ -202,7 +202,7 @@ public sealed class AccountTests
         // Arrange
         var account = new AccountTestBuilder()
             .WithPasswordRequiredParameters()
-            .WithPhoneNumber(AccountTestBuilder.DefaultPhoneNumberValue)
+            .WithPhoneNumber(AccountTestBuilder.DefaultPhoneNumber)
             .BuildWithPassword();
         account.VerifyPhoneNumber();
         account.ClearDomainEvents();

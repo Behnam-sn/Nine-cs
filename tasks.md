@@ -3,7 +3,6 @@
 ## Backlog
 
 - [ ] Add `Version` to `Account`
-- [ ] Use value objects instead of their values in tests
 
 ## Todo
 
@@ -146,3 +145,4 @@
 - [x] Install `MediatR` in `Nine.SharedKernel`
 - [x] Add `Messaging` to `Nine.SharedKernel.Abstractions`
 - [x] Add `CreateAccountWithPasswordCommand` to `Nine.Identities.Application.Accounts.Commands`
+- [x] Use default value objects instead default values in `AccountTests`

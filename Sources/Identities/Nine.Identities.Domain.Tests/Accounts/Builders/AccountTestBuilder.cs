@@ -7,22 +7,26 @@ internal sealed class AccountTestBuilder
 {
     public const string DefaultEmailAddressValue = "john@example.com";
     public const string DefaultPhoneNumberValue = "+123456789";
-    public static readonly HashedSecret DefaultHashedPassword = HashedSecret.Create("hashedpassword");
+    public const string DefaultHashedPasswordValue = "hashedpassword";
+    
+    public static readonly EmailAddress DefaultEmailAddress = EmailAddress.Create(DefaultEmailAddressValue);
+    public static readonly PhoneNumber DefaultPhoneNumber =  PhoneNumber.Create(DefaultPhoneNumberValue);
+    public static readonly HashedSecret DefaultHashedPassword = HashedSecret.Create(DefaultHashedPasswordValue);
 
     private EmailAddress _emailAddress;
     private PhoneNumber? _phoneNumber;
     private HashedSecret _hashedPassword;
     private bool _raiseCreationEvent = true;
 
-    public AccountTestBuilder WithEmailAddress(string emailAddress)
+    public AccountTestBuilder WithEmailAddress(EmailAddress emailAddress)
     {
-        _emailAddress = EmailAddress.Create(emailAddress);
+        _emailAddress = emailAddress;
         return this;
     }
 
-    public AccountTestBuilder WithPhoneNumber(string phoneNumber)
+    public AccountTestBuilder WithPhoneNumber(PhoneNumber phoneNumber)
     {
-        _phoneNumber = PhoneNumber.Create(phoneNumber);
+        _phoneNumber = phoneNumber;
         return this;
     }
 
@@ -40,14 +44,14 @@ internal sealed class AccountTestBuilder
 
     public AccountTestBuilder WithPasswordRequiredParameters()
     {
-        WithEmailAddress(DefaultEmailAddressValue);
+        WithEmailAddress(DefaultEmailAddress);
         WithPasswordCredential(DefaultHashedPassword);
         return this;
     }
 
     public AccountTestBuilder WithPasswordOptionalParameters()
     {
-        WithPhoneNumber(DefaultPhoneNumberValue);
+        WithPhoneNumber(DefaultPhoneNumber);
         return this;
     }
 
