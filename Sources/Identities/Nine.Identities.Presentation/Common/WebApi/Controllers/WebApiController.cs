@@ -4,6 +4,7 @@ using Nine.SharedKernel.Abstractions.Messaging;
 namespace Nine.Identities.Presentation.Common.WebApi.Controllers;
 
 [ApiController]
+[Route("api/v{version:apiVersion}/[controller]")]
 public abstract class WebApiController : ControllerBase
 {
     protected readonly ICommandBus CommandBus;

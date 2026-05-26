@@ -12,13 +12,16 @@
 - [ ] Reference `Nine.Contents.Domain` to `Nine.Contents.Domain.Tests`
 - [ ] Add `Post` aggregate root in `Nine.Contents.Domain`
 - [ ] Add `PostTests` in `Nine.Contents.Domain.Tests`
-- [ ] Infrastructure
 - [ ] Host
 - [ ] BDD Tests
 - [ ] Auth
 
 ## Doing
 
+- [ ] Find event store
+- [ ] Find email lookup database
+- [ ] Find Password Hasher
+- [ ] Infrastructure
 
 ## Done
 
@@ -146,3 +149,4 @@
 - [x] Add `CreateAccountWithPasswordCommand` to `Nine.Identities.Application.Accounts.Commands`
 - [x] Use default value objects instead default values in `AccountTests`
 - [x] Add `CreateWithPassword` to `AccountsWebApiController` in `Nine.Identities.Presentation.Accounts.WebApi`
+- [x] Add api versioning to `AccountsWebApiController`

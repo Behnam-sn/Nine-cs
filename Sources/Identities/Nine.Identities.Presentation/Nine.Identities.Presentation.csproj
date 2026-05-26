@@ -14,4 +14,8 @@
       <ProjectReference Include="..\Nine.Identities.Application\Nine.Identities.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Asp.Versioning.Mvc" Version="10.0.0" />
+    </ItemGroup>
+
 </Project>

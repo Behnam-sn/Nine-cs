@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nine.Identities.Application.Accounts.Commands.CreateAccountWithPassword;
 using Nine.Identities.Presentation.Accounts.WebApi.Requests;
@@ -8,17 +9,17 @@ using Nine.SharedKernel.Abstractions.Messaging;
 
 namespace Nine.Identities.Presentation.Accounts.WebApi.Controllers;
 
-[Route("accounts")]
-public sealed class AccountWebApiController : WebApiController
+[ApiVersion(1.0)]
+public sealed class AccountsWebApiController : WebApiController
 {
-    public AccountWebApiController(ICommandBus commandBus, IQueryBus queryBus) : base(commandBus, queryBus)
+    public AccountsWebApiController(ICommandBus commandBus, IQueryBus queryBus) : base(commandBus, queryBus)
     {
     }
 
     [HttpPost]
-    public async Task<ActionResult<CreateAccountWithPasswordResponse>> CreateWithPassword([FromBody] CreateAccountWithPasswordRequest request, CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateAccountWithPasswordResponseV1>> CreateWithPassword([FromBody] CreateAccountWithPasswordRequestV1 request, CancellationToken cancellationToken)
     {
-        var command = new CreateAccountWithPasswordCommand(
+        var command = new CreateAccountWithPasswordCommandV1(
             EmailAddress: request.EmailAddress,
             Password: request.Password,
             PhoneNumber: request.PhoneNumber
@@ -28,7 +29,7 @@ public sealed class AccountWebApiController : WebApiController
 
         return StatusCode(
             StatusCodes.Status201Created,
-            new CreateAccountWithPasswordResponse(accountId.ToString())
+            new CreateAccountWithPasswordResponseV1(accountId.ToString())
         );
     }
 }

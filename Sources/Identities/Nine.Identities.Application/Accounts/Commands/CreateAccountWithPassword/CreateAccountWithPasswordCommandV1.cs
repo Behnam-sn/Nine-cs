@@ -3,7 +3,7 @@ using Nine.SharedKernel.Abstractions.Messaging;
 
 namespace Nine.Identities.Application.Accounts.Commands.CreateAccountWithPassword;
 
-public sealed record CreateAccountWithPasswordCommand(
+public sealed record CreateAccountWithPasswordCommandV1(
     string EmailAddress,
     string Password,
     string? PhoneNumber = null

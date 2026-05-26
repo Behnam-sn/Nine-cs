@@ -7,14 +7,14 @@ using Nine.SharedKernel.Abstractions.Messaging;
 
 namespace Nine.Identities.Application.Accounts.Commands.CreateAccountWithPassword;
 
-public sealed class CreateAccountWithPasswordCommandHandler : ICommandHandler<CreateAccountWithPasswordCommand, AccountId>
+public sealed class CreateAccountWithPasswordCommandV1Handler : ICommandHandler<CreateAccountWithPasswordCommandV1, AccountId>
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IAccountEmailAddressUniquenessChecker _accountEmailAddressUniquenessChecker;
     private readonly IAccountPhoneNumberUniquenessChecker _accountPhoneNumberUniquenessChecker;
     private readonly IPasswordHasher _passwordHasher;
 
-    public CreateAccountWithPasswordCommandHandler(
+    public CreateAccountWithPasswordCommandV1Handler(
         IAccountRepository accountRepository,
         IAccountEmailAddressUniquenessChecker accountEmailAddressUniquenessChecker,
         IAccountPhoneNumberUniquenessChecker accountPhoneNumberUniquenessChecker,
@@ -27,7 +27,7 @@ public sealed class CreateAccountWithPasswordCommandHandler : ICommandHandler<Cr
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<AccountId> Handle(CreateAccountWithPasswordCommand request, CancellationToken cancellationToken)
+    public async Task<AccountId> Handle(CreateAccountWithPasswordCommandV1 request, CancellationToken cancellationToken)
     {
         var emailAddress = EmailAddress.Create(request.EmailAddress);
 
