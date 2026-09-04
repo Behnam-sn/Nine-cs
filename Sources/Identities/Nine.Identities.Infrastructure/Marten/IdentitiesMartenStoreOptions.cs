@@ -1,7 +1,12 @@
+using JasperFx.Events.Projections;
+
 using Marten;
+using Marten.Schema;
 
 using Nine.Identities.Domain.Contracts.Accounts.Events;
 using Nine.Identities.Domain.Contracts.Accounts.ValueObjects;
+using Nine.Identities.Infrastructure.Accounts.Projections;
+using Nine.Identities.Infrastructure.Accounts.ReadModels;
 using Nine.Identities.Infrastructure.Marten.Serialization;
 using Nine.SharedKernel.Abstractions.Events;
 using Nine.SharedKernel.Abstractions.ValueObjects;
@@ -39,5 +44,10 @@ public static class IdentitiesMartenStoreOptions
         {
             options.Events.AddEventType(eventType);
         }
+
+        options.Schema.For<AccountEmailAddressLookup>()
+            .UniqueIndex(UniqueIndexType.DuplicatedField, lookup => lookup.EmailAddress);
+
+        options.Projections.Add<AccountEmailAddressLookupProjection>(ProjectionLifecycle.Inline);
     }
 }

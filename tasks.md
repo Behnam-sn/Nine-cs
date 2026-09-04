@@ -18,7 +18,6 @@
 
 ## Doing
 
-- [ ] Find email lookup database
 - [ ] Find Password Hasher
 
 ## Done
@@ -150,3 +149,4 @@
 - [x] Add api versioning to `AccountsWebApiController`
 - [x] Add `Nine.Identities.Infrastructure` project
 - [x] Add `AccountCommandRepository` to `Nine.Identities.Infrastructure.Accounts.Repositories`
+- [x] Add `AccountEmailAddressUniquenessChecker` to `Nine.Identities.Infrastructure.Accounts.Services`
