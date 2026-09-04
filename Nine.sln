@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Application
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Presentation", "Sources\Identities\Nine.Identities.Presentation\Nine.Identities.Presentation.csproj", "{1DBE36EB-3973-4B2B-9C52-49B69548FEBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Infrastructure", "Sources\Identities\Nine.Identities.Infrastructure\Nine.Identities.Infrastructure.csproj", "{67F49565-9EE7-4390-8DA5-1FFD3C62FDFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,7 @@ Global
 		{5DE4A06B-3B14-43B5-8214-6ABC66B0E721} = {2F0E9196-121F-4274-802A-7A2411C6E50A}
 		{9BBA8456-63E6-4E12-9552-CC31F1511FBB} = {2F0E9196-121F-4274-802A-7A2411C6E50A}
 		{1DBE36EB-3973-4B2B-9C52-49B69548FEBE} = {2F0E9196-121F-4274-802A-7A2411C6E50A}
+		{67F49565-9EE7-4390-8DA5-1FFD3C62FDFE} = {2F0E9196-121F-4274-802A-7A2411C6E50A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C2DEDA38-2CA0-4598-8CF7-6521FE159F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -83,5 +86,9 @@ Global
 		{1DBE36EB-3973-4B2B-9C52-49B69548FEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DBE36EB-3973-4B2B-9C52-49B69548FEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DBE36EB-3973-4B2B-9C52-49B69548FEBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F49565-9EE7-4390-8DA5-1FFD3C62FDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F49565-9EE7-4390-8DA5-1FFD3C62FDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F49565-9EE7-4390-8DA5-1FFD3C62FDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F49565-9EE7-4390-8DA5-1FFD3C62FDFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
