@@ -18,7 +18,6 @@
 
 ## Doing
 
-- [ ] Find event store
 - [ ] Find email lookup database
 - [ ] Find Password Hasher
 
@@ -150,3 +149,4 @@
 - [x] Add `CreateWithPassword` to `AccountsWebApiController` in `Nine.Identities.Presentation.Accounts.WebApi`
 - [x] Add api versioning to `AccountsWebApiController`
 - [x] Add `Nine.Identities.Infrastructure` project
+- [x] Add `AccountCommandRepository` to `Nine.Identities.Infrastructure.Accounts.Repositories`

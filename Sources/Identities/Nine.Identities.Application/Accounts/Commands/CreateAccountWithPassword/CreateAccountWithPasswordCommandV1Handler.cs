@@ -9,19 +9,19 @@ namespace Nine.Identities.Application.Accounts.Commands.CreateAccountWithPasswor
 
 public sealed class CreateAccountWithPasswordCommandV1Handler : ICommandHandler<CreateAccountWithPasswordCommandV1, AccountId>
 {
-    private readonly IAccountRepository _accountRepository;
+    private readonly IAccountCommandRepository _accountCommandRepository;
     private readonly IAccountEmailAddressUniquenessChecker _accountEmailAddressUniquenessChecker;
     private readonly IAccountPhoneNumberUniquenessChecker _accountPhoneNumberUniquenessChecker;
     private readonly IPasswordHasher _passwordHasher;
 
     public CreateAccountWithPasswordCommandV1Handler(
-        IAccountRepository accountRepository,
+        IAccountCommandRepository accountCommandRepository,
         IAccountEmailAddressUniquenessChecker accountEmailAddressUniquenessChecker,
         IAccountPhoneNumberUniquenessChecker accountPhoneNumberUniquenessChecker,
         IPasswordHasher passwordHasher
     )
     {
-        _accountRepository = accountRepository;
+        _accountCommandRepository = accountCommandRepository;
         _accountEmailAddressUniquenessChecker = accountEmailAddressUniquenessChecker;
         _accountPhoneNumberUniquenessChecker = accountPhoneNumberUniquenessChecker;
         _passwordHasher = passwordHasher;
@@ -57,7 +57,7 @@ public sealed class CreateAccountWithPasswordCommandV1Handler : ICommandHandler<
             hashedPassword: hashedPassword
         );
 
-        await _accountRepository.AddAsync(account, cancellationToken);
+        await _accountCommandRepository.AddAsync(account, cancellationToken);
 
         return account.AccountId;
     }
