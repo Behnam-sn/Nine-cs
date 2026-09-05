@@ -11,8 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference
-            Include="..\..\Identities\Nine.Identities.Infrastructure\Nine.Identities.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\Identities\Nine.Identities.Infrastructure\Nine.Identities.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\Identities\Nine.Identities.Presentation\Nine.Identities.Presentation.csproj" />
     </ItemGroup>
 
 </Project>

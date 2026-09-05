@@ -13,10 +13,16 @@
 - [ ] Add `Post` aggregate root in `Nine.Contents.Domain`
 - [ ] Add `PostTests` in `Nine.Contents.Domain.Tests`
 - [ ] Host
+- [ ] Add swagger
+- [ ] Add error handling in web api controllers (account)
+- [ ] Add Serilog
 - [ ] BDD Tests
 - [ ] Auth
 
 ## Doing
+
+- [ ] Add `AssemblyReference` to all projects
+
 
 ## Done
 
@@ -150,3 +156,4 @@
 - [x] Add `AccountEmailAddressUniquenessChecker` to `Nine.Identities.Infrastructure.Accounts.Services`
 - [x] Add `AccountPhoneNumberUniquenessChecker` to `Nine.Identities.Infrastructure.Accounts.Services`
 - [x] Add `PasswordHasher` to `Nine.Identities.Infrastructure.Accounts.Services`
+- [x] Add `IdentitiesConfiguration` to `Nine.WebApi.Configurations`

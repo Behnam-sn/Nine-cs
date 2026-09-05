@@ -1,7 +1,25 @@
 ﻿services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: nine
+      POSTGRES_PASSWORD: nine
+      POSTGRES_DB: nine_identities
+    ports:
+      - "5432:5432"
+    volumes:
+      - nine-postgres:/var/lib/postgresql/data
+
   nine.webapi:
     image: nine.webapi
     build:
       context: .
       dockerfile: Sources/Hosts/Nine.WebApi/Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      ConnectionStrings__Identities: Host=postgres;Port=5432;Database=nine_identities;Username=nine;Password=nine
+
+volumes:
+  nine-postgres:
 

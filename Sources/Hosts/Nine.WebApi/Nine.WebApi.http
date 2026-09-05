@@ -1,6 +1,12 @@
-@Nine.WebApi_HostAddress = http://localhost:5029
+@WebApi_HostAddress = http://localhost:5029
 
-GET {{Nine.WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{WebApi_HostAddress}}/api/v1/AccountsWebApi
+Content-Type: application/json
+
+{
+  "emailAddress": "jane@example.com",
+  "password": "Password1!",
+  "phoneNumber": "+123456789"
+}
 
 ###
