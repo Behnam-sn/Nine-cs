@@ -45,9 +45,16 @@ public static class IdentitiesMartenStoreOptions
             options.Events.AddEventType(eventType);
         }
 
+        // Account Email Address Lookup
         options.Schema.For<AccountEmailAddressLookup>()
             .UniqueIndex(UniqueIndexType.DuplicatedField, lookup => lookup.EmailAddress);
 
         options.Projections.Add<AccountEmailAddressLookupProjection>(ProjectionLifecycle.Inline);
+        
+        // Account Phone Number Lookup
+        options.Schema.For<AccountPhoneNumberLookup>()
+            .UniqueIndex(UniqueIndexType.DuplicatedField, lookup => lookup.PhoneNumber);
+        
+        options.Projections.Add<AccountPhoneNumberLookupProjection>(ProjectionLifecycle.Inline);
     }
 }

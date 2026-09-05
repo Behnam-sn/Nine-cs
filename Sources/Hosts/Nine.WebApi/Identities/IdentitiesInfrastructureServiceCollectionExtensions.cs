@@ -20,6 +20,7 @@ public static class IdentitiesInfrastructureServiceCollectionExtensions
 
         services.AddScoped<IAccountCommandRepository, AccountCommandRepository>();
         services.AddScoped<IAccountEmailAddressUniquenessChecker, AccountEmailAddressUniquenessChecker>();
+        services.AddScoped<IAccountPhoneNumberUniquenessChecker, AccountPhoneNumberUniquenessChecker>();
 
         return services;
     }

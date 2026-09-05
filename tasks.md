@@ -150,3 +150,4 @@
 - [x] Add `Nine.Identities.Infrastructure` project
 - [x] Add `AccountCommandRepository` to `Nine.Identities.Infrastructure.Accounts.Repositories`
 - [x] Add `AccountEmailAddressUniquenessChecker` to `Nine.Identities.Infrastructure.Accounts.Services`
+- [x] Add `AccountPhoneNumberUniquenessChecker` to `Nine.Identities.Infrastructure.Accounts.Services`
