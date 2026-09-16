@@ -167,19 +167,19 @@ Not event-sourced. Write model: ASP.NET Core Identity.
 | Domain | `User`, value objects (`UserId`, `EmailAddress`, `PhoneNumber`, `PlainPassword`) |
 | Application | user commands/queries, **user authentication** (`AuthenticateUserWithPassword`, `GetUserForSignIn`) |
 | Infrastructure | `IdentitiesDbContext`, EF migrations, OpenIddict/Identity stores, seeder |
-| Presentation.Users | register, `/me` |
+| Presentation.Users | user HTTP: collection vs `/me` (see below) |
 | Presentation.Authentication | OpenIddict `/connect/*` (protocol only) |
 | Host (`Nine.WebApi`) | composition root — all Identities DI lives here, not in Infrastructure |
 
-**Protocol (OpenIddict):**
+**HTTP (Users vs `/me` vs protocol):**
 
-- `/connect/authorize`
-- `/connect/token`
-- `/connect/logout`
-- `/connect/userinfo`
-- discovery + JWKS
+| Surface | Who | Owns |
+|---------|-----|------|
+| `UsersWebApiController` | anonymous / later moderators | **Collection.** `POST` register only for now. Later: suspend / reactivate (and maybe get-by-id for a dashboard). No list-users. Other modules do not load Identity users. |
+| `MeWebApiController` | the signed-in user | **Self.** Id comes from the token, never from the URL or body. `GET /me` today. Next: change password, change/verify email, set/verify phone, notification preferences, later close/delete. |
+| `AuthorizationWebApiController` | OIDC clients | `/connect/authorize`, `/connect/token`, `/connect/logout`, `/connect/userinfo`, discovery + JWKS. Not user-management. |
 
-Register, change password, and verify email are user-management APIs on Identity — not custom JWT-minting endpoints.
+User-management APIs go through Identity (`UserManager`). They do not mint JWTs. Password change, logout, and `UserSuspended` revoke tokens.
 
 **Invariants:**
 
@@ -354,9 +354,10 @@ Moderator capability is a coarse JWT claim/policy at the edge; workflow stays in
 
 1. Identity is the source of truth for the user; OpenIddict is the protocol.
 2. User authentication (credentials, lockout, confirmation) is application logic. Token issue, forbid, and claim destinations are Presentation.
-3. Other modules authenticate via JWT + JWKS, never via Identities services.
-4. Lifecycle changes other contexts must see are integration events, not queries into the Identity database.
-5. Composition (Identity, OpenIddict, controllers) is registered in the host, not in Infrastructure.
+3. Register is a collection operation (`Users`). Anything that acts as the signed-in person is `/me` — `UserId` from the token, not the client.
+4. Other modules authenticate via JWT + JWKS, never via Identities services.
+5. Lifecycle changes other contexts must see are integration events, not queries into the Identity database.
+6. Composition (Identity, OpenIddict, controllers) is registered in the host, not in Infrastructure.
 
 ### Social event sourcing
 
@@ -385,7 +386,7 @@ Other modules add domain tests next to the module and Reqnroll features under `N
 **Next:**
 
 1. BFF cookie session on `Nine.WebApi`; resource APIs JWT bearer.
-2. Change password / verify email; publish integration events.
+2. `/me`: change password, verify email/phone, notification preferences; publish integration events.
 3. When Profiles exists: profile-scoped token exchange.
 4. Google as Identity external login.
 5. Split Identities to its own host only when a second process exists.
