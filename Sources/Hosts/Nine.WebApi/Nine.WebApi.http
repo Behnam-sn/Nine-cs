@@ -1,6 +1,7 @@
 @WebApi_HostAddress = http://localhost:5029
 
-POST {{WebApi_HostAddress}}/api/v1/AccountsWebApi
+### Register
+POST {{WebApi_HostAddress}}/api/v1/UsersWebApi
 Content-Type: application/json
 
 {
@@ -8,5 +9,24 @@ Content-Type: application/json
   "password": "Password1!",
   "phoneNumber": "+123456789"
 }
+
+###
+
+### Sign in (password grant — development/testing until the React BFF exists)
+# @name signIn
+POST {{WebApi_HostAddress}}/connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&username=jane@example.com&password=Password1!&client_id=nine-resource-owner&scope=openid email profile offline_access api
+
+> {%
+client.global.set("access_token", response.body.access_token);
+%}
+
+###
+
+### Current account
+GET {{WebApi_HostAddress}}/api/v1/me
+Authorization: Bearer {{access_token}}
 
 ###

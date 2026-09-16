@@ -12,7 +12,7 @@ The long-run goal is a system that can split into microservices **without changi
 
 - **Modular monolith.** One host today (`Nine.WebApi`). Each bounded context is a module with its own model and persistence. Extracting a context later is a hosting change, not a redesign.
 - **Domain-Driven Design.** Bounded contexts, aggregates, domain events, integration events.
-- **Hexagonal architecture (ports & adapters).** Domain and application layers do not depend on frameworks. Adapters provide HTTP, persistence, and brokers.
+- **Hexagonal architecture (ports & adapters).** Domain and application layers do not depend on frameworks. **Identities is the exception:** its application layer uses Identity `UserManager` because Identity *is* the write model. Other modules stay ports-and-adapters. Adapters provide HTTP, persistence, and brokers.
 - **CQRS.** Separate write (command) and read (query) models.
 - **Event sourcing for the social domain only.** Profiles, Contents, Interactions, SocialGraphs, Feeds, Notifications, and Moderation persist as event streams. **Identities does not.**
 - **Event-driven integration.** Cross-context communication is integration events (outbox + broker), not database queries into another module.
@@ -23,25 +23,25 @@ The long-run goal is a system that can split into microservices **without changi
 A module other than Identities must **not** inject Identity `UserManager`, OpenIddict stores, or Identities repositories. It may use:
 
 - claim type names
-- `AccountId` / `ProfileId` values
+- `UserId` / `ProfileId` values
 - integration events
 
 If a module today calls Identities services, it will not extract cleanly.
 
 ---
 
-## Actors: Account vs Profile
+## Actors: User vs Profile
 
-**Account is who you are. Profile is who you act as.**
+**User is who you are. Profile is who you act as.**
 
-| | Account | Profile |
-|---|---|---|
+| | User | Profile |
+| --- | --- | --- |
 | Question | Who signed in? | Which public face is acting? |
-| Cardinality | One per login | Many per account |
+| Cardinality | One per login | Many per user |
 | Examples | Password, email, suspension, notification defaults | Handle, posts, follows, reactions |
-| Token | `sub` = account id | `profile_id` claim, only if this account owns it |
+| Token | `sub` = `UserId` | `profile_id` claim, only if this user owns it |
 
-Authentication proves the account. Social writes (posts, follows, reactions) authorize as a **profile owned by that account**. Command handlers take the actor from the token, never from a client-supplied `profileId` in the JSON body.
+Authentication proves the user. Social writes (posts, follows, reactions) authorize as a **profile owned by that user**. Command handlers take the actor from the token, never from a client-supplied `profileId` in the JSON body.
 
 ---
 
@@ -58,16 +58,18 @@ BFF  (today: Nine.WebApi; later: gateway)
     ▼
 Identities module
     ASP.NET Core Identity   (users, passwords, lockout, external logins)
-    OpenIddict              (authorize, token, JWKS, revocation)
-    │  JWT access token (RS256), `sub` = account id
+    OpenIddict              (authorize, token, logout, JWKS)
+    │  JWT access token (RS256), `sub` = UserId
     ▼
 Resource APIs  (Profiles, Contents, … — same process today)
 ```
 
+**Today (no React BFF yet):** password grant against client `nine-resource-owner` is enabled so APIs can be exercised from `Nine.WebApi.http`. That grant is a development tool. React login remains Authorization Code + PKCE via client `nine-spa` (already seeded).
+
 ### Stack (all free)
 
 | Piece | Choice | License |
-|-------|--------|---------|
+| ------- | -------- | --------- |
 | Users, passwords, Google login | ASP.NET Core Identity | MIT |
 | OIDC authorization server | OpenIddict | Apache 2.0 |
 | Access tokens | JWT **RS256**, published via JWKS | — |
@@ -84,8 +86,8 @@ Resource APIs  (Profiles, Contents, … — same process today)
 
 ### Tokens
 
-- **Access token:** short-lived JWT. `sub` is the Identity user id (`AccountId`). Resource APIs validate locally via JWKS — they do not call Identities per request.
-- **Account-scoped token:** settings, credentials, email/phone, logout.
+- **Access token:** short-lived JWT (`at+jwt`, unencrypted, RS256). `sub` is `UserId`. Resource APIs validate locally via JWKS — they do not call Identities per request.
+- **User-scoped token:** settings, credentials, email/phone, logout.
 - **Profile-scoped token:** social writes. Identities issues it only after proving ownership (token exchange or a dedicated OpenIddict grant). Claim: `profile_id`.
 - **Refresh / session:** held by the BFF and OpenIddict stores, **not** by JavaScript.
 
@@ -109,7 +111,7 @@ Coarse roles belong in the token (member / moderator). Resource rules belong in 
 1. Identities becomes its own host (Identity + OpenIddict + JWKS).
 2. BFF/gateway: cookie in, JWT out; `Authority` = Identities URL.
 3. Other hosts: `AddJwtBearer` with the same `Authority`.
-4. `AccountSuspended` (and similar) already travel on the broker; subscribers revoke sessions and reject that `sub`.
+4. `UserSuspended` (and similar) already travel on the broker; subscribers revoke sessions and reject that `sub`.
 
 The React app and resource modules keep using OIDC/JWT. No shared HMAC secret. No rewrite of login.
 
@@ -120,11 +122,11 @@ The React app and resource modules keep using OIDC/JWT. No shared HMAC secret. N
 **One PostgreSQL instance**, two styles:
 
 | Area | Store | Schema |
-|------|--------|--------|
+| ------ | -------- | -------- |
 | Identities | EF Core (Identity + OpenIddict) | `identities` |
 | Social contexts | Marten event store | per context (`profiles`, `contents`, …) |
 
-**Why Identities is not event-sourced.** Passwords, security stamps, lockout, recovery, 2FA, OAuth grants, and refresh tokens are high-churn, need indexed lookups, and are already solved by Identity + OpenIddict. Event streams are the wrong source of truth for a security principal. Lifecycle facts other contexts care about (`AccountSuspended`) are **integration events**, not an account stream.
+**Why Identities is not event-sourced.** Passwords, security stamps, lockout, recovery, 2FA, OAuth grants, and refresh tokens are high-churn, need indexed lookups, and are already solved by Identity + OpenIddict. Event streams are the wrong source of truth for a security principal. Lifecycle facts other contexts care about (`UserSuspended`) are **integration events**, not a user stream.
 
 **Why Marten for the social domain.** Stream management, optimistic concurrency (`ExpectedVersion`), async projections, snapshots, transactional outbox — all on PostgreSQL.
 
@@ -141,7 +143,7 @@ The React app and resource modules keep using OIDC/JWT. No shared HMAC secret. N
 
 ## Write / read flow
 
-- **Identities writes:** Identity `UserManager` / OpenIddict stores. Current row is the truth. After register / suspend / reactivate / email change, publish an integration event via outbox.
+- **Identities writes:** Identity `UserManager` / OpenIddict stores. Current row is the truth. After register / suspend / reactivate / email change, publish an integration event via outbox. User authentication (password check, lockout, confirmation) lives in the Identities **application** layer; OpenIddict SignIn / Forbid / claim destinations stay in Presentation.
 - **Social writes:** load aggregate from its stream, apply command, append events atomically (`ExpectedVersion`).
 - **Reads:** projections (Marten Async Daemon or external consumers). Eventually consistent.
 - **Cross-context:** broker (Kafka/Redpanda). At-least-once via transactional outbox. Resource modules never query Identities tables.
@@ -156,33 +158,45 @@ Each context owns its write model, its events, and its read models.
 
 Not event-sourced. Write model: ASP.NET Core Identity.
 
-**User (`Account`):** id (`AccountId`), email, phone, password hash, lockout, email/phone confirmation, notification defaults. Google (and later other providers) are Identity **external logins**, not a parallel credential table.
+**User:** `IdentityUser<Guid>`. Id is `UserId`. Email, phone, password hash, lockout, email/phone confirmation, notification defaults. Google (and later other providers) are Identity **external logins**, not a parallel credential table.
 
-**Protocol (OpenIddict, this module):**
+**Layers (this module):**
+
+| Layer | Owns |
+| ------- | ------ |
+| Domain | `User`, value objects (`UserId`, `EmailAddress`, `PhoneNumber`, `PlainPassword`) |
+| Application | user commands/queries, **user authentication** (`AuthenticateUserWithPassword`, `GetUserForSignIn`) |
+| Infrastructure | `IdentitiesDbContext`, EF migrations, OpenIddict/Identity stores, seeder |
+| Presentation.Users | register, `/me` |
+| Presentation.Authentication | OpenIddict `/connect/*` (protocol only) |
+| Host (`Nine.WebApi`) | composition root — all Identities DI lives here, not in Infrastructure |
+
+**Protocol (OpenIddict):**
 
 - `/connect/authorize`
 - `/connect/token`
-- `/connect/revocation`
+- `/connect/logout`
+- `/connect/userinfo`
 - discovery + JWKS
 
-Register, change password, and verify email are account-management APIs on Identity — not custom JWT-minting endpoints.
+Register, change password, and verify email are user-management APIs on Identity — not custom JWT-minting endpoints.
 
 **Invariants:**
 
 - Email uniqueness (normalized email + unique index).
 - Phone uniqueness when set (unique index; absent/null allowed).
-- The account must remain able to sign in (password and/or at least one external login).
+- The user must remain able to sign in (password and/or at least one external login).
 
 **Persistence:** PostgreSQL / EF Core, schema `identities`.
 
-**Integration events** (not an account stream):
+**Integration events** (not a user stream):
 
-- `AccountRegistered`
-- `AccountSuspended` / `AccountReactivated`
-- `AccountEmailAddressChanged`
+- `UserRegistered`
+- `UserSuspended` / `UserReactivated`
+- `UserEmailAddressChanged`
 - `NotificationPreferencesUpdated`
 
-**Revocation:** password change, logout, and `AccountSuspended` invalidate OpenIddict tokens/sessions. Postgres first; Redis later if needed.
+**Revocation:** password change, logout, and `UserSuspended` invalidate OpenIddict tokens/sessions. Postgres first; Redis later if needed.
 
 Other modules consume these events and the JWT. They do not load Identity users.
 
@@ -195,7 +209,7 @@ Other modules consume these events and the JWT. They do not load Identity users.
 
 **Events:**
 
-- `ProfileCreated` (handle, name, linked account id = Identity user id)
+- `ProfileCreated` (handle, name, linked user id = Identity `UserId`)
 - `ProfileHandleChanged`
 - `ProfileUpdated` (bio, avatar, visibility, notification preferences)
 - `ProfileDeleted`
@@ -310,7 +324,7 @@ Created by consuming other contexts (e.g. `PostReacted` → `NotificationCreated
 
 **Store:** Marten. Outbox keeps creation and publishing in one transaction.
 
-**Read models:** MongoDB `notifications_current` (paginated inbox). Preferences from Identities (account defaults) and Profile projections (overrides), cached. Eventual consistency: a short window after a preference change may still send a notification — acceptable here.
+**Read models:** MongoDB `notifications_current` (paginated inbox). Preferences from Identities (user defaults) and Profile projections (overrides), cached. Eventual consistency: a short window after a preference change may still send a notification — acceptable here.
 
 ---
 
@@ -330,7 +344,7 @@ Created by consuming other contexts (e.g. `PostReacted` → `NotificationCreated
 
 **Read models:** relational DB for moderator dashboards.
 
-Moderator capability is a coarse JWT claim/policy at the edge; workflow stays in these aggregates. Reporter **account** is recorded for anti-abuse; actions reference **profiles**.
+Moderator capability is a coarse JWT claim/policy at the edge; workflow stays in these aggregates. Reporter **user** is recorded for anti-abuse; actions reference **profiles**.
 
 ---
 
@@ -339,8 +353,10 @@ Moderator capability is a coarse JWT claim/policy at the edge; workflow stays in
 ### Identities
 
 1. Identity is the source of truth for the user; OpenIddict is the protocol.
-2. Other modules authenticate via JWT + JWKS, never via Identities services.
-3. Lifecycle changes other contexts must see are integration events, not queries into the Identity database.
+2. User authentication (credentials, lockout, confirmation) is application logic. Token issue, forbid, and claim destinations are Presentation.
+3. Other modules authenticate via JWT + JWKS, never via Identities services.
+4. Lifecycle changes other contexts must see are integration events, not queries into the Identity database.
+5. Composition (Identity, OpenIddict, controllers) is registered in the host, not in Infrastructure.
 
 ### Social event sourcing
 
@@ -356,13 +372,15 @@ Moderator capability is a coarse JWT claim/policy at the edge; workflow stays in
 
 ## Suggested build order
 
-1. Replace event-sourced `Account` with Identity + EF on the same PostgreSQL instance as Marten.
-2. OpenIddict: authorization code + PKCE, RS256, discovery, JWKS.
-3. BFF cookie session on `Nine.WebApi`; resource APIs JWT bearer.
-4. Register / change password / verify email on Identity; publish integration events.
-5. When Profiles exists: profile-scoped token exchange.
-6. Google as Identity external login.
-7. Split Identities to its own host only when a second process exists.
+**Done.** Identity + EF (`User`, schema `identities`). OpenIddict RS256 / JWKS / discovery. Password grant for HTTP-file testing. Authorization Code + PKCE client seeded. Register with password. `/me`. User authentication in Application.
+
+**Next:**
+
+1. BFF cookie session on `Nine.WebApi`; resource APIs JWT bearer.
+2. Change password / verify email; publish integration events.
+3. When Profiles exists: profile-scoped token exchange.
+4. Google as Identity external login.
+5. Split Identities to its own host only when a second process exists.
 
 ---
 
@@ -371,8 +389,8 @@ Moderator capability is a coarse JWT claim/policy at the edge; workflow stays in
 ```text
 Sources/
   Nine.SharedKernel          claims, messaging ports, ES abstractions
-  Identities/                Identity + OpenIddict + account APIs
-  Hosts/Nine.WebApi          composition root: BFF + JWT bearer + module wiring
+  Identities/                Identity + OpenIddict + user APIs (auth in Application)
+  Hosts/Nine.WebApi          composition root: Identities DI + (later) BFF + JWT bearer
   (Profiles, Contents, …)    later modules; Marten; JWT only
 ```
 
