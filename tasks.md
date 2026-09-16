@@ -21,9 +21,6 @@
 
 ## Doing
 
-- [ ] Add `AssemblyReference` to all projects
-
-
 ## Done
 
 - [x] Convert `UserFirstNameChangedDomainEventV1` constructor to a primary constructor
@@ -157,3 +154,4 @@
 - [x] Add `AccountPhoneNumberUniquenessChecker` to `Nine.Identities.Infrastructure.Accounts.Services`
 - [x] Add `PasswordHasher` to `Nine.Identities.Infrastructure.Accounts.Services`
 - [x] Add `IdentitiesConfiguration` to `Nine.WebApi.Configurations`
+- [x] Add `AssemblyReference` to projects

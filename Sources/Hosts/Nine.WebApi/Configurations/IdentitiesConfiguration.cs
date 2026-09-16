@@ -27,7 +27,7 @@ public static class IdentitiesConfiguration
     {
         services
             .AddControllers()
-            .AddApplicationPart(typeof(UsersWebApiController).Assembly);
+            .AddApplicationPart(Identities.Presentation.AssemblyReference.Assembly);
 
         services
             .AddApiVersioning(options =>
