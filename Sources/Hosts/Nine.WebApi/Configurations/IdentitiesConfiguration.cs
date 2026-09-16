@@ -2,6 +2,7 @@ using Asp.Versioning;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 using Nine.Identities.Domain.Users.Entities;
 using Nine.Identities.Infrastructure.Identity;
@@ -13,12 +14,10 @@ namespace Nine.WebApi.Configurations;
 
 public static class IdentitiesConfiguration
 {
-    public static IServiceCollection AddIdentities(this IServiceCollection services, string connectionString)
+    public static IServiceCollection AddIdentities(this IServiceCollection services)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
-
         AddPresentation(services);
-        AddInfrastructure(services, connectionString);
+        AddInfrastructure(services);
 
         return services;
     }
@@ -42,10 +41,14 @@ public static class IdentitiesConfiguration
         services.AddProblemDetails();
     }
 
-    private static void AddInfrastructure(IServiceCollection services, string connectionString)
+    private static void AddInfrastructure(IServiceCollection services)
     {
-        services.AddDbContext<IdentitiesDbContext>(options =>
+        services.AddDbContext<IdentitiesDbContext>((serviceProvider, options) =>
         {
+            var connectionString = serviceProvider.GetRequiredService<IConfiguration>()
+                .GetConnectionString("Identities");
+            ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
+
             options.UseNpgsql(
                 connectionString,
                 npgsql => npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "identities"));

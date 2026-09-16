@@ -16,8 +16,6 @@
 - [ ] Add swagger
 - [ ] Add error handling in web api controllers (account)
 - [ ] Add Serilog
-- [ ] BDD Tests
-- [ ] Auth
 
 ## Doing
 
@@ -135,7 +133,7 @@
 - [x] Add `Parse_ShouldReturnCorrectId` to `CredentialIdTests`
 - [x] Add `Parse_WithInvalidFormat_ShouldThrowCredentialIdInvalidFormatException` to `CredentialIdTests`
 - [x] Add `HashedSecret` to `Nine.Identities.Domain.Accounts.ValueObjects`
-- [x] Add `Credential ` to `Nine.Identities.Domain.Accounts.Entities`
+- [x] Add `Credential` to `Nine.Identities.Domain.Accounts.Entities`
 - [x] Add `AddCredential_WithDuplicateType_ShouldThrowCredentialAlreadyExistsException` to `AccountTests`
 - [x] Rename `Email` to `EmailAddress`
 - [x] Rename `Phone` to `PhoneNumber`
@@ -155,3 +153,4 @@
 - [x] Add `PasswordHasher` to `Nine.Identities.Infrastructure.Accounts.Services`
 - [x] Add `IdentitiesConfiguration` to `Nine.WebApi.Configurations`
 - [x] Add `AssemblyReference` to projects
+- [x] Add `Nine.WebApi.Tests` project

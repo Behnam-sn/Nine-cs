@@ -3,9 +3,7 @@ using Nine.WebApi.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddIdentities(
-    builder.Configuration.GetConnectionString("Identities")
-    ?? throw new InvalidOperationException("Connection string 'Identities' is not configured."));
+builder.Services.AddIdentities();
 builder.Services.AddMessaging();
 builder.Services.AddOpenApi();
 
@@ -23,3 +21,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program;

@@ -368,11 +368,19 @@ Moderator capability is a coarse JWT claim/policy at the edge; workflow stays in
 6. **Idempotent projections** — track `EventId` or use Marten projection tracking.
 7. **`IEventStore<T>` port** — swap Marten for EventStoreDB in infrastructure only.
 
+### Testing
+
+1. **Domain** — xUnit + FluentAssertions beside the module (`Nine.Identities.Domain.Tests`). Value objects and invariants; no HTTP, no database.
+2. **End-to-end** — Reqnroll (Gherkin; SpecFlow’s successor) against `Nine.WebApi`. `WebApplicationFactory` boots the real host; Testcontainers PostgreSQL is a throwaway database. Features speak user behaviour; HTTP stays in step support. Password grant until the BFF exists. Docker is required.
+3. **Not the suite** — `Nine.WebApi.http` is a manual smoke. Playwright / Authorization Code + PKCE wait for the BFF and SPA.
+
+Other modules add domain tests next to the module and Reqnroll features under `Nine.WebApi.Tests` (or their own host tests after extraction).
+
 ---
 
 ## Suggested build order
 
-**Done.** Identity + EF (`User`, schema `identities`). OpenIddict RS256 / JWKS / discovery. Password grant for HTTP-file testing. Authorization Code + PKCE client seeded. Register with password. `/me`. User authentication in Application.
+**Done.** Identity + EF (`User`, schema `identities`). OpenIddict RS256 / JWKS / discovery. Password grant for HTTP-file testing. Authorization Code + PKCE client seeded. Register with password. `/me`. User authentication in Application. Reqnroll e2e: register → token → `/me`.
 
 **Next:**
 
@@ -391,6 +399,7 @@ Sources/
   Nine.SharedKernel          claims, messaging ports, ES abstractions
   Identities/                Identity + OpenIddict + user APIs (auth in Application)
   Hosts/Nine.WebApi          composition root: Identities DI + (later) BFF + JWT bearer
+  Hosts/Nine.WebApi.Tests    Reqnroll e2e against the host
   (Profiles, Contents, …)    later modules; Marten; JWT only
 ```
 
