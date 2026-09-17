@@ -154,3 +154,4 @@
 - [x] Add `IdentitiesConfiguration` to `Nine.WebApi.Configurations`
 - [x] Add `AssemblyReference` to projects
 - [x] Add `Nine.WebApi.Tests` project
+- [x] Add `Nine.Profiles` projects
