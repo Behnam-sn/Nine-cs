@@ -155,3 +155,4 @@
 - [x] Add `AssemblyReference` to projects
 - [x] Add `Nine.WebApi.Tests` project
 - [x] Add `Nine.Profiles` projects
+- [x] Add `Profile` aggregate root in `Nine.Profiles.Domain.Profiles.Entities`
