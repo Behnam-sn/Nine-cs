@@ -54,7 +54,7 @@ public sealed class ProfileNameTests
     public void Create_WithTooLongValue_ShouldThrowProfileNameTooLongException()
     {
         // Arrange
-        var longName = new string('A', 101);
+        var longName = new string('A', ProfileName.MaxLength + 1);
 
         // Act
         var act = () => ProfileName.Create(longName);

@@ -4,7 +4,7 @@ namespace Nine.Profiles.Domain.Contracts.Profiles.ValueObjects;
 
 public readonly record struct ProfileName
 {
-    const int MaxLength = 100;
+    public const int MaxLength = 100;
     
     private ProfileName(string value)
     {

@@ -158,3 +158,4 @@
 - [x] Add `Profile` aggregate root in `Nine.Profiles.Domain.Profiles.Entities`
 - [x] Add `ProfileIdTests` in `Nine.Profiles.Domain.Tests.Profiles.ValueObjects`
 - [x] Add `ProfileNameTests` in `Nine.Profiles.Domain.Tests.Profiles.ValueObjects`
+- [x] Add `ProfileHandleTests` in `Nine.Profiles.Domain.Tests.Profiles.ValueObjects`
