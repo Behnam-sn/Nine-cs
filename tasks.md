@@ -160,3 +160,4 @@
 - [x] Add `ProfileNameTests` in `Nine.Profiles.Domain.Tests.Profiles.ValueObjects`
 - [x] Add `ProfileHandleTests` in `Nine.Profiles.Domain.Tests.Profiles.ValueObjects`
 - [x] Add `ProfileAvatarTests` in `Nine.Profiles.Domain.Tests.Profiles.ValueObjects`
+- [x] Add `ProfileBioTests` in `Nine.Profiles.Domain.Tests.Profiles.ValueObjects`
