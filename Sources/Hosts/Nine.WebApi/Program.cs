@@ -22,4 +22,7 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program;
+namespace Nine.WebApi
+{
+    public partial class Program;
+}
