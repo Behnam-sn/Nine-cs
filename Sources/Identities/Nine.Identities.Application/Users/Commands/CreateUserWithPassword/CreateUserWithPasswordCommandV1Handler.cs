@@ -5,6 +5,7 @@ using Nine.Identities.Domain.Contracts.Users.Exceptions;
 using Nine.Identities.Domain.Contracts.Users.ValueObjects;
 using Nine.Identities.Domain.Users.Entities;
 using Nine.SharedKernel.Abstractions.Messaging;
+using Nine.SharedKernel.Common.Security;
 
 namespace Nine.Identities.Application.Users.Commands.CreateUserWithPassword;
 
@@ -45,16 +46,22 @@ public sealed class CreateUserWithPasswordCommandV1Handler : ICommandHandler<Cre
         };
 
         var result = await _userManager.CreateAsync(user, plainPassword.Value);
-        if (result.Succeeded)
+        if (!result.Succeeded)
         {
-            return userId;
+            if (result.Errors.Any(error => error.Code is "DuplicateEmail" or "DuplicateUserName"))
+            {
+                throw new UserEmailAddressAlreadyInUseException(emailAddress);
+            }
+
+            throw new InvalidOperationException(string.Join(" ", result.Errors.Select(error => error.Description)));
         }
 
-        if (result.Errors.Any(error => error.Code is "DuplicateEmail" or "DuplicateUserName"))
+        var roleResult = await _userManager.AddToRoleAsync(user, RoleNames.Member);
+        if (!roleResult.Succeeded)
         {
-            throw new UserEmailAddressAlreadyInUseException(emailAddress);
+            throw new InvalidOperationException(string.Join(" ", roleResult.Errors.Select(error => error.Description)));
         }
 
-        throw new InvalidOperationException(string.Join(" ", result.Errors.Select(error => error.Description)));
+        return userId;
     }
 }

@@ -19,6 +19,8 @@
 
 ## Doing
 
+- [ ] Fill `MapException` in `ProfileExceptionHandler`
+
 ## Done
 
 - [x] Convert `UserFirstNameChangedDomainEventV1` constructor to a primary constructor
@@ -163,3 +165,4 @@
 - [x] Add `ProfileBioTests` in `Nine.Profiles.Domain.Tests.Profiles.ValueObjects`
 - [x] Add `ProfileTests` in `Nine.Profiles.Domain.Tests.Profiles.Entities`
 - [x] Add `CreateProfileCommandV1` in `Nine.Profiles.Application.Profiles.Commands.Create`
+- [x] Add `ProfileWebApiController` in `Nine.Profiles.Presentation.Profiles.WebApi.Controllers`

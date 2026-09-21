@@ -7,7 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="12.5.0" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.5.0"/>
+        <PackageReference Include="Asp.Versioning.Mvc" Version="10.2.1"/>
     </ItemGroup>
 
 </Project>

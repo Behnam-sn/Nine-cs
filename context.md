@@ -20,13 +20,14 @@ The long-run goal is a system that can split into microservices **without changi
 
 ### Extraction rule
 
-A module other than Identities must **not** inject Identity `UserManager`, OpenIddict stores, or Identities repositories. It may use:
+A module other than Identities must **not** inject Identity `UserManager`, OpenIddict stores, or Identities repositories, and must **not** name an OpenIddict, Identity, or Keycloak authentication scheme. It may use:
 
-- claim type names
+- SharedKernel claim type names
 - `UserId` / `ProfileId` values
+- `[Authorize]` and SharedKernel policy names
 - integration events
 
-If a module today calls Identities services, it will not extract cleanly.
+If a module today calls Identities services or names the token validator, it will not extract cleanly.
 
 ---
 
@@ -101,10 +102,14 @@ Resource APIs  (Profiles, Contents, … — same process today)
 
 ### Authorization layers
 
-- **Edge (ASP.NET policies):** authenticated; optional email-verified; `MustHaveActiveProfile` for social writes; `MustBeModerator` for Moderation. Policies read **claims only**.
+- **Edge (ASP.NET policies):** authenticated; `MustHaveVerifiedEmail` and `MustBeMember` for creating a profile; `MustHaveActiveProfile` for social writes; `MustBeModerator` for Moderation. Policies read **claims only**. Resource controllers use `[Authorize]` and named SharedKernel policies. They do not name an authentication scheme.
 - **Domain:** ownership, blocks, visibility — on aggregates. “Can this profile delete this post?” is not a JWT role.
 
-Coarse roles belong in the token (member / moderator). Resource rules belong in the aggregate.
+Coarse roles belong in the token. **member** is a social account: self-registered, may own profiles. **moderator** is staff: no profiles, no social writes. Self-registration assigns `member`. Resource rules belong in the aggregate.
+
+Claim type names live in SharedKernel (`sub` = user id, `email_verified`, `profile_id` = active profile). OpenIddict and JwtBearer both surface `sub`; JwtBearer may also map it to `NameIdentifier`. Resource modules read either.
+
+The host binds the default resource-API policy to the current token validator. Today that is OpenIddict validation (in-process). Replacing Identities with another OIDC server (Keycloak, a split Identities host, etc.) is a host change: `AddJwtBearer` with the new `Authority`, and the same SharedKernel policy helper with the JwtBearer scheme. Profiles and other resource modules stay unchanged.
 
 ### Extraction to microservices
 
@@ -113,7 +118,7 @@ Coarse roles belong in the token (member / moderator). Resource rules belong in 
 3. Other hosts: `AddJwtBearer` with the same `Authority`.
 4. `UserSuspended` (and similar) already travel on the broker; subscribers revoke sessions and reject that `sub`.
 
-The React app and resource modules keep using OIDC/JWT. No shared HMAC secret. No rewrite of login.
+The React app and resource modules keep using OIDC/JWT. No shared HMAC secret. No rewrite of login. No OpenIddict types outside Identities.
 
 ---
 
@@ -354,8 +359,8 @@ Moderator capability is a coarse JWT claim/policy at the edge; workflow stays in
 
 1. Identity is the source of truth for the user; OpenIddict is the protocol.
 2. User authentication (credentials, lockout, confirmation) is application logic. Token issue, forbid, and claim destinations are Presentation.
-3. Register is a collection operation (`Users`). Anything that acts as the signed-in person is `/me` — `UserId` from the token, not the client.
-4. Other modules authenticate via JWT + JWKS, never via Identities services.
+3. Register is a collection operation (`Users`). It assigns the `member` role. Anything that acts as the signed-in person is `/me` — `UserId` from the token, not the client.
+4. Other modules authenticate via JWT + JWKS, never via Identities services. They use `[Authorize]` and SharedKernel claims; the host binds the token validator.
 5. Lifecycle changes other contexts must see are integration events, not queries into the Identity database.
 6. Composition (Identity, OpenIddict, controllers) is registered in the host, not in Infrastructure.
 

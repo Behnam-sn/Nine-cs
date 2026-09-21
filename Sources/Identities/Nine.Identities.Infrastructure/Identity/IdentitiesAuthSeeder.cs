@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using Nine.SharedKernel.Common.Security;
 
 using OpenIddict.Abstractions;
 
@@ -26,6 +29,10 @@ public sealed class IdentitiesAuthSeeder : IHostedService
         using var scope = _serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<IdentitiesDbContext>();
         await dbContext.Database.MigrateAsync(cancellationToken);
+
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+        await EnsureRoleAsync(roleManager, RoleNames.Member);
+        await EnsureRoleAsync(roleManager, RoleNames.Moderator);
 
         var applicationManager = scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();
         var scopeManager = scope.ServiceProvider.GetRequiredService<IOpenIddictScopeManager>();
@@ -101,5 +108,13 @@ public sealed class IdentitiesAuthSeeder : IHostedService
     public Task StopAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
+    }
+
+    private static async Task EnsureRoleAsync(RoleManager<IdentityRole<Guid>> roleManager, string roleName)
+    {
+        if (!await roleManager.RoleExistsAsync(roleName))
+        {
+            await roleManager.CreateAsync(new IdentityRole<Guid>(roleName) { Id = Guid.NewGuid() });
+        }
     }
 }

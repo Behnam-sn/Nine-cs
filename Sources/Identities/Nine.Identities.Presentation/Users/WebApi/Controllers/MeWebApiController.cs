@@ -1,16 +1,17 @@
-using System.Security.Claims;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Nine.Identities.Presentation.Common.WebApi.Controllers;
+
 using Nine.Identities.Presentation.Users.WebApi.Responses;
 using Nine.SharedKernel.Abstractions.Messaging;
+using Nine.SharedKernel.Common.Security;
+using Nine.SharedKernel.Common.WebApi.Controllers;
 
 namespace Nine.Identities.Presentation.Users.WebApi.Controllers;
 
 [ApiVersion(1.0)]
 [Route("api/v{version:apiVersion}/me")]
-[Authorize(AuthenticationSchemes = "OpenIddict.Validation.AspNetCore")]
+[Authorize]
 public sealed class MeWebApiController : WebApiController
 {
     public MeWebApiController(ICommandBus commandBus, IQueryBus queryBus)
@@ -21,12 +22,8 @@ public sealed class MeWebApiController : WebApiController
     [HttpGet]
     public ActionResult<MeResponseV1> Get()
     {
-        var userId = User.FindFirstValue("sub")
-                     ?? User.FindFirstValue(ClaimTypes.NameIdentifier)
-                     ?? string.Empty;
-
-        var email = User.FindFirstValue("email")
-                    ?? User.FindFirstValue(ClaimTypes.Email);
+        var userId = User.FindUserId() ?? string.Empty;
+        var email = User.FindEmail();
 
         return Ok(new MeResponseV1(userId, email));
     }

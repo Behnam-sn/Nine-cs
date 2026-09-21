@@ -2,12 +2,14 @@ using Asp.Versioning;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 using Nine.Identities.Domain.Users.Entities;
 using Nine.Identities.Infrastructure.Identity;
-using Nine.Identities.Presentation.Users.WebApi.Controllers;
 using Nine.Identities.Presentation.Users.WebApi.ExceptionHandlers;
+using Nine.SharedKernel.Common.Security;
+
+using OpenIddict.Validation.AspNetCore;
+
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Nine.WebApi.Configurations;
@@ -18,6 +20,7 @@ public static class IdentitiesConfiguration
     {
         AddPresentation(services);
         AddInfrastructure(services);
+        services.AddResourceApiAuthorization(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
 
         return services;
     }

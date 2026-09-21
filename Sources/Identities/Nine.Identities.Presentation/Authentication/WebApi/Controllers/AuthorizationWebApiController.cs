@@ -156,6 +156,7 @@ public sealed class AuthorizationWebApiController : ControllerBase
 
         identity.SetClaim(Claims.Subject, user.UserId)
             .SetClaim(Claims.Email, user.Email)
+            .SetClaim(Claims.EmailVerified, user.EmailVerified)
             .SetClaim(Claims.Name, user.UserName)
             .SetClaim(Claims.PreferredUsername, user.UserName)
             .SetClaims(Claims.Role, [.. user.Roles]);
@@ -179,7 +180,7 @@ public sealed class AuthorizationWebApiController : ControllerBase
 
                 yield break;
 
-            case Claims.Email:
+            case Claims.Email or Claims.EmailVerified:
                 yield return Destinations.AccessToken;
                 if (claim.Subject!.HasScope(Scopes.Email))
                 {

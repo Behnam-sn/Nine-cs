@@ -31,6 +31,7 @@ internal static class UserAuthentication
         return new AuthenticatedUserV1(
             UserId: await userManager.GetUserIdAsync(user),
             Email: await userManager.GetEmailAsync(user),
+            EmailVerified: await userManager.IsEmailConfirmedAsync(user),
             UserName: await userManager.GetUserNameAsync(user),
             Roles: [.. await userManager.GetRolesAsync(user)]);
     }

@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nine.Identities.Application.Users.Commands.CreateUserWithPassword;
-using Nine.Identities.Presentation.Common.WebApi.Controllers;
 using Nine.Identities.Presentation.Users.WebApi.Requests;
 using Nine.Identities.Presentation.Users.WebApi.Responses;
 using Nine.SharedKernel.Abstractions.Messaging;
+using Nine.SharedKernel.Common.WebApi.Controllers;
 
 namespace Nine.Identities.Presentation.Users.WebApi.Controllers;
 

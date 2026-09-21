@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using Nine.SharedKernel.Abstractions.Messaging;
 
-namespace Nine.Identities.Presentation.Common.WebApi.Controllers;
+namespace Nine.SharedKernel.Common.WebApi.Controllers;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
