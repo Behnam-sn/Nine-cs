@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Identities\Nine.Identities.Domain.Contracts\Nine.Identities.Domain.Contracts.csproj" />
       <ProjectReference Include="..\..\Nine.SharedKernel\Nine.SharedKernel.csproj" />
     </ItemGroup>
 
