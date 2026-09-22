@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
+using Nine.Profiles.Domain.Contracts.Profiles.Exceptions;
+
 namespace Nine.Profiles.Presentation.Profiles.WebApi.ExceptionHandlers;
 
 public sealed class ProfileExceptionHandler : IExceptionHandler
@@ -48,11 +50,30 @@ public sealed class ProfileExceptionHandler : IExceptionHandler
 
         return true;
     }
-    
+
     private static (int StatusCode, string Title) MapException(Exception exception)
     {
         return exception switch
         {
+            ProfileHandleAlreadyInUseException
+                => (StatusCodes.Status409Conflict, "Profile handle already in use"),
+
+            ProfileHandleInvalidCharactersException or ProfileHandleTooLongException
+                or ProfileHandleTooShortException
+                => (StatusCodes.Status400BadRequest, "Invalid profile handle"),
+
+            ProfileIdCannotBeEmptyException or ProfileIdInvalidFormatException
+                => (StatusCodes.Status400BadRequest, "Invalid profile ID"),
+
+            ProfileNameCannotBeEmptyException or ProfileNameTooLongException
+                => (StatusCodes.Status400BadRequest, "Invalid profile name"),
+
+            ProfileBioTooLongException
+                => (StatusCodes.Status400BadRequest, "Invalid profile bio"),
+
+            ProfileAvatarObjectKeyCannotBeEmptyException or ProfileAvatarInvalidMediaTypeException
+                => (StatusCodes.Status400BadRequest, "Invalid profile avatar"),
+
             ArgumentException
                 => (StatusCodes.Status400BadRequest, "Invalid request"),
 

@@ -19,12 +19,12 @@
 
 ## Doing
 
-- [ ] Fill `MapException` in `ProfileExceptionHandler`
 - [ ] Add email verification command
 - [ ] Add `SharedKernels` projects
 - [ ] Add profiles bdd tests
 - [ ] Add Visibility to profile
 - [ ] Add Status to profile
+- [ ] Add `IUserCommandRepository`
 
 ## Done
 
@@ -172,3 +172,4 @@
 - [x] Add `CreateProfileCommandV1` in `Nine.Profiles.Application.Profiles.Commands.Create`
 - [x] Add `ProfileWebApiController` in `Nine.Profiles.Presentation.Profiles.WebApi.Controllers`
 - [x] Implement `Nine.Profiles.Infrastructure.Profiles`
+- [x] Fill `MapException` in `ProfileExceptionHandler` with exceptions in `Nine.Profiles.Domain.Contracts.Profiles.Exceptions`
