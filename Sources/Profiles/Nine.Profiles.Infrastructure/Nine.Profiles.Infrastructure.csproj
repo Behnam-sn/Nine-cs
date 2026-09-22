@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Nine.Profiles.Application\Nine.Profiles.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Marten" Version="9.38.0" />
+    </ItemGroup>
+
 </Project>
