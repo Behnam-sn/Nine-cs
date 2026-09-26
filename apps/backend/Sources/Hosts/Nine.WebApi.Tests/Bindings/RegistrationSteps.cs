@@ -36,14 +36,14 @@ public sealed class RegistrationSteps
     [When("they register")]
     public async Task WhenTheyRegister()
     {
-        var api = new IdentitiesApi(_context.Client);
+        var api = new IdentityApi(_context.Client);
         await _context.CaptureAsync(await api.RegisterAsync(_context.Email!, _context.Password!));
     }
 
     [When("they try to register again with the same email")]
     public async Task WhenTheyTryToRegisterAgainWithTheSameEmail()
     {
-        var api = new IdentitiesApi(_context.Client);
+        var api = new IdentityApi(_context.Client);
         await _context.CaptureAsync(await api.RegisterAsync(_context.Email!, _context.Password!));
     }
 

@@ -1,7 +1,7 @@
 ﻿using JasperFx.Events.Projections;
 using Marten;
 using Marten.Schema;
-using Nine.Identities.Domain.Contracts.Users.ValueObjects;
+using Nine.Identity.Domain.Contracts.Users.ValueObjects;
 using Nine.Profiles.Domain.Contracts.Profiles.ValueObjects;
 using Nine.Profiles.Infrastructure.Profiles.Projections;
 using Nine.Profiles.Infrastructure.Profiles.ReadModels;

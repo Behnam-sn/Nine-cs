@@ -1,4 +1,4 @@
-﻿using Nine.Identities.Domain.Contracts.Users.ValueObjects;
+﻿using Nine.Identity.Domain.Contracts.Users.ValueObjects;
 using Nine.Profiles.Domain.Contracts.Profiles.ValueObjects;
 using Nine.Profiles.Domain.Profiles.Entities;
 

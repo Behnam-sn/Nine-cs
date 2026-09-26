@@ -22,14 +22,14 @@ public sealed class CurrentUserSteps
     [When("they request the current user")]
     public async Task WhenTheyRequestTheCurrentUser()
     {
-        var api = new IdentitiesApi(_context.Client);
+        var api = new IdentityApi(_context.Client);
         await _context.CaptureAsync(await api.GetCurrentUserAsync(_context.AccessToken));
     }
 
     [When("someone requests the current user without a token")]
     public async Task WhenSomeoneRequestsTheCurrentUserWithoutAToken()
     {
-        var api = new IdentitiesApi(_context.Client);
+        var api = new IdentityApi(_context.Client);
         await _context.CaptureAsync(await api.GetCurrentUserAsync(null));
     }
 
@@ -37,7 +37,7 @@ public sealed class CurrentUserSteps
     public async Task WhenTheyRequestTheCurrentUserWithOnlyTheTokenHeader()
     {
         var header = _context.AccessToken?.Split('.')[0];
-        var api = new IdentitiesApi(_context.Client);
+        var api = new IdentityApi(_context.Client);
         await _context.CaptureAsync(await api.GetCurrentUserAsync(header));
     }
 

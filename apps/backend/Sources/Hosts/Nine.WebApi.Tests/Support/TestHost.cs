@@ -14,14 +14,14 @@ internal static class TestHost
     {
         _postgres = new PostgreSqlBuilder()
             .WithImage("postgres:17")
-            .WithDatabase("nine_identities")
+            .WithDatabase("nine_identity")
             .WithUsername("nine")
             .WithPassword("nine")
             .Build();
 
         await _postgres.StartAsync();
 
-        Environment.SetEnvironmentVariable("ConnectionStrings__Identities", _postgres.GetConnectionString());
+        Environment.SetEnvironmentVariable("ConnectionStrings__Identity", _postgres.GetConnectionString());
 
         _factory = new WebApiFactory(_postgres.GetConnectionString());
         _ = _factory.CreateClient();
@@ -41,6 +41,6 @@ internal static class TestHost
             _postgres = null;
         }
 
-        Environment.SetEnvironmentVariable("ConnectionStrings__Identities", null);
+        Environment.SetEnvironmentVariable("ConnectionStrings__Identity", null);
     }
 }

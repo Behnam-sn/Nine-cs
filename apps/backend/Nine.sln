@@ -17,19 +17,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.WebApi", "Sources\Host
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.SharedKernel", "Sources\Nine.SharedKernel\Nine.SharedKernel.csproj", "{6A338C65-D15E-4596-BDF2-9C0B361B0E6A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identities", "Identities", "{2F0E9196-121F-4274-802A-7A2411C6E50A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{2F0E9196-121F-4274-802A-7A2411C6E50A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Domain", "Sources\Identities\Nine.Identities.Domain\Nine.Identities.Domain.csproj", "{CA666A8E-C5AF-4B0E-831C-B16703AE111F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identity.Domain", "Sources\Identity\Nine.Identity.Domain\Nine.Identity.Domain.csproj", "{CA666A8E-C5AF-4B0E-831C-B16703AE111F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Domain.Tests", "Sources\Identities\Nine.Identities.Domain.Tests\Nine.Identities.Domain.Tests.csproj", "{36B97185-1EFC-4755-8521-FA177EEF3445}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identity.Domain.Tests", "Sources\Identity\Nine.Identity.Domain.Tests\Nine.Identity.Domain.Tests.csproj", "{36B97185-1EFC-4755-8521-FA177EEF3445}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Domain.Contracts", "Sources\Identities\Nine.Identities.Domain.Contracts\Nine.Identities.Domain.Contracts.csproj", "{5DE4A06B-3B14-43B5-8214-6ABC66B0E721}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identity.Domain.Contracts", "Sources\Identity\Nine.Identity.Domain.Contracts\Nine.Identity.Domain.Contracts.csproj", "{5DE4A06B-3B14-43B5-8214-6ABC66B0E721}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Application", "Sources\Identities\Nine.Identities.Application\Nine.Identities.Application.csproj", "{9BBA8456-63E6-4E12-9552-CC31F1511FBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identity.Application", "Sources\Identity\Nine.Identity.Application\Nine.Identity.Application.csproj", "{9BBA8456-63E6-4E12-9552-CC31F1511FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Presentation", "Sources\Identities\Nine.Identities.Presentation\Nine.Identities.Presentation.csproj", "{1DBE36EB-3973-4B2B-9C52-49B69548FEBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identity.Presentation", "Sources\Identity\Nine.Identity.Presentation\Nine.Identity.Presentation.csproj", "{1DBE36EB-3973-4B2B-9C52-49B69548FEBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identities.Infrastructure", "Sources\Identities\Nine.Identities.Infrastructure\Nine.Identities.Infrastructure.csproj", "{67F49565-9EE7-4390-8DA5-1FFD3C62FDFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.Identity.Infrastructure", "Sources\Identity\Nine.Identity.Infrastructure\Nine.Identity.Infrastructure.csproj", "{67F49565-9EE7-4390-8DA5-1FFD3C62FDFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nine.WebApi.Tests", "Sources\Hosts\Nine.WebApi.Tests\Nine.WebApi.Tests.csproj", "{E2201256-BE0C-47AB-9E8B-E338202F88B1}"
 EndProject

@@ -3,7 +3,7 @@ using Nine.WebApi.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddIdentities();
+builder.Services.AddIdentity();
 builder.Services.AddMessaging();
 builder.Services.AddOpenApi();
 

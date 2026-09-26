@@ -16,12 +16,12 @@ internal sealed class WebApiFactory : WebApplicationFactory<Program>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Development");
-        builder.UseSetting("ConnectionStrings:Identities", _connectionString);
+        builder.UseSetting("ConnectionStrings:Identity", _connectionString);
         builder.ConfigureAppConfiguration((_, configuration) =>
         {
             configuration.AddInMemoryCollection(new Dictionary<string, string?>
             {
-                ["ConnectionStrings:Identities"] = _connectionString
+                ["ConnectionStrings:Identity"] = _connectionString
             });
         });
     }

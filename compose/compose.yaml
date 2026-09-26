@@ -4,7 +4,7 @@
     environment:
       POSTGRES_USER: nine
       POSTGRES_PASSWORD: nine
-      POSTGRES_DB: nine_identities
+      POSTGRES_DB: nine_identity
     ports:
       - "5432:5432"
     volumes:
@@ -18,7 +18,7 @@
     depends_on:
       - postgres
     environment:
-      ConnectionStrings__Identities: Host=postgres;Port=5432;Database=nine_identities;Username=nine;Password=nine
+      ConnectionStrings__Identity: Host=postgres;Port=5432;Database=nine_identity;Username=nine;Password=nine
 
 volumes:
   nine-postgres:

@@ -32,14 +32,14 @@ public sealed class AuthenticationSteps
     [When("they sign in with the password grant")]
     public async Task WhenTheySignInWithThePasswordGrant()
     {
-        var api = new IdentitiesApi(_context.Client);
+        var api = new IdentityApi(_context.Client);
         await _context.CaptureAsync(await api.SignInAsync(_context.Email!, _context.Password!));
     }
 
     [When("they sign in with password {string}")]
     public async Task WhenTheySignInWithPassword(string password)
     {
-        var api = new IdentitiesApi(_context.Client);
+        var api = new IdentityApi(_context.Client);
         await _context.CaptureAsync(await api.SignInAsync(_context.Email!, password));
     }
 
