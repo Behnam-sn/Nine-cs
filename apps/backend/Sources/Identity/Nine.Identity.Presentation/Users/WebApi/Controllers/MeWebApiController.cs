@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using Nine.Identity.Presentation.Users.WebApi.Responses;
-using Nine.SharedKernel.Abstractions.Messaging;
-using Nine.SharedKernel.Common.Security;
-using Nine.SharedKernel.Common.WebApi.Controllers;
+using Nine.Shared.Application.Abstractions.Messaging;
+using Nine.Shared.Application.Common.Security;
+using Nine.Shared.Presentation.Common.Security;
+using Nine.Shared.Presentation.Common.WebApi.Controllers;
 
 namespace Nine.Identity.Presentation.Users.WebApi.Controllers;
 

@@ -1,7 +1,7 @@
 ﻿using Nine.Identity.Domain.Contracts.Users.ValueObjects;
 using Nine.Profiles.Domain.Contracts.Profiles.ValueObjects;
-using Nine.SharedKernel.Abstractions.Events;
-using Nine.SharedKernel.Abstractions.ValueObjects;
+using Nine.Shared.Domain.Abstractions.Events;
+using Nine.Shared.Domain.Abstractions.ValueObjects;
 
 namespace Nine.Profiles.Domain.Contracts.Profiles.Events;
 

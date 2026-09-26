@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 
 using Nine.Identity.Domain.Users.Entities;
-using Nine.SharedKernel.Abstractions.Messaging;
+using Nine.Shared.Application.Abstractions.Messaging;
 
 namespace Nine.Identity.Application.Authentication.Queries.GetUserForSignIn;
 

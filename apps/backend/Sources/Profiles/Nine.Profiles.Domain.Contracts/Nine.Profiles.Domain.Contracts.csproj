@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Identity\Nine.Identity.Domain.Contracts\Nine.Identity.Domain.Contracts.csproj" />
-      <ProjectReference Include="..\..\Nine.SharedKernel\Nine.SharedKernel.csproj" />
+      <ProjectReference Include="..\..\Shared\Nine.Shared.Domain\Nine.Shared.Domain.csproj" />
     </ItemGroup>
 
 </Project>

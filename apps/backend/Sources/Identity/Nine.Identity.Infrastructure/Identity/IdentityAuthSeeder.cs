@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using Nine.SharedKernel.Common.Security;
+using Nine.Shared.Application.Common.Security;
 
 using OpenIddict.Abstractions;
 

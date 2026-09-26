@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Nine.Identity.Domain.Contracts.Users.Exceptions;
 using Nine.Identity.Domain.Contracts.Users.ValueObjects;
 using Nine.Identity.Domain.Users.Entities;
-using Nine.SharedKernel.Abstractions.Messaging;
-using Nine.SharedKernel.Common.Security;
+using Nine.Shared.Application.Abstractions.Messaging;
+using Nine.Shared.Application.Common.Security;
 
 namespace Nine.Identity.Application.Users.Commands.CreateUserWithPassword;
 

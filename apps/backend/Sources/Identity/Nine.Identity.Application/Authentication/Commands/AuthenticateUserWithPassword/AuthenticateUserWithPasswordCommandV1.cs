@@ -1,4 +1,4 @@
-using Nine.SharedKernel.Abstractions.Messaging;
+using Nine.Shared.Application.Abstractions.Messaging;
 
 namespace Nine.Identity.Application.Authentication.Commands.AuthenticateUserWithPassword;
 

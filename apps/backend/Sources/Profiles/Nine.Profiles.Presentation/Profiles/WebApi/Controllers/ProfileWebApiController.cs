@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Nine.Profiles.Application.Profiles.Commands.Create;
 using Nine.Profiles.Presentation.Profiles.WebApi.Requests;
 using Nine.Profiles.Presentation.Profiles.WebApi.Responses;
-using Nine.SharedKernel.Abstractions.Messaging;
-using Nine.SharedKernel.Common.Security;
-using Nine.SharedKernel.Common.WebApi.Controllers;
+using Nine.Shared.Application.Abstractions.Messaging;
+using Nine.Shared.Application.Common.Security;
+using Nine.Shared.Presentation.Common.Security;
+using Nine.Shared.Presentation.Common.WebApi.Controllers;
 
 namespace Nine.Profiles.Presentation.Profiles.WebApi.Controllers;
 

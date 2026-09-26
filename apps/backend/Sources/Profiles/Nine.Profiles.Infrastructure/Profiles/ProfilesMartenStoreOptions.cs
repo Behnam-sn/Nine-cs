@@ -6,9 +6,9 @@ using Nine.Profiles.Domain.Contracts.Profiles.ValueObjects;
 using Nine.Profiles.Infrastructure.Profiles.Projections;
 using Nine.Profiles.Infrastructure.Profiles.ReadModels;
 using Nine.Profiles.Infrastructure.Profiles.Serialization;
-using Nine.SharedKernel.Abstractions.Events;
-using Nine.SharedKernel.Abstractions.ValueObjects;
-using Nine.SharedKernel.Marten.Serialization;
+using Nine.Shared.Domain.Abstractions.Events;
+using Nine.Shared.Domain.Abstractions.ValueObjects;
+using Nine.Shared.Infrastructure.Marten.Serialization;
 using Weasel.Core;
 
 namespace Nine.Profiles.Infrastructure.Profiles;

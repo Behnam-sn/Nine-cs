@@ -4,7 +4,7 @@ using Nine.Profiles.Domain.Contracts.Profiles.Events;
 using Nine.Profiles.Domain.Contracts.Profiles.ValueObjects;
 using Nine.Profiles.Domain.Profiles.Entities;
 using Nine.Profiles.Domain.Tests.Profiles.Builders;
-using Nine.SharedKernel.Abstractions.ValueObjects;
+using Nine.Shared.Domain.Abstractions.ValueObjects;
 
 namespace Nine.Profiles.Domain.Tests.Profiles.Entities;
 

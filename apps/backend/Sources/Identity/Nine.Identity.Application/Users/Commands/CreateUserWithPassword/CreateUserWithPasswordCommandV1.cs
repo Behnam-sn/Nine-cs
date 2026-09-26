@@ -1,5 +1,5 @@
 using Nine.Identity.Domain.Contracts.Users.ValueObjects;
-using Nine.SharedKernel.Abstractions.Messaging;
+using Nine.Shared.Application.Abstractions.Messaging;
 
 namespace Nine.Identity.Application.Users.Commands.CreateUserWithPassword;
 

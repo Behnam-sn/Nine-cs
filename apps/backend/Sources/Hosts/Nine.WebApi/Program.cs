@@ -1,5 +1,4 @@
 using Nine.WebApi.Configurations;
-using Nine.WebApi.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 

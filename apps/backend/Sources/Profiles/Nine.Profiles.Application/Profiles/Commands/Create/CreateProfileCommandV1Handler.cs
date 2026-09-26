@@ -4,7 +4,7 @@ using Nine.Profiles.Domain.Contracts.Profiles.ValueObjects;
 using Nine.Profiles.Domain.Profiles.Entities;
 using Nine.Profiles.Domain.Profiles.Repositories;
 using Nine.Profiles.Domain.Profiles.Services;
-using Nine.SharedKernel.Abstractions.Messaging;
+using Nine.Shared.Application.Abstractions.Messaging;
 
 namespace Nine.Profiles.Application.Profiles.Commands.Create;
 

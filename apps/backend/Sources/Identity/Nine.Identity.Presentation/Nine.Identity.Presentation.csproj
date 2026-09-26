@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Nine.Shared.Presentation\Nine.Shared.Presentation.csproj" />
       <ProjectReference Include="..\Nine.Identity.Application\Nine.Identity.Application.csproj" />
     </ItemGroup>
 

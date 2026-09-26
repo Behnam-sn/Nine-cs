@@ -20,7 +20,6 @@
 ## Doing
 
 - [ ] Add email verification command
-- [ ] Add `SharedKernels` projects
 - [ ] Add profiles bdd tests
 - [ ] Add Visibility to profile
 - [ ] Add Status to profile
@@ -173,3 +172,4 @@
 - [x] Add `ProfileWebApiController` in `Nine.Profiles.Presentation.Profiles.WebApi.Controllers`
 - [x] Implement `Nine.Profiles.Infrastructure.Profiles`
 - [x] Fill `MapException` in `ProfileExceptionHandler` with exceptions in `Nine.Profiles.Domain.Contracts.Profiles.Exceptions`
+- [x] Add `Nine.Shared` projects

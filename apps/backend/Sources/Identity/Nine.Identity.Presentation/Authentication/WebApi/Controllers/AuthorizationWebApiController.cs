@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Nine.Identity.Application.Authentication;
 using Nine.Identity.Application.Authentication.Commands.AuthenticateUserWithPassword;
 using Nine.Identity.Application.Authentication.Queries.GetUserForSignIn;
-using Nine.SharedKernel.Abstractions.Messaging;
+using Nine.Shared.Application.Abstractions.Messaging;
 
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;

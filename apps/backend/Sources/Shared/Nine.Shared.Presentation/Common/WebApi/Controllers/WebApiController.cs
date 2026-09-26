@@ -1,0 +1,19 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+using Nine.Shared.Application.Abstractions.Messaging;
+
+namespace Nine.Shared.Presentation.Common.WebApi.Controllers;
+
+[ApiController]
+[Route("api/v{version:apiVersion}/[controller]")]
+public abstract class WebApiController : ControllerBase
+{
+    protected readonly ICommandBus CommandBus;
+    protected readonly IQueryBus QueryBus;
+
+    protected WebApiController(ICommandBus commandBus, IQueryBus queryBus)
+    {
+        CommandBus = commandBus;
+        QueryBus = queryBus;
+    }
+}

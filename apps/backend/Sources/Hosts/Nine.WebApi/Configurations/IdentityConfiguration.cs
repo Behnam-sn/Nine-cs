@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Nine.Identity.Domain.Users.Entities;
 using Nine.Identity.Infrastructure.Identity;
 using Nine.Identity.Presentation.Users.WebApi.ExceptionHandlers;
-using Nine.SharedKernel.Common.Security;
 
 using OpenIddict.Validation.AspNetCore;
 
