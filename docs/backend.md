@@ -7,14 +7,47 @@
 
 ## 1. Architecture Principles
 
-- **Modular monolith.** One host today: `Nine.Api`. Each bounded context is a module with its own model and persistence. Extracting a context later is a hosting change, not a redesign.
-- **Domain-Driven Design.** Bounded contexts, aggregates, domain events.
-- **Hexagonal architecture / ports and adapters.** Domain and Application layers do not depend on frameworks. Infrastructure implements interfaces defined in Domain. Identity is the exception: its Application layer uses ASP.NET Core Identity `UserManager` because Identity is the write model for credentials.
-- **CQRS.** Separate write and read models. Command repositories load streams and append events. Query repositories read projection documents.
-- **Event sourcing for the social domain.** Profiles, Content, Interactions, SocialGraphs, Notifications, Stories, and Moderation persist as event streams. Feeds is read-only with no aggregate. Identity core is not event-sourced.
-- **Narrow event-sourced Identity adjunct.** Administrator, moderator, and suspension are events on an Account stream, projected onto a table. The Identity tables remain the source of truth for credentials, lockout, confirmation, reset tokens, and the cookie principal.
-- **No broker today.** Cross-context communication happens in the same Marten session and the same unit-of-work commit. A broker is a later extraction option.
-- **Open-source licenses only.** MIT / Apache 2.0.
+- **Modular monolith.**
+
+  One host today: `Nine.Api`.  
+  Each bounded context is a module with its own model and persistence.  
+  Extracting a context later is a hosting change, not a redesign.
+
+- **Domain-Driven Design.**
+
+  Bounded contexts, aggregates, domain events.
+
+- **Hexagonal architecture / ports and adapters.**
+
+  Domain and Application layers do not depend on frameworks.
+  Infrastructure implements interfaces defined in Domain.  
+  Identity is the exception: its Application layer uses ASP.NET Core Identity `UserManager` because Identity is the write model for credentials.
+
+- **CQRS.**
+
+  Separate write and read models.  
+  Command repositories load streams and append events.  
+  Query repositories read projection documents.
+
+- **Event sourcing for the social domain.**
+
+  Profiles, Content, Interactions, SocialGraphs, Notifications, Stories, and Moderation persist as event streams.  
+  Feeds is read-only with no aggregate.  
+  Identity core is not event-sourced.
+
+- **Narrow event-sourced Identity adjunct.**
+
+  Administrator, moderator, and suspension are events on an Account stream, projected onto a table.  
+  The Identity tables remain the source of truth for credentials, lockout, confirmation, reset tokens, and the cookie principal.
+
+- **No broker today.**
+
+  Cross-context communication happens in the same Marten session and the same unit-of-work commit.  
+  A broker is a later extraction option.
+
+- **Open-source licenses only.**
+
+  MIT / Apache 2.0.
 
 ### Long-run goal
 
@@ -28,9 +61,11 @@ A module other than Identity must not inject Identity `UserManager`, OpenIddict 
 
 ## 2. Solution and Modules
 
-One Git repository. `Nine.sln` is the .NET solution. The Next.js app lives in `frontend/`.
+`Nine.sln` is the .NET solution.  
+The Next.js app lives in `frontend/`.
 
-The API is a modular monolith. Nine bounded contexts exist:
+The API is a modular monolith.  
+Nine bounded contexts exist:
 
 | Context       | Store                           | Aggregate(s)                                     |
 | ------------- | ------------------------------- | ------------------------------------------------ |
