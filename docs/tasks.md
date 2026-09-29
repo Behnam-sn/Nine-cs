@@ -20,7 +20,7 @@
 ## Doing
 
 - [ ] Add email verification command
-- [ ] Add profiles bdd tests
+- [ ] Add profiles end-to-end tests
 - [ ] Add Visibility to profile
 - [ ] Add Status to profile
 - [ ] Add `IUserCommandRepository`
