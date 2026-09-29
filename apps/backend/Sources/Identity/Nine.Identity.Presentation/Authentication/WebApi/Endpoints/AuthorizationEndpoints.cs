@@ -2,8 +2,10 @@ using System.Security.Claims;
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.IdentityModel.Tokens;
 
 using Nine.Identity.Application.Authentication;
@@ -16,43 +18,37 @@ using OpenIddict.Server.AspNetCore;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace Nine.Identity.Presentation.Authentication.WebApi.Controllers;
+namespace Nine.Identity.Presentation.Authentication.WebApi.Endpoints;
 
-[ApiController]
-public sealed class AuthorizationWebApiController : ControllerBase
+public static class AuthorizationEndpoints
 {
-    private readonly ICommandBus _commandBus;
-    private readonly IQueryBus _queryBus;
-    private readonly SignInManager<Domain.Users.Entities.User> _signInManager;
-
-    public AuthorizationWebApiController(
-        ICommandBus commandBus,
-        IQueryBus queryBus,
-        SignInManager<Domain.Users.Entities.User> signInManager)
+    public static IEndpointRouteBuilder MapAuthorizationWebApi(this IEndpointRouteBuilder endpoints)
     {
-        _commandBus = commandBus;
-        _queryBus = queryBus;
-        _signInManager = signInManager;
+        endpoints.MapMethods("/connect/authorize", [HttpMethods.Get, HttpMethods.Post], Authorize);
+        endpoints.MapPost("/connect/token", Exchange);
+        endpoints.MapMethods("/connect/logout", [HttpMethods.Get, HttpMethods.Post], Logout);
+
+        return endpoints;
     }
 
-    [HttpGet("~/connect/authorize")]
-    [HttpPost("~/connect/authorize")]
-    [IgnoreAntiforgeryToken]
-    public async Task<IActionResult> Authorize(CancellationToken cancellationToken)
+    private static async Task<IResult> Authorize(
+        HttpContext httpContext,
+        IQueryBus queryBus,
+        CancellationToken cancellationToken)
     {
-        var request = HttpContext.GetOpenIddictServerRequest()
+        var request = httpContext.GetOpenIddictServerRequest()
                       ?? throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
-        var result = await HttpContext.AuthenticateAsync(IdentityConstants.ApplicationScheme);
+        var result = await httpContext.AuthenticateAsync(IdentityConstants.ApplicationScheme);
         if (result is not { Succeeded: true, Principal: { } principal })
         {
-            return Forbid(
-                authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-                properties: new AuthenticationProperties(new Dictionary<string, string?>
+            return Results.Forbid(
+                new AuthenticationProperties(new Dictionary<string, string?>
                 {
                     [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.LoginRequired,
                     [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The user is not logged in."
-                }));
+                }),
+                [OpenIddictServerAspNetCoreDefaults.AuthenticationScheme]);
         }
 
         var userId = principal.FindFirstValue(ClaimTypes.NameIdentifier)
@@ -62,34 +58,39 @@ public sealed class AuthorizationWebApiController : ControllerBase
             return InvalidGrant("The user is not logged in.");
         }
 
-        var authentication = await _queryBus.Send(new GetUserForSignInQueryV1(userId), cancellationToken);
+        var authentication = await queryBus.Send(new GetUserForSignInQueryV1(userId), cancellationToken);
         if (authentication.Status != AuthenticateUserStatus.Succeeded || authentication.User is null)
         {
             return InvalidGrant("The user is no longer allowed to sign in.");
         }
 
         var identity = CreateIdentity(authentication.User, request.GetScopes());
-        return SignIn(new ClaimsPrincipal(identity), OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+        return Results.SignIn(
+            new ClaimsPrincipal(identity),
+            authenticationScheme: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
 
-    [HttpPost("~/connect/token"), IgnoreAntiforgeryToken, Produces("application/json")]
-    public async Task<IActionResult> Exchange(CancellationToken cancellationToken)
+    private static async Task<IResult> Exchange(
+        HttpContext httpContext,
+        ICommandBus commandBus,
+        IQueryBus queryBus,
+        CancellationToken cancellationToken)
     {
-        var request = HttpContext.GetOpenIddictServerRequest()
+        var request = httpContext.GetOpenIddictServerRequest()
                       ?? throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
         if (request.IsPasswordGrantType())
         {
-            var authentication = await _commandBus.Send(
+            var authentication = await commandBus.Send(
                 new AuthenticateUserWithPasswordCommandV1(request.Username!, request.Password!),
                 cancellationToken);
 
             return authentication.Status switch
             {
                 AuthenticateUserStatus.Succeeded when authentication.User is not null =>
-                    SignIn(
+                    Results.SignIn(
                         new ClaimsPrincipal(CreateIdentity(authentication.User, request.GetScopes())),
-                        OpenIddictServerAspNetCoreDefaults.AuthenticationScheme),
+                        authenticationScheme: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme),
                 AuthenticateUserStatus.CannotSignIn =>
                     InvalidGrant("The user is no longer allowed to sign in."),
                 _ => InvalidGrant("The username or password is invalid.")
@@ -98,20 +99,20 @@ public sealed class AuthorizationWebApiController : ControllerBase
 
         if (request.IsAuthorizationCodeGrantType() || request.IsRefreshTokenGrantType())
         {
-            var result = await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+            var result = await httpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
             var userId = result.Principal?.GetClaim(Claims.Subject);
             if (string.IsNullOrEmpty(userId))
             {
                 return InvalidGrant("The token is no longer valid.");
             }
 
-            var authentication = await _queryBus.Send(new GetUserForSignInQueryV1(userId), cancellationToken);
+            var authentication = await queryBus.Send(new GetUserForSignInQueryV1(userId), cancellationToken);
             return authentication.Status switch
             {
                 AuthenticateUserStatus.Succeeded when authentication.User is not null =>
-                    SignIn(
+                    Results.SignIn(
                         new ClaimsPrincipal(CreateIdentity(authentication.User, request.GetScopes())),
-                        OpenIddictServerAspNetCoreDefaults.AuthenticationScheme),
+                        authenticationScheme: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme),
                 AuthenticateUserStatus.CannotSignIn =>
                     InvalidGrant("The user is no longer allowed to sign in."),
                 _ => InvalidGrant("The token is no longer valid.")
@@ -121,30 +122,27 @@ public sealed class AuthorizationWebApiController : ControllerBase
         throw new InvalidOperationException("The specified grant type is not supported.");
     }
 
-    [HttpGet("~/connect/logout")]
-    [HttpPost("~/connect/logout")]
-    [IgnoreAntiforgeryToken]
-    public async Task<IActionResult> Logout()
+    private static async Task<IResult> Logout(SignInManager<Domain.Users.Entities.User> signInManager)
     {
-        await _signInManager.SignOutAsync();
+        await signInManager.SignOutAsync();
 
-        return SignOut(
-            authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-            properties: new AuthenticationProperties
+        return Results.SignOut(
+            new AuthenticationProperties
             {
                 RedirectUri = "/"
-            });
+            },
+            [OpenIddictServerAspNetCoreDefaults.AuthenticationScheme]);
     }
 
-    private IActionResult InvalidGrant(string description)
+    private static IResult InvalidGrant(string description)
     {
-        return Forbid(
-            authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-            properties: new AuthenticationProperties(new Dictionary<string, string?>
+        return Results.Forbid(
+            new AuthenticationProperties(new Dictionary<string, string?>
             {
                 [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
                 [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = description
-            }));
+            }),
+            [OpenIddictServerAspNetCoreDefaults.AuthenticationScheme]);
     }
 
     private static ClaimsIdentity CreateIdentity(AuthenticatedUserV1 user, IEnumerable<string> scopes)

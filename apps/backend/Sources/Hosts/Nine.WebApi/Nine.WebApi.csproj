@@ -17,6 +17,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Identity\Nine.Identity.Infrastructure\Nine.Identity.Infrastructure.csproj" />
         <ProjectReference Include="..\..\Identity\Nine.Identity.Presentation\Nine.Identity.Presentation.csproj" />
+        <ProjectReference Include="..\..\Profiles\Nine.Profiles.Presentation\Nine.Profiles.Presentation.csproj" />
     </ItemGroup>
 
 </Project>

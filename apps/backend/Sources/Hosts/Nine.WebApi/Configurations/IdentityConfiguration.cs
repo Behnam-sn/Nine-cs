@@ -1,5 +1,3 @@
-using Asp.Versioning;
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,19 +24,6 @@ public static class IdentityConfiguration
 
     private static void AddPresentation(IServiceCollection services)
     {
-        services
-            .AddControllers()
-            .AddApplicationPart(Identity.Presentation.AssemblyReference.Assembly);
-
-        services
-            .AddApiVersioning(options =>
-            {
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.ReportApiVersions = true;
-                options.ApiVersionReader = new UrlSegmentApiVersionReader();
-            })
-            .AddMvc();
-
         services.AddExceptionHandler<UserExceptionHandler>();
         services.AddProblemDetails();
     }

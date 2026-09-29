@@ -1,3 +1,8 @@
+using Nine.Identity.Presentation.Authentication.WebApi;
+using Nine.Identity.Presentation.Authentication.WebApi.Endpoints;
+using Nine.Identity.Presentation.Users.WebApi;
+using Nine.Profiles.Presentation.Profiles.WebApi;
+using Nine.Profiles.Presentation.Profiles.WebApi.Endpoints;
 using Nine.WebApi.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +22,9 @@ app.UseExceptionHandler();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+app.MapUsersWebApi();
+app.MapAuthorizationWebApi();
+app.MapProfilesWebApi();
 
 app.Run();
 
